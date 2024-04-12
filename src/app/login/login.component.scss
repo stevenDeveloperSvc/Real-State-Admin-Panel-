@@ -3,44 +3,125 @@
     position: fixed;
     width: 100%;
     height: 100%;
-    transform: translate(22%, 0%);
+    transform: translate(50%, 40%);
     border-radius: 50% 22% 40% 80%;  
-    filter: blur(100px);
+    filter: blur(120px);
     background: radial-gradient(circle at 100% 100%,rgba(76, 0, 255, .2), rgb(121, 70, 242), rgba(70, 144, 242, 0.9));
     opacity: 0.4;
     overflow: hidden;
 }
-
 .login-section{
     display: flex;
     width:100vw;
     height: 100vh;
 }
-
 .login-box{
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    width:550px;
-    height:400px;
+    width: 550px;
+    max-width:550px;
+    height:510px;
     background-color: white;
-    box-shadow:  36px 36px 72px #bebebe,
-    -36px -36px 72px #ffffff;
-        margin: auto;
-        border-radius: 42px;
+    box-shadow:  36px 36px 72px #bebebe,-36px -36px 72px #ffffff;
+    margin: auto;
+    border-radius: 20px;
     z-index: 100000000;
 }
 .login-box-header{
     width: 100%;
-    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 40px 40px 0px 40px; 
+
+    .logo{
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
     .login-box-header__img{
         width: 40px;
         height: 40px;
         background-color: red;
+        margin-right: 10px;
     }
 }
+.login__title{
+    width: 100%;
+    text-align: start;
+    margin: 20px 0px;
+}
 .divider{
-    width: 450px;
+    min-width: calc(550px/1.1);
     height: 1px;
-    background-color: rgb(123, 114, 114, .2);
+    margin-top: 20px;
+    background-color: rgb(123, 114, 114, .09);
+}
+
+.login-box-body{
+    height: 100%;
+    padding:0px 40px 0 40px;
+}
+.login-body__form{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 80%;
+}
+label{
+    margin: 0px;
+    position: relative;
+    top:10px;
+}
+input[type="text"], 
+input[type="password"]{
+  padding:13px;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid rgba(0, 0, 0, 0.116);
+}
+input[type="text"]::placeholder, 
+input[type="password"]::placeholder{
+    color: rgba(0, 0, 0, 0.45);
+  }
+input[type="password"]{
+    position: 10px;
+}
+.form__send{
+    outline: none;
+    border:none;
+    background-color: black;
+    color:white;
+    height: 45px;
+    border-radius: 5px;
+    position: relative;
+    top:5px;
+    transition:all .3s ease-in-out;
+}
+.form__send:hover{
+    background-color: rgba(0, 0, 0, 0.178);
+}
+
+.login-box-body h5{
+    font-weight: normal;
+}
+h5 > a {
+    color:none;
+    text-decoration: none;
+}
+h5 > a:visited {
+    text-decoration: none;
+}
+@media only screen and (max-width:412px) {
+    .login-box{
+        width: 300px;
+        min-width: 300px;
+    }
+    .divider{
+        min-width: calc(250px/1.1);
+        background-color: rgb(123, 114, 114, .09);
+    }
+    
 }
