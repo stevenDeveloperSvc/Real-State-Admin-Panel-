@@ -1,1 +1,71 @@
-<p>sidebar works!</p>
+<div class="sidebar-container">
+    <div class="sidebar-container-user-image">
+        <div class="sidebar-container-image-or-name">
+            <img *ngIf="IsImageLoaded" [src]="ImageUrl" alt="user image" class="sidebar-container-image__user">
+            <p *ngIf="!IsImageLoaded" class="sidebar-container-name">{{FirstVowelUser}}</p>
+        </div>
+    </div>
+    <div class="sidebar-container-menu-wrapper">
+        <ul class="sidebar-container-menu-items">
+            <li> <a [routerLink]="['/home/dashboard']">
+                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+                    <p>Home</p>
+
+                </a>
+
+            </li>
+            <li> <a [routerLink]="['product']">
+                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+                    <p>Products</p>
+
+                </a>
+
+            </li>
+            <li> <a [routerLink]="['transactions']">
+                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+                    <p>Transaction</p>
+
+                </a>
+
+            </li>
+            <!-- <li> <a [routerLink]="['bills/billDetails']">
+                    <img src="../../../assets/icon/bill-detail-icon.svg" alt="home casa default view button">
+                    <p>Bill details</p>
+
+                </a>
+
+            </li> -->
+            <li> <a [routerLink]="['bills']">
+                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+                    <p>Bill</p>
+
+                </a>
+
+            </li>
+            <li> <a [routerLink]="['customer']">
+                    <img src="/assets/icon/customer.svg"  alt="home casa default view button">
+                    <p>Customer</p>
+
+                </a>
+
+            </li>
+
+            <li> <a [routerLink]="['stock']">
+                    <img src="/assets/icon/customer.svg"  alt="home casa default view button">
+                    <p>Stock</p>
+
+                </a>
+
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="sidebar-container-menu-logout">
+        <a (click)="LogOut()">
+            <img src="/assets/icon/customer.svg"  alt="home casa default view button">
+            <p>Logout</p>
+        </a>
+    </div>
+
+</div>

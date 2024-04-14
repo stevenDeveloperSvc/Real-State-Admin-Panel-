@@ -1,0 +1,22 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "sidebar header"
+      "sidebar content";
+    background-color: #fff1f185;
+  }
+  
+  app-sidebar {
+    grid-area: sidebar;
+  }
+  
+  app-header {
+    grid-area: header;
+  }
+  
+  app-content {
+    grid-area: content;
+  }
+  
