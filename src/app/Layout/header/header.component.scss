@@ -1,0 +1,52 @@
+
+@import "variables.scss";
+
+.header-box{
+    display: flex;
+    padding: $padding;
+    .header-box-leftside{
+        flex:1;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-box-rightside{
+        display: flex;
+        flex:.3;
+        width: 400px;
+        justify-content: end;
+    }
+}
+
+.user-box-data{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    .user-box-data__title{
+        font-family: $font-subtitle;
+        font-size: $font-title-size;
+        margin:0px;
+    }
+    .user-box-data__subtitle{
+        margin:0px;
+
+        font-family: $font-subtitle;
+        font-size: $font-subtitle-size
+    }
+}
+
+.user-box__profileImage{
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    border-radius:50%;
+}
+
+.header-box-rightside-user-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
