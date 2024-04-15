@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LayoutComponent } from './Layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { ContentDashboardComponent } from './Layout/content/content-dashboard/content-dashboard.component';
+import { ContentUserInfoComponent } from './Layout/content/content-user-info/content-user-info.component';
 
 export const routes: Routes = [
   {
@@ -15,8 +16,13 @@ export const routes: Routes = [
         title: 'Admin - Dashboard',
       },
       {
+        path:'user-info',
+        component: ContentUserInfoComponent,
+        title:'Admin - UserInfo'
+      },
+      {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'user-info',
         pathMatch: 'full',
         title: 'Admin - Dashboard ',
       },

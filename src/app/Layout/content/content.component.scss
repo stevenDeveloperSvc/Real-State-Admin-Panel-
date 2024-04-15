@@ -1,3 +1,6 @@
+@import "variables.scss";
+
 .container-content{
     display: flex;
+    padding: $padding;;
 }
