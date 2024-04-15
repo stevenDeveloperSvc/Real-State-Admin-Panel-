@@ -41,14 +41,26 @@
     height: 150px;
 }
 .content-user-right{
+    flex:2;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
     background-color: $primary-color-sidebar;
     padding:$padding;
     border-radius: $border-radius;
-    flex:2;
 }
+.content-user-left{
+    max-height: 350px;
+}
+
 .user-right__description{
     background-color: transparent;
-    width: 100% ;
+    max-width: 1200px;
+    min-width: 300px;
+    margin: 0px;
+    width: 1200px;
+    max-height:600px ;
+    min-height: 400px;
     border:none;
 }
 .user-right__description::-webkit-scrollbar {
@@ -69,4 +81,20 @@
   
 .user-right__description::-webkit-scrollbar-button{
     display: none;
+}
+
+.right-save-box{
+    border-radius: $border-radius-button;
+    border:1px solid $button-color;
+    background-color: transparent;
+    transition: all $animation-time ease-in-out;
+}
+
+.right-save-box:hover{
+    background-color: $button-color;
+}
+.right__save{
+    width:50px;
+    height:50px;
+    filter:contrast()
 }
