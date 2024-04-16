@@ -17,7 +17,9 @@
         justify-content: end;
     }
 }
-
+.header-box__title{
+    font-size: $font-title-size;
+}
 .user-box-data{
     display: flex;
     justify-content: center;
@@ -30,7 +32,6 @@
     }
     .user-box-data__subtitle{
         margin:0px;
-
         font-family: $font-subtitle;
         font-size: $font-subtitle-size
     }

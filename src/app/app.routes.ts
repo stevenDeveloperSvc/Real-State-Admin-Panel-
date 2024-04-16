@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { ContentDashboardComponent } from './Layout/content/content-dashboard/content-dashboard.component';
 import { ContentUserInfoComponent } from './Layout/content/content-user-info/content-user-info.component';
 import { ContentPropertyListComponent } from './Layout/content/content-property-list/content-property-list.component';
+import { ContentPropertyMaintenanceComponent } from './Layout/content/content-property-maintenance/content-property-maintenance.component';
 
 export const routes: Routes = [
   {
@@ -27,8 +28,13 @@ export const routes: Routes = [
         title: 'Admin - Propety List'
       },
       {
+        path:'property-maintenance',
+        component:ContentPropertyMaintenanceComponent,
+        title: 'Admin - Property Maintenance'
+      },
+      {
         path: '',
-        redirectTo: 'property-list',
+        redirectTo: 'property-maintenance',
         pathMatch: 'full',
         title: 'Admin - Dashboard ',
       },

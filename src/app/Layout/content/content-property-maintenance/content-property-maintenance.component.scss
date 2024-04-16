@@ -1,0 +1,79 @@
+@import "variables.scss";
+.maintenance-box {
+  width: 80vw;
+  height: 100%;
+}
+.header-box__title {
+  font-size: $font-title-size;
+}
+.maintenance-box-slider {
+  width: 100%;
+  border-radius: $border-radius;
+  padding: $padding;
+  background-color: $primary-color;
+  display: flex;
+  flex-direction: column;
+}
+.maintenance-box-select-image {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px dashed $button-color;
+    border-radius: $border-radius;
+    width: 500px;
+    height: 400px;
+    transition: all $animation-time ease-in-out;
+}
+.maintenance-box-select-image:hover{
+    background-color: $primary-color;
+    color:white;
+    border: 5px solid $primary-color;
+}
+
+.select-image__label{
+    color:$button-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: calc($font-title-size + 12px);
+    font-family: $font-title;
+    height: 100%;
+    width: 100%;
+}
+.right-save-edit-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:25px;
+    width: 500px;
+}
+.right-save-box{
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    width: 57px;
+    height: 57px;
+    border-radius: $border-radius-button;
+    border:1px solid $button-color;
+    background-color: transparent;
+    transition: all $animation-time ease-in-out;
+}
+
+.right-save-box:hover{
+    background-color: $button-color;
+}
+.right__save{
+    width:50px;
+    height:50px;
+    transition: all $animation-time ease-in-out;
+}
+
+.right__save:hover{
+    cursor:pointer;
+    filter: brightness(0) invert(1);
+}
+
+#select__image{
+    display: none;
+}
