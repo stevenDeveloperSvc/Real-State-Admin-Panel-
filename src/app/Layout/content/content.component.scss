@@ -1,6 +1,8 @@
 @import "variables.scss";
 
-.container-content{
+.container-content {
     display: flex;
-    padding: $padding;;
+    justify-content: center;
+    padding: $padding;
+     width: 100%;
 }
