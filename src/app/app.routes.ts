@@ -3,6 +3,7 @@ import { LayoutComponent } from './Layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { ContentDashboardComponent } from './Layout/content/content-dashboard/content-dashboard.component';
 import { ContentUserInfoComponent } from './Layout/content/content-user-info/content-user-info.component';
+import { ContentPropertyListComponent } from './Layout/content/content-property-list/content-property-list.component';
 
 export const routes: Routes = [
   {
@@ -21,8 +22,13 @@ export const routes: Routes = [
         title:'Admin - UserInfo'
       },
       {
+        path:'property-list',
+        component:ContentPropertyListComponent,
+        title: 'Admin - Propety List'
+      },
+      {
         path: '',
-        redirectTo: 'user-info',
+        redirectTo: 'property-list',
         pathMatch: 'full',
         title: 'Admin - Dashboard ',
       },
