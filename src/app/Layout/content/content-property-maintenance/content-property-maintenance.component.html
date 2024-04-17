@@ -1,30 +1,29 @@
 <section class="maintenance-box">
-  <!-- <input type='file' name='files[]' multiple>
-    <button type='submit'>Submit</button> -->
-
   <div class="maintenance-box-slider">
     <h2 class="header-box__title">Slider Image</h2>
-    <div class="maintenance-box-select-image">
-      <label for="select__image" class="select-image__label">
-        SELECT AN IMAGE
+    <div class="maintenance-box-select-image" [ngClass]="selectedImageUrl !== undefined? 'No-border' : '' ">
+      <p-image *ngIf="selectedImageUrl !== undefined" width="500px" height="400px" [src]="selectedImageUrl" alt="Image"
+      [preview]="true"></p-image>
+      
+      <h3 class="select-image__label">{{ display }}</h3>
+    
 
-        <input
-          id="select__image"
-          type="file"
-          accept="image/png, image/gif, image/jpeg"
-          name="files[]"
-          multiple
-        />
-      </label>
     </div>
     <div class="right-save-edit-box">
+      <div class="right-save-box">
+        <label for="select__image">
+          <img src="assets/icon/add.svg" alt="add button" class="right__save" />
+          <input id="select__image" type="file" accept="image/png, image/gif, image/jpeg" name="files"
+          (change)="onFileSelected($event)">
+        </label>
 
-        <div class="right-save-box">
-            <img src="assets/icon/save.svg" alt="save button" class="right__save" />
-        </div>
-        <div class="right-save-box">
-            <img src="assets/icon/edit.svg" alt="delete button" class="right__save" />
-        </div>
+      </div>
+      <div class="right-save-box">
+        <img src="assets/icon/save.svg" alt="save button" class="right__save" />
+      </div>
+      <div class="right-save-box" (click)="DeleteCurrentImage()">
+        <img src="assets/icon/delete.svg" alt="delete button" class="right__save" />
+      </div>
     </div>
   </div>
 </section>

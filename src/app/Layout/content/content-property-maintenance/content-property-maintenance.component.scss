@@ -15,7 +15,6 @@
   flex-direction: column;
 }
 .maintenance-box-select-image {
-    cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,10 +24,8 @@
     height: 400px;
     transition: all $animation-time ease-in-out;
 }
-.maintenance-box-select-image:hover{
-    background-color: $primary-color;
-    color:white;
-    border: 5px solid $primary-color;
+.No-border{
+    border: 5px solid transparent;
 }
 
 .select-image__label{
@@ -40,7 +37,14 @@
     font-family: $font-title;
     height: 100%;
     width: 100%;
+    transition: all $animation-time ease-in-out;
 }
+.image__preview{
+    height: 400px !important;
+    width: 300px !important;
+}
+
+
 .right-save-edit-box{
     display: flex;
     justify-content: center;
@@ -52,8 +56,8 @@
     margin-top: 15px;
     display: flex;
     justify-content: center;
-    width: 57px;
-    height: 57px;
+    width: 55px;
+    height: 55px;
     border-radius: $border-radius-button;
     border:1px solid $button-color;
     background-color: transparent;
