@@ -1,11 +1,11 @@
 <section class="maintenance-box">
-  <div class="maintenance-box-slider">
+  <div class="maintenance-box-maintenance">
     <h2 class="header-box__title">Slider Image</h2>
     <div class="maintenance-box-select-image" [ngClass]="selectedImageUrl !== undefined? 'No-border' : '' ">
       <p-image *ngIf="selectedImageUrl !== undefined" width="500px" height="400px" [src]="selectedImageUrl" alt="Image"
       [preview]="true"></p-image>
       
-      <h3 class="select-image__label">{{ display }}</h3>
+      <h3 *ngIf="selectedImageUrl === undefined" class="select-image__label">{{ display }}</h3>
     
 
     </div>
@@ -18,12 +18,23 @@
         </label>
 
       </div>
-      <div class="right-save-box">
+      <div class="right-save-box" (click)="AddCurrentImage()">
         <img src="assets/icon/save.svg" alt="save button" class="right__save" />
       </div>
       <div class="right-save-box" (click)="DeleteCurrentImage()">
         <img src="assets/icon/delete.svg" alt="delete button" class="right__save" />
       </div>
     </div>
+  </div>
+  <p-divider layout="vertical" ></p-divider>
+  <div class="maintenance-box-slider">
+    <p-galleria [value]="images" [containerStyle]="{ 'width': '640px' }" [numVisible]="5">
+        <img *ngFor="let item of images" [src]="item.url" style="width: 100px; height: 400px;" />
+      <!-- <ng-template pTemplate="thumbnail" let-item>
+        <div class="grid grid-nogutter justify-content-center">
+          <img [src]="item.url" />
+        </div>
+      </ng-template> -->
+    </p-galleria> 
   </div>
 </section>
