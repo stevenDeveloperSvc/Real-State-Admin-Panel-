@@ -44,8 +44,11 @@ export class LoginComponent {
       next:(response)=>{
         
         localStorage.setItem('token', response.result);
-        localStorage.setItem('username', response.user?.username);
+        localStorage.setItem('username', response.user?.fullName);
         localStorage.setItem('id', response.user?.userId);
+        localStorage.setItem('ocupation',response.user?.ocupation);
+        localStorage.setItem('image',response.user?.image);
+
         this.message.add({detail:'Login Successfully', severity:'success', summary:'success'})
         this.router.navigate(['/main/dashboard'])
         //ruta cuando haga login exitosamente

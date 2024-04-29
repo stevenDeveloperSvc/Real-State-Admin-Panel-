@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +7,15 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+  ocupation!: string | null;
+  user!: string | null;
+  userPicture: any;
+
+  ngOnInit(): void {
+    this.ocupation = localStorage.getItem('ocupation');
+    this.user = localStorage.getItem('username');
+    this.userPicture = `data:image/png;base64, ${localStorage.getItem('image')}`
+  }
 
 }

@@ -6,10 +6,10 @@
   <div class="header-box-rightside">
     <div class="header-box-rightside-user-box">
       <div class="user-box-data">
-        <h3 class="user-box-data__title">Milagros German</h3>
-        <h4 class="user-box-data__subtitle">Admin</h4>
+        <h3 class="user-box-data__title">{{ user }}</h3>
+        <h4 class="user-box-data__subtitle">{{ ocupation }}</h4>
       </div>
-      <img class="user-box__profileImage" src="/assets/logo.png" alt="logo png user profile" srcset="" />
+      <img class="user-box__profileImage" [src]="userPicture" alt="logo png user profile" srcset="" />
     </div>
   </div>
 </section>
