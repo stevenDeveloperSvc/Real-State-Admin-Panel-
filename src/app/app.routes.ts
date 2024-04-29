@@ -5,39 +5,46 @@ import { ContentDashboardComponent } from './Layout/content/content-dashboard/co
 import { ContentUserInfoComponent } from './Layout/content/content-user-info/content-user-info.component';
 import { ContentPropertyListComponent } from './Layout/content/content-property-list/content-property-list.component';
 import { ContentPropertyMaintenanceComponent } from './Layout/content/content-property-maintenance/content-property-maintenance.component';
+import { authGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'main',
     component: LayoutComponent,
     title: 'Admin - Panel',
+    canActivate:[authGuard],
     children: [
       {
         path: 'dashboard',
         component: ContentDashboardComponent,
+        canActivate:[authGuard],
         title: 'Admin - Dashboard',
       },
       {
         path:'user-info',
         component: ContentUserInfoComponent,
+        canActivate:[authGuard],
         title:'Admin - UserInfo'
       },
       {
         path:'property-list',
         component:ContentPropertyListComponent,
+        canActivate:[authGuard],
         title: 'Admin - Propety List'
       },
       {
         path:'property-maintenance',
         component:ContentPropertyMaintenanceComponent,
+        canActivate:[authGuard],
         title: 'Admin - Property Maintenance'
       },
-      {
-        path: '',
-        redirectTo: 'property-maintenance',
-        pathMatch: 'full',
-        title: 'Admin - Dashboard ',
-      },
+      // {
+      //   path: '',
+      //   redirectTo: 'property-maintenance',
+      //   pathMatch: 'full',
+      //   canActivate:[authGuard],
+      //   title: 'Admin - Dashboard ',
+      // },
     ],
   },
   {
@@ -49,6 +56,8 @@ export const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full',
   },
+    { path: '**', redirectTo: 'login' }
+
 ];
 
 // const routes: Routes = [

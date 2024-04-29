@@ -1,28 +1,52 @@
+<p-toast></p-toast>
 <div class="login-section">
-        <div class="login-background">
 
+  <div class="login-background"></div>
+  <div class="login-box">
+    <header class="login-box-header">
+      <div class="logo">
+        <div class="login-box-header__img">
+          <img src="/assets/logo.png" alt="logo" srcset="/assets/logo2.png" />
         </div>
-        <div class="login-box">
-                <header class="login-box-header">
-                        <div class="logo">
-                                <div class="login-box-header__img"> 
-                                        <img src="/assets/logo.png" alt="logo" srcset="/assets/logo2.png"> </div>
-                                <h3>Emi & Alt</h3>
-                        </div>
-                        <div class="divider"></div>
-                        <h2 class="login__title">Welcome back, Login.</h2>
-                </header>
+        <h3>Emi & Alt</h3>
+      </div>
+      <div class="divider"></div>
+      <h2 class="login__title"  >Welcome back, Login.</h2>
+    </header>
 
-                <body class="login-box-body">
-                        <form class="login-body__form">
-                                <label for="email_id">Email</label>
-                                <input type="text" name="email" id="email_id" placeholder="name@gmail.com">
-                                <label for="password_id">Password</label>
-                                <input type="password" name="password" id="password_id" placeholder="Password">
-                                <input type="button" routerLink="/main" class="form__send" value="Login">
-                        </form>
-                        <h5>Forget password? <a href="#">Click Here</a></h5>
-                </body>
-        </div>
-
+    <body class="login-box-body">
+      <form
+        class="login-body__form"
+        [formGroup]="loginform"
+        (ngSubmit)="Submit()"
+      >
+        <label for="email_id">Email</label>
+        <input
+          formControlName="username"
+          type="text"
+          name="email"
+          id="email_id"
+          placeholder="name@gmail.com"
+          required
+        />
+        <label for="password_id">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          name="password"
+          id="password_id"
+          placeholder="Password"
+          required
+        />
+        <input
+          type="submit"
+          class="form__send"
+          name="login"
+          value="Login"
+          [disabled]="loginform.invalid"
+        />
+      </form>
+      <h5>Forget password? <a href="#">Click Here</a></h5>
+    </body>
+  </div>
 </div>
