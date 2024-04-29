@@ -107,3 +107,16 @@
     cursor:pointer;
     filter: brightness(0) invert(1);
 }
+
+.card{
+    position: absolute;
+    bottom: 90px;
+    left: 93%;
+    width: auto;
+    height: auto;
+    background-color: green;   
+}
+.color{
+    color:green !important;
+}
+

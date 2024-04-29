@@ -24,7 +24,7 @@ export const routes: Routes = [
         path:'user-info',
         component: ContentUserInfoComponent,
         canActivate:[authGuard],
-        title:'Admin - UserInfo'
+        title:'Admin - User'
       },
       {
         path:'property-list',

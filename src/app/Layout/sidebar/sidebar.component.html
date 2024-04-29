@@ -7,22 +7,22 @@
     </div>
     <div class="sidebar-container-menu-wrapper">
         <ul class="sidebar-container-menu-items">
-            <li> <a [routerLink]="['/home/dashboard']">
-                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+            <li> <a [routerLink]="['/main/dashboard']">
+                    <img class = "item-icon" src="/assets/icon/customer.svg" alt="home casa default view button">
                     <p>Home</p>
 
                 </a>
 
             </li>
             <li> <a [routerLink]="['product']">
-                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+                    <img class = "item-icon"  src="/assets/icon/customer.svg" alt="home casa default view button">
                     <p>Products</p>
 
                 </a>
 
             </li>
             <li> <a [routerLink]="['transactions']">
-                    <img src="/assets/icon/customer.svg" alt="home casa default view button">
+                    <img  class = "item-icon" src="/assets/icon/customer.svg" alt="home casa default view button">
                     <p>Transaction</p>
 
                 </a>
@@ -50,20 +50,21 @@
 
             </li>
 
-            <li> <a [routerLink]="['stock']">
-                    <img src="/assets/icon/customer.svg"  alt="home casa default view button">
-                    <p>Stock</p>
+          -->
+            <li> <a [routerLink]="['/main/user-info']">
+                    <img class = "item-icon"  src="/assets/icon/configuration.svg" alt="configuration user">
+                    <p>Configuration</p>
 
                 </a>
 
-            </li> -->
+            </li>
         </ul>
 
     </div>
 
     <div class="sidebar-container-menu-logout">
         <a (click)="LogOut()">
-            <img src="/assets/icon/customer.svg"  alt="home casa default view button">
+            <img  class = "item-icon"  src="/assets/icon/logout.svg" alt="home casa default view button">
             <p>Logout</p>
         </a>
     </div>
