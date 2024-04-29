@@ -29,9 +29,6 @@ export class LoginComponent {
     get Username(){
     return this.loginform.controls['username'];
   }
-  URL(){
-  }
-  
   get Password(){
     return this.loginform.controls['password'];
   }
@@ -41,14 +38,7 @@ export class LoginComponent {
     const userdata = this.loginform.value;
     
     this.authService.Login(userdata).subscribe({
-      next:(response)=>{
-        
-        localStorage.setItem('token', response.result);
-        localStorage.setItem('username', response.user?.fullName);
-        localStorage.setItem('id', response.user?.userId);
-        localStorage.setItem('ocupation',response.user?.ocupation);
-        localStorage.setItem('image',response.user?.image);
-
+      next:()=>{
         this.message.add({detail:'Login Successfully', severity:'success', summary:'success'})
         this.router.navigate(['/main/dashboard'])
         //ruta cuando haga login exitosamente
@@ -57,5 +47,7 @@ export class LoginComponent {
         this.message.add({detail:'Password incorrect', severity:'warn',summary:'warn'});
       }
     })
+
+  
   }
 }
