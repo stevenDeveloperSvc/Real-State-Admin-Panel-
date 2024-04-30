@@ -4,6 +4,8 @@
 .header-box{
     display: flex;
     padding: $padding;
+    background-color:$header-background-color;
+
     .header-box-leftside{
         flex:1;
         display: flex;
