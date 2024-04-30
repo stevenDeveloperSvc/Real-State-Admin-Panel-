@@ -8,7 +8,7 @@ import { BaseUrl } from './cosntant';
   providedIn: 'root',
 })
 export class UserInfoService {
-  headers?: HttpHeaders;
+private  headers?: HttpHeaders;
 
   constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
     let Token: string = '';
@@ -19,7 +19,7 @@ export class UserInfoService {
     });
 
     this.headers = new HttpHeaders({
-      'Authorization' : 'Bearer ' + (Token === undefined? sessionStorage.getItem('result') : Token)
+      'Authorization' : 'Bearer ' + (Token === undefined? localStorage.getItem('token') : Token)
     })
   }
 

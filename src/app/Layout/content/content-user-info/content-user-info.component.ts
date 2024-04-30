@@ -1,20 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { SpeedDialModule } from 'primeng/speeddial';
-import { ToastModule } from 'primeng/toast';
+import { UserInfoService } from '../../../services/user-info.service';
+import { UserInfo } from '../../../interface/Content';
 
 @Component({
     selector: 'app-content-user-info',
     standalone: true,
-    imports: [SpeedDialModule, ToastModule],
+    imports: [SpeedDialModule],
     templateUrl: './content-user-info.component.html',
     styleUrl: './content-user-info.component.scss'
 })
+
+
 export class ContentUserInfoComponent implements OnInit {
     items!: MenuItem[] | null;
-
-    constructor(private messageService: MessageService) { }
+    user!: UserInfo
+    constructor(private messageService: MessageService, private userInfo: UserInfoService) { }
+    
     ngOnInit(): void {
+        this.LoadItems();
+        this.LoadUserData();
+    }
+    private LoadUserData() {
+        this.userInfo.GetUserInfoByRequest().subscribe({
+            next: ({ userInfo }) => {
+               this.user = {
+                    ocupation: userInfo.ocupation,
+                    description : userInfo.description,
+                    ocupationId: userInfo.ocupationId,
+                    firstname :  userInfo.firstname,
+                    lastname : userInfo.lastname,
+                    imageurl : userInfo.image,
+                    phone : userInfo.phone,
+                    email: userInfo.email,
+                    username: userInfo.username
+                }
+
+                console.log(userInfo)
+            },
+            error: (value) => {
+
+            }
+        });
+    }
+    private LoadItems() {
         this.items = [
             {
                 icon: 'pi pi-pencil',
@@ -27,8 +57,8 @@ export class ContentUserInfoComponent implements OnInit {
             {
                 style: { 'color': 'green;' },
                 icon: 'pi pi-pencil',
-              //  icon: 'pi pi-refresh',
-                 command: () => {
+                //  icon: 'pi pi-refresh',
+                command: () => {
                     this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
                 }
             },
@@ -52,6 +82,7 @@ export class ContentUserInfoComponent implements OnInit {
                 url: 'http://angular.io'
             }
         ];
+
     }
 
 }

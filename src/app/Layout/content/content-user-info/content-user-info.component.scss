@@ -54,6 +54,8 @@
 }
 .content-user-left{
     max-height: 350px;
+    height: 300px;
+
 }
 
 .user-right__description{
@@ -61,9 +63,8 @@
     width: 600px;
     max-width: 600px;
     min-width: 300px;
-    margin: 0px;
-    max-height:600px ;
-    min-height: 400px;
+    max-height:300px ;
+    min-height: 100px;
     border:none;
 }
 .user-right__description::-webkit-scrollbar {

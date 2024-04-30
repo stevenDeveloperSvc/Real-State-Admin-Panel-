@@ -18,7 +18,7 @@ export class SidebarComponent {
   constructor(private Auth: AuthService, private router: Router, private message: MessageService,
   ) { }
   LogOut() {
-    this.message.add({detail:'Logout Successfully', severity:'success', summary:'success'})
+    this.message.add({ detail: 'Logout Successfully', severity: 'success', summary: 'success' })
     this.Auth.Logout();
     this.router.navigate(["/login"])
   }
