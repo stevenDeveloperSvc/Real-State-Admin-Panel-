@@ -14,8 +14,6 @@
 
     .header-box-rightside{
         display: flex;
-        flex:.3;
-        width: 400px;
         justify-content: end;
     }
 }
@@ -27,15 +25,16 @@
     justify-content: center;
     align-items: start;
     flex-direction: column;
+    margin-right: 30px;
     .user-box-data__title{
         font-family: $font-subtitle;
         font-size: $font-title-size2;
         margin:0px;
     }
     .user-box-data__subtitle{
-        margin:0px;
         font-family: $font-subtitle;
-        font-size: $font-subtitle-size
+        font-size: $font-subtitle-size;
+        margin:0px;
     }
 }
 

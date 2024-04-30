@@ -26,7 +26,8 @@ export class ContentUserInfoComponent implements OnInit {
             },
             {
                 style: { 'color': 'green;' },
-                icon: 'pi pi-refresh',
+                icon: 'pi pi-pencil',
+              //  icon: 'pi pi-refresh',
                  command: () => {
                     this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
                 }

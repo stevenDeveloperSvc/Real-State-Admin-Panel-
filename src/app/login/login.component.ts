@@ -16,6 +16,8 @@ import { ToastModule } from 'primeng/toast';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+
+
   loginform = this.form.group({
     username: ['', [Validators.required]],
     password: ['',[Validators.required]],
@@ -32,22 +34,18 @@ export class LoginComponent {
   get Password(){
     return this.loginform.controls['password'];
   }
-  
-  
+
   Submit(){
     const userdata = this.loginform.value;
-    
     this.authService.Login(userdata).subscribe({
       next:()=>{
         this.message.add({detail:'Login Successfully', severity:'success', summary:'success'})
-        this.router.navigate(['/main/dashboard'])
-        //ruta cuando haga login exitosamente
+
+          this.router.navigate(['/main/dashboard'])
       },
       error:(error)=>{
         this.message.add({detail:'Password incorrect', severity:'warn',summary:'warn'});
       }
     })
-
-  
   }
 }

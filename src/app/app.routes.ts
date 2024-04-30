@@ -30,14 +30,24 @@ export const routes: Routes = [
         path:'property-list',
         component:ContentPropertyListComponent,
         canActivate:[authGuard],
-        title: 'Admin - Propety List'
+        canActivateChild:[authGuard],
+        title: 'Admin - Propety List',
+        children:[
+          {
+            title:'property-maintenance',
+            path:'maintenance',
+            component: ContentPropertyMaintenanceComponent,
+          
+          }
+        ]
       },
-      {
-        path:'property-maintenance',
-        component:ContentPropertyMaintenanceComponent,
-        canActivate:[authGuard],
-        title: 'Admin - Property Maintenance'
-      },
+      // {
+      //   path:'property-maintenance',
+      //   component:ContentPropertyMaintenanceComponent,
+      //   canActivate:[authGuard],
+      //   title: 'Admin - Property Maintenance'
+      
+      // },
       // {
       //   path: '',
       //   redirectTo: 'property-maintenance',
