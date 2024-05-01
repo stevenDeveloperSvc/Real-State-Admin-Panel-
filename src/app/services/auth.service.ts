@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, buffer } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { BaseUrl } from './cosntant';
 import { Buffer as b } from 'buffer';
-
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +12,14 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   Login(Users: any): Observable<any> {
-    this.UserInfo = this.http.post<any>(`${BaseUrl}/auth/login`, Users);
-    this.SaveToken(this.UserInfo);
+    this.UserInfo = this.http.post<any>(`${BaseUrl}/auth/login`, Users).pipe(
+      shareReplay(1)
+    );
+    this.SaveToken();
     return this.UserInfo;
   }
-  private SaveToken(info: Observable<any>): void {
-    info.subscribe({
+  private SaveToken(): void {
+    this.UserInfo.subscribe({
       next: (value) => {
         localStorage.setItem('token', value.result);
         localStorage.setItem('username', value.user?.username)
@@ -46,10 +47,7 @@ export class AuthService {
     }
     return !this.IsTokenExpried(token);
   }
-  IsTokenExpried = (token: string) : boolean => (Date.now() >= JSON.parse(b.from(token.split('.')[1], 'base64').toString()).exp * 1000)
-
-
-
+  IsTokenExpried = (token: string): boolean => (Date.now() >= JSON.parse(b.from(token.split('.')[1], 'base64').toString()).exp * 1000)
 }
 
 
