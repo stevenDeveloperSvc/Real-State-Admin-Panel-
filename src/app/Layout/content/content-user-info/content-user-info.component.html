@@ -1,5 +1,5 @@
 <section class="content-user">
-  <div class="content-user-left">
+  <!-- <div class="content-user-left">
     <img [src]="user.imageurl" alt="image user login" class="user-left__image" />
     <div class="user-left-box">
       <input type="text" class="left-box__title" placeholder="FULL NAME" [value]="user.firstname" />
@@ -14,8 +14,24 @@
     </textarea>
 
 </div>
-  <div class="card">
+  <div class="ca2rd">
     <p-speedDial transitionDelay="80" [model]="items" radius="120" direction="up-left" type="quarter-circle"
       buttonClassName="p-button-danger"></p-speedDial>
-  </div>
+  </div> -->
+
+  <header class="content-user__header">
+    <div class="content-user-picture-box">
+      <img [src]="ImageURL" alt="user picture" class="user__picture">
+    </div>
+      <form action="" class="content-user-info-box">
+        <div class="user-info-fullname-box">
+          <input class="info-box__firstname" type="text" name="firstname" id="first" placeholder="First Name" >
+          <input class="info-box__lastname" type="text" name="lastname" id="last" placeholder="Last Name">
+        </div>
+        <input class="info-box__username" type="text" name="username" id="username" placeholder="Username">
+        <input class="info-box__email" type="email" name="email" id="email" placeholder="Email">
+        <input class="info-box__phone" type="phone" name="phone" id="phone" placeholder="Phone">
+
+      </form>
+  </header>
 </section>

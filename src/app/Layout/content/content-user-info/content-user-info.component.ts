@@ -16,6 +16,10 @@ import { UserInfo } from '../../../interface/Content';
 export class ContentUserInfoComponent implements OnInit {
     items!: MenuItem[] | null;
     user!: UserInfo
+    ImageURL: string | null = '';
+    value: any;
+
+
     constructor(private messageService: MessageService, private userInfo: UserInfoService) { }
     
     ngOnInit(): void {
