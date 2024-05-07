@@ -92,23 +92,22 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    padding: 13px;
-    border-radius: 5px;
+    padding: $input-padding;
+    border-radius: $input-border-radius;
     outline: none;
     font-family: $font-subtitle;
-    border: 1px solid rgba(0, 0, 0, 0.116);
+    border: $input-border;
 
 }
 
 input[type="text"]::placeholder,
 input[type="password"]::placeholder {
-    color: rgba(0, 0, 0, 0.45);
+    color: $input-placeholder-color;
 }
 
 input[type="text"]:focus ,
 input[type="password"]:focus  {
-    border:none;;
-    color:blue;
+    border:$input-focus-border;
 }
 
 
