@@ -16,7 +16,6 @@ import { UserInfo } from '../../../interface/Content';
 export class ContentUserInfoComponent implements OnInit {
     items!: MenuItem[] | null;
     user!: UserInfo
-    ImageURL: string | null = '';
     value: any;
 
 
@@ -35,7 +34,7 @@ export class ContentUserInfoComponent implements OnInit {
                     ocupationId: userInfo.ocupationId,
                     firstname :  userInfo.firstname,
                     lastname : userInfo.lastname,
-                    imageurl : userInfo.image,
+                    imageurl : `data:image/png;base64, ${userInfo.image}`,
                     phone : userInfo.phone,
                     email: userInfo.email,
                     username: userInfo.username

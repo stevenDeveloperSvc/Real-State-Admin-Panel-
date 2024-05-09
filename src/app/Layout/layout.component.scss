@@ -9,6 +9,8 @@
   
   app-sidebar {
     grid-area: sidebar;
+    position: fixed;
+    z-index: 10000000;
   }
   
   app-header {

@@ -2,7 +2,7 @@
 
   <section class="content-user__header">
     <div class="content-user-picture-box">
-      <img [src]="ImageURL" alt="user picture" class="user__picture">
+      <img [src]="user.imageurl" alt="user picture" class="user__picture">
     </div>
     <form action="" class="content-user-info-box">
       <div class="user-info-fullname-box">
@@ -41,9 +41,9 @@
       </div>
       
 
+      <!-- {{ user.description }} -->
       <div class="form-input textarea">
         <textarea name="Phone" required autocomplete="off" >
-        {{ user.description }}
         </textarea>
         <label for="name" class="label-name">
           <span class="content-name">Description</span>
