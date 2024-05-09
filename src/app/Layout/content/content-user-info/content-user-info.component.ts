@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { UserInfoService } from '../../../services/user-info.service';
-import { UserInfo } from '../../../interface/Content';
+import { Ocupation, UserInfo } from '../../../interface/Content';
+import { DropdownModule } from 'primeng/dropdown';
+import { OcupationService } from '../../../services/ocupation.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-content-user-info',
     standalone: true,
-    imports: [SpeedDialModule],
+    imports: [SpeedDialModule, DropdownModule, ReactiveFormsModule, FormsModule],
     templateUrl: './content-user-info.component.html',
     styleUrl: './content-user-info.component.scss'
 })
@@ -15,39 +18,80 @@ import { UserInfo } from '../../../interface/Content';
 
 export class ContentUserInfoComponent implements OnInit {
     items!: MenuItem[] | null;
-    user!: UserInfo
+    Ocupations!: any[] | Ocupation[];
+    Ocupation: Ocupation | undefined;
     value: any;
 
+    user: UserInfo = {
+        firstname: '',
+        lastname: '',
+        ocupation: '',
+        ocupationId: 0,
+        description: '',
+        imageurl: '',
+        phone: '',
+        email: '',
+        username: ''
+    }
 
-    constructor(private messageService: MessageService, private userInfo: UserInfoService) { }
-    
+    constructor(private messageService: MessageService, private userInfo: UserInfoService, private OcupationService: OcupationService) { }
+
     ngOnInit(): void {
-        this.LoadItems();
         this.LoadUserData();
+        this.LoadItems();
+    }
+
+    private SetUserCatching() {
+        for (let item in this.user) {
+            sessionStorage.setItem(item, this.user[item]);
+        }
+        sessionStorage.setItem("IsLoaded", "1");
     }
     private LoadUserData() {
+        if (this.CheckIfCacheInfo()) {
+            this.LoadUserInfoFromCaching();
+            return;
+        };
+
         this.userInfo.GetUserInfoByRequest().subscribe({
             next: ({ userInfo }) => {
-               this.user = {
+                this.user = {
                     ocupation: userInfo.ocupation,
-                    description : userInfo.description,
+                    description: userInfo.description,
                     ocupationId: userInfo.ocupationId,
-                    firstname :  userInfo.firstname,
-                    lastname : userInfo.lastname,
-                    imageurl : `data:image/png;base64, ${userInfo.image}`,
-                    phone : userInfo.phone,
+                    firstname: userInfo.firstname,
+                    lastname: userInfo.lastname,
+                    imageurl: `data:image/png;base64, ${userInfo.image}`,
+                    phone: userInfo.phone,
                     email: userInfo.email,
                     username: userInfo.username
                 }
+                this.SetUserCatching();
 
-                console.log(userInfo)
             },
             error: (value) => {
 
             }
         });
+
+
+
+    }
+    LoadUserInfoFromCaching() {
+        for (let item in this.user) {
+            let value = sessionStorage.getItem(item);
+            this.user[item] = value === "null" || value === undefined ? "" : value;
+        }
+    }
+    CheckIfCacheInfo(): boolean {
+        const value = sessionStorage.getItem('IsLoaded');
+        return (value === undefined || value === null ? false : true);
+
     }
     private LoadItems() {
+
+        this.LoadOcupations();
+
         this.items = [
             {
                 icon: 'pi pi-pencil',
@@ -85,6 +129,27 @@ export class ContentUserInfoComponent implements OnInit {
                 url: 'http://angular.io'
             }
         ];
+
+    }
+    private LoadOcupations() {
+        this.OcupationService.GetAllOcupations().subscribe(
+            {
+                next: ({ ocupations }) => {
+                    this.Ocupations = [...ocupations],
+                        this.Ocupation = {
+                            ocupationId: Number(this.user.ocupationId),
+                            description: this.user.ocupation
+                        }
+                        console.log(this.Ocupation)
+                },
+                error: () => {
+
+                }
+            }
+
+        );
+
+
 
     }
 

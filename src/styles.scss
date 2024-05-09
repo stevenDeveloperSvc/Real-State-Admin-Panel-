@@ -2,6 +2,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+@import 'variables.scss';
 
 /* Document
    ========================================================================== */
@@ -10,7 +11,13 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-
+ .p-dropdown{
+   background:none; 
+   border:none;
+   border-bottom: 1px solid black;
+   border-radius: 0PX;
+   font-family: $font-subtitle;
+ }
  html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */

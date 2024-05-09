@@ -34,6 +34,7 @@ export class AuthService {
 
   Logout(): void {
     localStorage.clear();
+    sessionStorage.clear();
   }
 
   private GetToken(): string | null {

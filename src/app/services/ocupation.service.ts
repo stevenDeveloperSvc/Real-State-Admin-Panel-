@@ -2,13 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
+import { OcupationResponse } from '../interface/Content';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class UserInfoService {
-private  headers?: HttpHeaders;
+export class OcupationService {
 
+  private headers?: HttpHeaders;
   constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
     let Token: string = '';
     this.route.queryParams.subscribe({
@@ -18,12 +19,12 @@ private  headers?: HttpHeaders;
     });
 
     this.headers = new HttpHeaders({
-      'Authorization' : 'Bearer ' + (Token === undefined? localStorage.getItem('token') : Token)
+      'Authorization': 'Bearer ' + (Token === undefined ? localStorage.getItem('token') : Token)
     })
   }
 
-  
-  public GetUserInfoByRequest() {
-    return this.httpClient.get<any>(`${BaseUrl}/user/info`, {headers: this.headers});
+  public GetAllOcupations() {
+    return this.httpClient.get<OcupationResponse>(`${BaseUrl}/ocupation`, { headers: this.headers });
   }
+
 }

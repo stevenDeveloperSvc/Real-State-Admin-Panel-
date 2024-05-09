@@ -1,51 +1,54 @@
-
 @import "variables.scss";
 
-.header-box{
+.header-box {
     display: flex;
     padding: $padding;
-    background-color:$header-background-color;
+    background-color: $header-background-color;
 
-    .header-box-leftside{
-        flex:1;
+    .header-box-leftside {
+        flex: 1;
         display: flex;
         align-items: center;
+        background-color: red;
     }
-
-    .header-box-rightside{
+    .header-box-rightside {
         display: flex;
         justify-content: end;
     }
 }
-.header-box__title{
+
+.header-box__title {
     font-size: $font-title-size;
 }
-.user-box-data{
+
+.user-box-data {
     display: flex;
     justify-content: center;
     align-items: start;
     flex-direction: column;
     margin-right: 30px;
-    .user-box-data__title{
+
+    .user-box-data__title {
         font-family: $font-subtitle;
         font-size: $font-title-size2;
-        margin:0px;
+        margin: 0px;
     }
-    .user-box-data__subtitle{
+
+    .user-box-data__subtitle {
         font-family: $font-subtitle;
         font-size: $font-subtitle-size;
-        margin:0px;
+        margin: 0px;
     }
 }
 
-.user-box__profileImage{
+.user-box__profileImage {
     width: 70px;
     height: 70px;
     background-size: cover;
-    border-radius:50%;
+    border-radius: 50%;
 }
 
-.header-box-rightside-user-box{
+.header-box-rightside-user-box {
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -36,7 +36,7 @@ export class HeaderComponent implements OnInit {
   private SetCurrentPageName(URL: string): void {
     switch (URL) {
       case "/main/dashboard":
-        this.SitePage = "Dashboard"
+        this.SitePage = "Dashboard"        
         break;
       case "/main/user-info":
         const username = localStorage.getItem('username');
