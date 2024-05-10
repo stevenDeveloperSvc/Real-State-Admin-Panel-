@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 export class ContentUserInfoComponent implements OnInit {
+    IsDisabled: any;
+
     items!: MenuItem[] | null;
     Ocupations!: any[] | Ocupation[];
     Ocupation: Ocupation | undefined;
@@ -34,13 +36,19 @@ export class ContentUserInfoComponent implements OnInit {
         username: ''
     }
 
-    constructor(private messageService: MessageService, private userInfo: UserInfoService, private OcupationService: OcupationService) { }
+    constructor(private messageService: MessageService, 
+        private userInfo: UserInfoService,
+         private OcupationService: OcupationService) { }
 
     ngOnInit(): void {
         this.LoadUserData();
         this.LoadItems();
     }
 
+
+    onFileSelected($event: Event) {
+        throw new Error('Method not implemented.');
+    }
     private SetUserCatching() {
         for (let item in this.user) {
             sessionStorage.setItem(item, this.user[item]);
@@ -140,7 +148,6 @@ export class ContentUserInfoComponent implements OnInit {
                             ocupationId: Number(this.user.ocupationId),
                             description: this.user.ocupation
                         }
-                        console.log(this.Ocupation)
                 },
                 error: () => {
 
