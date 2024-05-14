@@ -5,7 +5,8 @@ import { UserInfoService } from '../../../services/user-info.service';
 import { Ocupation, UserInfo } from '../../../interface/Content';
 import { DropdownModule } from 'primeng/dropdown';
 import { OcupationService } from '../../../services/ocupation.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'app-content-user-info',
@@ -36,16 +37,28 @@ export class ContentUserInfoComponent implements OnInit {
         username: ''
     }
 
-    constructor(private messageService: MessageService, 
+    
+    constructor(private messageService: MessageService,
         private userInfo: UserInfoService,
-         private OcupationService: OcupationService) { }
-
-    ngOnInit(): void {
-        this.LoadUserData();
-        this.LoadItems();
-    }
-
-
+        private formBuilder : FormBuilder,
+        private OcupationService: OcupationService) { }
+        
+        ngOnInit(): void {
+            this.LoadUserData();
+            this.LoadItems();
+        }
+    
+    UserInfoForm = this.formBuilder.group({
+        firstname: ['', Validators.required],
+        lastname: ['',Validators.required],
+        ocupationId:  ['',Validators.required],
+        description:  ['',Validators.required],
+        phone: ['',Validators.required],
+        email:  ['',[Validators.required, Validators.email]],
+        username:  ['',Validators.required],
+        imageurl:  ['',Validators.required],
+    })
+    
     onFileSelected($event: Event) {
         throw new Error('Method not implemented.');
     }
@@ -54,10 +67,13 @@ export class ContentUserInfoComponent implements OnInit {
             sessionStorage.setItem(item, this.user[item]);
         }
         sessionStorage.setItem("IsLoaded", "1");
+
     }
     private LoadUserData() {
         if (this.CheckIfCacheInfo()) {
             this.LoadUserInfoFromCaching();
+            console.log(this.user.imageurl);
+
             return;
         };
 

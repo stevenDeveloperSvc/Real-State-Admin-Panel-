@@ -5,11 +5,11 @@
       <img [src]="user.imageurl" alt="user picture" class="user__picture">
 
       <div class="content-user-actions__buttons">
-        <div class="content-user__add">
-          <input type="file" (change)="onFileSelected($event)" id="fileInput" accept="image/*">
+        <label for ="fileInput" class="content-user__add">
+          <input type="file" (change)="onFileSelected($event)" id="fileInput" accept="image/*" hidden>
 
           <img class="user-add__icon" src="/assets/icon/add.svg" alt="add icon button" srcset="">
-        </div>
+        </label>  
         <div class="content-user__delete"><img class="user-add__icon" src="/assets/icon/delete.svg"
             alt="delete icon button" srcset="">
         </div>
