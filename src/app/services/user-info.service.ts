@@ -2,12 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
+import { Observable, lastValueFrom } from 'rxjs';
+import { User } from '../interface/Content';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserInfoService {
-private  headers?: HttpHeaders;
+  private headers?: HttpHeaders;
 
   constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
     let Token: string = '';
@@ -18,12 +20,19 @@ private  headers?: HttpHeaders;
     });
 
     this.headers = new HttpHeaders({
-      'Authorization' : 'Bearer ' + (Token === undefined? localStorage.getItem('token') : Token)
-    })
+      Authorization:
+        'Bearer ' +
+        (Token === undefined ? localStorage.getItem('token') : Token),
+    });
   }
 
-  
-  public GetUserInfoByRequest() {
-    return this.httpClient.get<any>(`${BaseUrl}/user/info`, {headers: this.headers});
+  private GetUserInfoByRequest(): Observable< User > {
+    return this.httpClient.get<any>(`${BaseUrl}/user/info`, {
+      headers: this.headers,
+    });
+  }
+
+  public async GetUserInfoByRequestPromise() : Promise<User> {
+    return await lastValueFrom(this.GetUserInfoByRequest());
   }
 }
