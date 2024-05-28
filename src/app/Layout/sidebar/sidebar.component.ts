@@ -15,6 +15,19 @@ export class SidebarComponent {
   IsImageLoaded: any;
   ImageUrl: any;
   FirstVowelUser: any;
+
+  activeIndex: number | null = null;
+
+  setActive(index: number) {
+    this.activeIndex = index;
+  }
+  menuItems = [
+    { link: '/main/dashboard', icon: '/assets/icon/home.svg', alt: 'home casa default view button', label: 'Home' },
+    { link: '/main/property-list', icon: '/assets/icon/building.svg', alt: 'home casa default view button', label: 'Properties' },
+    { link: '/main/user-info', icon: '/assets/icon/configuration.svg', alt: 'configuration user', label: 'Configuration' }
+  ];
+
+  
   constructor(private Auth: AuthService, private router: Router, private message: MessageService,
   ) { }
   LogOut() {

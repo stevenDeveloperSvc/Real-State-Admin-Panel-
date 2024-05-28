@@ -1,26 +1,15 @@
 <div class="sidebar-container">
     <div class="sidebar-menuitems">
         <ul class="sidebar-container-menu-items">
-            <li>
-                <a class="menu-item" [routerLink]="['/main/dashboard']">
-                    <img class="item-icon" src="/assets/icon/home.svg" alt="home casa default view button">
-                    <p>Home</p>
-                </a>
-            </li>
-            <li>
-                <a class="menu-item" [routerLink]="['/main/property-list']">
-                    <img class="item-icon" src="/assets/icon/building.svg" alt="home casa default view button">
-                    <p>Properties</p>
-                </a>
-            </li>
-            <li>
-                <a class="menu-item" [routerLink]="['/main/user-info']">
-                    <img class="item-icon" src="/assets/icon/configuration.svg" alt="configuration user">
-                    <p>Configuration</p>
-                </a>
-            </li>
+            <li *ngFor="let item of menuItems; let i = index" 
+            [ngClass]="{'active': activeIndex === i}" 
+            (click)="setActive(i)">
+          <a class="menu-item" [routerLink]="item.link">
+            <img class="item-icon" [src]="item.icon" [alt]="item.alt">
+            <p>{{ item.label }}</p>
+          </a>
+        </li>
         </ul>
-
         <!-- <ul class="sidebar-container-menu-items">
             <li>
                 <a class="menu-item" (click)="LogOut()">
