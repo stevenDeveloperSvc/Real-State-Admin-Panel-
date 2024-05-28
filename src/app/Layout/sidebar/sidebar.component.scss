@@ -4,31 +4,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
   width: 250px;
+  height: 100%;
   transition: all 0.5s ease-in-out;
   background-color: $primary-color-sidebar;
   border-radius: 0 $border-radius $border-radius 0;
 }
-
-.sidebar-container-user-image {
-  display: flex;
-  width: 100%;
-  height: 15%;
-}
-
-.sidebar-container-image-or-name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: transparent;
-  border: 1px solid $font-color-sidebar;
-  margin: auto;
-}
-
 .sidebar-container-menu-items {
   align-items: start;
   list-style: none;

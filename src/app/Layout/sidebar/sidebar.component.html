@@ -1,10 +1,4 @@
 <div class="sidebar-container">
-    <div class="sidebar-container-user-image">
-        <div class="sidebar-container-image-or-name">
-            <img *ngIf="IsImageLoaded" [src]="ImageUrl" alt="user image" class="sidebar-container-image__user">
-            <p *ngIf="!IsImageLoaded" class="sidebar-container-name">{{FirstVowelUser}}</p>
-        </div>
-    </div>
     <div class="sidebar-menuitems">
         <ul class="sidebar-container-menu-items">
             <li>
@@ -27,14 +21,14 @@
             </li>
         </ul>
 
-        <ul class="sidebar-container-menu-items">
+        <!-- <ul class="sidebar-container-menu-items">
             <li>
                 <a class="menu-item" (click)="LogOut()">
                     <img class="item-icon" src="/assets/icon/logout.svg" alt="home casa default view button">
                     <p>Logout</p>
                 </a>
             </li>
-        </ul>
+        </ul> -->
 
     </div>
 
