@@ -41,6 +41,7 @@ textarea:focus {
 .content-user__info-image{
     background-color: $header-background-color;
     padding: $padding;
+    height: fit-content;
 }
 
 .header__title{
@@ -157,7 +158,13 @@ textarea {
     height: 45px;
     outline: none;
     border: none;
-    background-color: #db6574;
-    color:white;
+    background-color: $button-background-color;
+    border-radius: 4%;
+    color:$button-color1;
+    transition: $animation;
 }
 
+.send__button:active{
+    background-color: $button-background-color-active;
+    color: $button-color-active;
+}
