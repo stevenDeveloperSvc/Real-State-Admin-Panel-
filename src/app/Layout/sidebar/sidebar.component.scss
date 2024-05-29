@@ -11,55 +11,42 @@
   border-radius: 0 $border-radius $border-radius 0;
 }
 .sidebar-container-menu-items {
-  align-items: start;
-  list-style: none;
-  padding: 0;
-  margin: 20px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  list-style: none;
+  padding: 0;
   width: 100%;
   gap: 30px;
-  padding: 0;
   cursor:pointer;
 }
+.menu-item-list{
+  border-left: 3px solid transparent;
 
-.sidebar-container-menu-items li a {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-decoration: none;
 }
-
+.active{
+  border-left: 3px solid $primary-color;
+}
 .sidebar-container-menu-items li a p {
-  text-align: start;
   color: $font-color-sidebar;
   font-family: Montserrat;
   font-weight: 600;
   line-height: normal;
   font-size: $font-subtitle-size;
 }
-.sidebar-container-menu-items li{
-  display: flex;
-  width: 100%;
-}
-
-// .sidebar-container-menu-items li:focus{
-//   background-color: black;
-// }
 .menu-item{
-  block-size: 100%;
+  width: 100%;
+  gap: 20px;
   display: flex;
-  gap: 40px;
-  margin-left: 15px;
+  justify-content: start;
+  align-items: center;
+  text-decoration: none;
+  padding: calc($padding - 15px);
+  
 }
 .item-icon {
   width: 30px;
   height: 30px;
 }
 .sidebar-menuitems{
-  display: flex;  
-  flex-direction: column;
-  justify-content: space-between;
-  height: 85%;
+  width: 100%;
 }

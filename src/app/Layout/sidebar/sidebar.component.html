@@ -1,14 +1,13 @@
 <div class="sidebar-container">
     <div class="sidebar-menuitems">
         <ul class="sidebar-container-menu-items">
-            <li *ngFor="let item of menuItems; let i = index" 
-            [ngClass]="{'active': activeIndex === i}" 
-            (click)="setActive(i)">
-          <a class="menu-item" [routerLink]="item.link">
-            <img class="item-icon" [src]="item.icon" [alt]="item.alt">
-            <p>{{ item.label }}</p>
-          </a>
-        </li>
+            <li class="menu-item-list" *ngFor="let item of menuItems; let i = index" [ngClass]="{'active': activeIndex === i}"
+                (click)="setActive(i)">
+                <a class="menu-item" [routerLink]="item.link">
+                    <img class="item-icon" [src]="item.icon" [alt]="item.alt">
+                    <p>{{ item.label }}</p>
+                </a>
+            </li>
         </ul>
         <!-- <ul class="sidebar-container-menu-items">
             <li>

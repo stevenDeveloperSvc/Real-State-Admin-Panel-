@@ -2,9 +2,10 @@
 
 .header-box {
   display: flex;
+
   padding: calc($padding - 15px);
   background-color: $header-background-color;
-  border: 0.2px solid rgba(96, 95, 95, 0.211);
+  border: $border;
   .header-box-leftside {
     flex: 1;
     display: flex;
