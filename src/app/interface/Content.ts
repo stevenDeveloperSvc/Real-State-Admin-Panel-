@@ -12,11 +12,13 @@ export interface User{
     ocupation: string;
     ocupationId: number;
     description: string;
-    image: string;
+    image?: string | null;
     phone: string;
     email: string;
     username: string;
 }
+
+
 
 export interface OcupationResponse{
     response: { isSuccess : boolean, value: string; }

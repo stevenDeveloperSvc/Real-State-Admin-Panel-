@@ -23,6 +23,17 @@ export class ContentUserInfoComponent implements OnInit {
   Ocupation: Ocupation | undefined;
   value: any;
 
+  UserInfoForm = this.formBuilder.group({
+    firstname: ['', Validators.required],
+    lastname: ['', Validators.required],
+    ocupationId: ['', Validators.required],
+    description: ['', Validators.required],
+    phone: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
+    username: ['', Validators.required]
+    });
+
+
   user: UserInfo = {
     firstname: '',
     lastname: '',
@@ -40,24 +51,39 @@ export class ContentUserInfoComponent implements OnInit {
     private userInfo: UserInfoService,
     private formBuilder: FormBuilder,
     private OcupationService: OcupationService
-  ) {}
+    ) { }
 
- async ngOnInit() {
-   await this.LoadUserData();
+  async ngOnInit() {
+    await this.LoadUserData();
     this.LoadItems();
     this.LoadOcupations();
   }
 
-  UserInfoForm = this.formBuilder.group({
-    firstname: ['', Validators.required],
-    lastname: ['', Validators.required],
-    ocupationId: ['', Validators.required],
-    description: ['', Validators.required],
-    phone: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    username: ['', Validators.required],
-    imageurl: ['', Validators.required],
-  });
+  submitUserInfo() {
+    const userData = { ...this.UserInfoForm.value }
+  }
+  get FirstName() {
+    return this.UserInfoForm.controls['firstname'];
+  }
+  get LastName() {
+    return this.UserInfoForm.controls['lastname'];
+  }
+  get UserName() {
+    return this.UserInfoForm.controls['username'];
+  }
+  get Email() {
+    return this.UserInfoForm.controls['email'];
+  }
+  get Phone() {
+    return this.UserInfoForm.controls['phone'];
+  }
+  get Description() {
+    return this.UserInfoForm.controls['description'];
+  }
+  get OcupationId() {
+    return this.UserInfoForm.controls['ocupationId'];
+  }
+
 
   onFileSelected($event: Event) {
     throw new Error('Method not implemented.');
@@ -68,29 +94,29 @@ export class ContentUserInfoComponent implements OnInit {
     }
     sessionStorage.setItem('IsLoaded', '1');
   }
-  private async  LoadUserData() {
+  private async LoadUserData() {
     if (this.CheckIfCacheInfo()) {
       this.LoadUserInfoFromCaching();
       return;
     }
 
-   await this.userInfo.GetUserInfoByRequestPromise().then(({userInfo})=>{
-    this.user = {
-      ocupation: userInfo.ocupation,
-      description: userInfo.description,
-      ocupationId: userInfo.ocupationId,
-      firstname: userInfo.firstname,
-      lastname: userInfo.lastname,
-      image: `data:image/png;base64, ${userInfo.image}`,
-      phone:userInfo.phone,
-      email: userInfo.email,
-      username: userInfo.username,
-      
-    };
+    await this.userInfo.GetUserInfoByRequestPromise().then(({ userInfo }) => {
+      this.user = {
+        ocupation: userInfo.ocupation,
+        description: userInfo.description,
+        ocupationId: userInfo.ocupationId,
+        firstname: userInfo.firstname,
+        lastname: userInfo.lastname,
+        image: `data:image/png;base64, ${userInfo.image}`,
+        phone: userInfo.phone,
+        email: userInfo.email,
+        username: userInfo.username,
 
-   this.SetUserCatching()
-    console.log(userInfo)
-   });
+      };
+
+      this.SetUserCatching()
+      console.log(userInfo)
+    });
 
   }
   LoadUserInfoFromCaching() {
@@ -154,6 +180,7 @@ export class ContentUserInfoComponent implements OnInit {
       },
     ];
   }
+
   private LoadOcupations() {
     this.OcupationService.GetAllOcupations().subscribe({
       next: ({ ocupations }) => {
@@ -163,7 +190,7 @@ export class ContentUserInfoComponent implements OnInit {
             description: this.user.ocupation,
           });
       },
-      error: () => {},
+      error: () => { },
     });
   }
 }

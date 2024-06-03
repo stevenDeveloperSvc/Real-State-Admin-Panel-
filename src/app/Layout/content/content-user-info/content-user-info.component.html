@@ -5,43 +5,43 @@
       <p class="header__subtitle">This info will be displayed in the website!</p>
     </header>
  
-      <form action="" class="content-user-info-box">
+      <form [formGroup]="UserInfoForm" class="content-user-info-box" (submit)="submitUserInfo()">
         <div class="user-info-fullname-box">
           <div class="input-box">
           <label for="firstname" class="label-name">First Name </label>
-          <input type="text" id="firstname" name="firstname" required autocomplete="off" [value]="user.firstname  ">
+          <input formControlName="firstname" type="text" id="firstname" name="firstname" required autocomplete="off" [value]="user.firstname  ">
         </div>
         
         <div class="input-box">
           <label for="lastname" class="label-name">Last Name </label>
-          <input type="text" id="lastname" name="lastname" required autocomplete="off" [value]="user.lastname">
+          <input formControlName="lastname" type="text" id="lastname" name="lastname" required autocomplete="off" [value]="user.lastname">
         </div>
       </div>
       
       <div class="input-box">
         <label for="name" class="label-name">User Name</label>
-        <input type="text" name="username" required autocomplete="off" [value]="user.username">
+        <input formControlName="username" type="text" name="username" required autocomplete="off" [value]="user.username">
       </div>
       
       <div class="input-box">
         <label for="email" class="label-name">Email</label>
-        <input type="text" name="email" id="email" required autocomplete="off" [value]="user.email">
+        <input formControlName="email" type="text" name="email" id="email" required autocomplete="off" [value]="user.email">
       </div>
       
       <div class="input-box">
         <label for="phone" class="label-name">Phone</label>
-        <input type="text" id="phone" name="phone" required autocomplete="off" placeholder="Phone" [value]="user.phone">
+        <input formControlName="phone" type="text" id="phone" name="phone" required autocomplete="off" placeholder="Phone" [value]="user.phone">
       </div>
       
       <div class="input-box">
         <label for="ocupations" class="label-name">Ocupation</label>
-        <p-dropdown id="ocupations" name="ocupations" [options]="Ocupations" [(ngModel)]="Ocupation" optionLabel="description" name="ocupationinput"
+        <p-dropdown formControlName="ocupationid" id="ocupations" name="ocupations" [options]="Ocupations" [(ngModel)]="Ocupation" optionLabel="description" name="ocupationinput"
         placeholder="Select a Ocupation" />
       </div>
       
       <div class="input-box">
         <label for="description" class="label-name">Description</label>
-        <textarea id="description" name="description" required autocomplete="off">{{user.description}}</textarea>
+        <textarea formControlName="description" id="description" name="description" required autocomplete="off">{{user.description}}</textarea>
       </div>
 
       <input class="send__button" type="button"  value="SAVE">
@@ -57,7 +57,7 @@
 
          
     <div class="content-user-picture-box">
-      <img [src]="user.image" alt="user picture" class="user__picture">
+      <img [src]="user.image" formControlName="imageurl" alt="user picture" class="user__picture">
       
       <div class="content-user-actions__buttons">
         <label for="fileInput" class="content-user__add">

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
 import { Observable, lastValueFrom } from 'rxjs';
-import { User } from '../interface/Content';
+import { User, UserInfo } from '../interface/Content';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +28,15 @@ export class UserInfoService {
 
   private GetUserInfoByRequest(): Observable< User > {
     return this.httpClient.get<any>(`${BaseUrl}/user/info`, {
-      headers: this.headers,
+      headers: this.headers
     });
   }
 
   public async GetUserInfoByRequestPromise() : Promise<User> {
     return await lastValueFrom(this.GetUserInfoByRequest());
+  }
+
+  public SaveUser(User : UserInfo){
+    return this.httpClient.post(`${BaseUrl}/user/modify`,User,{headers: this.headers})
   }
 }
