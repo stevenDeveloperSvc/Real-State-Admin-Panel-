@@ -2,80 +2,124 @@
   <section class="content-user__info">
     <header class="content-user__header">
       <h4 class="header__title">User Info</h4>
-      <p class="header__subtitle">This info will be displayed in the website!</p>
+      <p class="header__subtitle">
+        This info will be displayed in the website!
+      </p>
     </header>
- 
-      <form [formGroup]="UserInfoForm" class="content-user-info-box" (submit)="submitUserInfo()">
-        <div class="user-info-fullname-box">
-          <div class="input-box">
-          <label for="firstname" class="label-name">First Name </label>
-          <input formControlName="firstname" type="text" id="firstname" name="firstname" required autocomplete="off" [value]="user.firstname  ">
-        </div>
-        
-        <div class="input-box">
-          <label for="lastname" class="label-name">Last Name </label>
-          <input formControlName="lastname" type="text" id="lastname" name="lastname" required autocomplete="off" [value]="user.lastname">
-        </div>
-      </div>
-      
-      <div class="input-box">
-        <label for="name" class="label-name">User Name</label>
-        <input formControlName="username" type="text" name="username" required autocomplete="off" [value]="user.username">
-      </div>
-      
-      <div class="input-box">
-        <label for="email" class="label-name">Email</label>
-        <input formControlName="email" type="text" name="email" id="email" required autocomplete="off" [value]="user.email">
-      </div>
-      
-      <div class="input-box">
-        <label for="phone" class="label-name">Phone</label>
-        <input formControlName="phone" type="text" id="phone" name="phone" required autocomplete="off" placeholder="Phone" [value]="user.phone">
-      </div>
-      
-      <div class="input-box">
-        <label for="ocupations" class="label-name">Ocupation</label>
-        <p-dropdown formControlName="ocupationid" id="ocupations" name="ocupations" [options]="Ocupations" [(ngModel)]="Ocupation" optionLabel="description" name="ocupationinput"
-        placeholder="Select a Ocupation" />
-      </div>
-      
-      <div class="input-box">
-        <label for="description" class="label-name">Description</label>
-        <textarea formControlName="description" id="description" name="description" required autocomplete="off">{{user.description}}</textarea>
-      </div>
 
-      <input class="send__button" type="button"  value="SAVE">
+    <form
+      [formGroup]="UserInfoForm"
+      class="content-user-info-box"
+      (submit)="submitUserInfo()"
+    >
+      <label for="firstname" class="label-name">First Name </label>
+      <input
+        class="input-box"
+        formControlName="FirstName"
+        type="text"
+        id="firstname"
+        name="firstname"
+        required
+        autocomplete="off"
+      />
+      <label for="lastname" class="label-name">Last Name </label>
+      <input
+        class="input-box"
+        formControlName="LastName"
+        type="text"
+        id="lastname"
+        name="lastname"
+        required
+        autocomplete="off"
+      />
+      <label for="name" class="label-name">User Name</label>
+      <input
+        class="input-box"
+        formControlName="UserName"
+        type="text"
+        name="username"
+        required
+        autocomplete="off"
+      />
+      <label for="email" class="label-name">Email</label>
+      <input
+        class="input-box"
+        formControlName="Email"
+        type="text"
+        name="email"
+        id="email"
+        required
+        autocomplete="off"
+      />
+      <label for="phone" class="label-name">Phone</label>
+      <input
+        class="input-box"
+        formControlName="Phone"
+        type="text"
+        id="phone"
+        name="phone"
+        required
+        autocomplete="off"
+        placeholder="Phone"
+      />
+      <label for="ocupations" class="label-name">Ocupation</label>
+      <p-dropdown
+        id="ocupations"
+        name="ocupations"
+        [options]="Ocupations"
+        optionLabel="description"
+        placeholder="Select a Ocupation"
+        formControlName="ocupationId"
+        />
+        <!-- formControlName="ocupationId" -->
+      <label for="description" class="label-name">Description</label>
+      <textarea
+      class="input-box"
+        formControlName="Description"
+        id="description"
+        name="description"
+        required
+        autocomplete="off"
+      ></textarea>
+    
+      <input class="send__button" type="submit" value="SAVE" />
     </form>
-
   </section>
-  
+
   <section class="content-user__info-image">
     <header class="content-user__header">
       <h4 class="header__title">User Picture</h4>
       <p class="header__subtitle">Choose your profile picture</p>
     </header>
 
-         
     <div class="content-user-picture-box">
-      <img [src]="user.image" formControlName="imageurl" alt="user picture" class="user__picture">
-      
       <div class="content-user-actions__buttons">
         <label for="fileInput" class="content-user__add">
-          <input type="file" (change)="onFileSelected($event)" id="fileInput" accept="image/*" hidden>
-          
-          <img class="user-add__icon" src="/assets/icon/add.svg" alt="add icon button" srcset="">
+          <input
+            type="file"
+            (change)="onFileSelected($event)"
+            id="fileInput"
+            accept="image/*"
+            hidden
+          />
+
+          <!-- <img [src]="user.image" formControlName="imageurl" alt="user picture" class="user__picture"> -->
+          <img
+            class="user-add__icon"
+            src="/assets/icon/add.svg"
+            alt="add icon button"
+            srcset=""
+          />
         </label>
-        <div class="content-user__delete"><img class="user-add__icon" src="/assets/icon/delete.svg"
-          alt="delete icon button" srcset="">
+        <div class="content-user__delete">
+          <img
+            class="user-add__icon"
+            src="/assets/icon/delete.svg"
+            alt="delete icon button"
+            srcset=""
+          />
         </div>
       </div>
-    </div> 
+    </div>
   </section>
-
-
-
 </section>
-<!-- <div class="speed-box">
-  <p-speedDial [model]="items" radius="120" direction="up-left" type="quarter-circle"
-  buttonClassName="p-button-success" /> 
-</div> -->

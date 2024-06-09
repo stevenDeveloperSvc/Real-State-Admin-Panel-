@@ -36,7 +36,8 @@ export class UserInfoService {
     return await lastValueFrom(this.GetUserInfoByRequest());
   }
 
-  public SaveUser(User : UserInfo){
-    return this.httpClient.post(`${BaseUrl}/user/modify`,User,{headers: this.headers})
+  public UpdateUser(User : UserInfo){
+    console.log(JSON.stringify(User))
+    return this.httpClient.put(`${BaseUrl}/user/modify`,User,{headers: this.headers})
   }
 }

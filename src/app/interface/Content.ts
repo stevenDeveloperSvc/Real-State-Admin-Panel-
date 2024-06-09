@@ -10,7 +10,7 @@ export interface User{
     firstname : string;
     lastname: string;
     ocupation: string;
-    ocupationId: number;
+    ocupationId: Ocupation | number;
     description: string;
     image?: string | null;
     phone: string;
