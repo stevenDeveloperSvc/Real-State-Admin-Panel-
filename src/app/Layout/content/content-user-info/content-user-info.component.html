@@ -70,18 +70,17 @@
         optionLabel="description"
         placeholder="Select a Ocupation"
         formControlName="ocupationId"
-        />
-        <!-- formControlName="ocupationId" -->
+      />
       <label for="description" class="label-name">Description</label>
       <textarea
-      class="input-box"
+        class="input-box"
         formControlName="Description"
         id="description"
         name="description"
         required
         autocomplete="off"
       ></textarea>
-    
+
       <input class="send__button" type="submit" value="SAVE" />
     </form>
   </section>
@@ -93,6 +92,7 @@
     </header>
 
     <div class="content-user-picture-box">
+      <img [src]="imgURL" alt="user picture" class="user__picture" />
       <div class="content-user-actions__buttons">
         <label for="fileInput" class="content-user__add">
           <input
@@ -103,7 +103,6 @@
             hidden
           />
 
-          <!-- <img [src]="user.image" formControlName="imageurl" alt="user picture" class="user__picture"> -->
           <img
             class="user-add__icon"
             src="/assets/icon/add.svg"
@@ -120,6 +119,7 @@
           />
         </div>
       </div>
+      <input class="send__button" type="button" (click)="UpdateImage()" value="SAVE" />
     </div>
   </section>
 </section>

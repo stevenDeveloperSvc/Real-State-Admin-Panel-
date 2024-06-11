@@ -32,12 +32,16 @@ export class UserInfoService {
     });
   }
 
+
   public async GetUserInfoByRequestPromise() : Promise<User> {
     return await lastValueFrom(this.GetUserInfoByRequest());
   }
 
   public UpdateUser(User : UserInfo){
-    console.log(JSON.stringify(User))
     return this.httpClient.put(`${BaseUrl}/user/modify`,User,{headers: this.headers})
+  }
+
+  public UpdateImage(Image: any){
+    return this.httpClient.put(`${BaseUrl}/user/image`, Image,{headers :this.headers })
   }
 }

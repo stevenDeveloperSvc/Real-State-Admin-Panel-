@@ -23,7 +23,7 @@ export class AuthService {
       next: (value) => {
         localStorage.setItem('token', value.result);
         localStorage.setItem('username', value.user?.username)
-        localStorage.setItem('image', value.user?.image);
+        localStorage.setItem('image', `data:image/png;base64, ${value.user?.image}`);
         localStorage.setItem('ocupation', value.user?.ocupation)
       },
       error: (e) => {

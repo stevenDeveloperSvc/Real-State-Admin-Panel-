@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { EventBusService } from '../../services/event-bus.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   private routerSubscription: Subscription = new Subscription();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private eventBus : EventBusService) {
     this.routerSubscription = this.router.events.subscribe((e) => {
       if (e instanceof NavigationEnd) {
         this.SetCurrentPageName(e.url);
@@ -27,9 +28,20 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.eventBus.imageUpdated$.subscribe(()=>
+      {
+        this.GetData()
+        console.log("Event emited")
+      }
+     
+  );
+   this.GetData();
+  }
+
+  GetData(): void {
     this.ocupation = localStorage.getItem('ocupation');
     this.user = localStorage.getItem('username');
-    this.userPicture = `data:image/png;base64, ${localStorage.getItem('image')}`
+    this.userPicture =  localStorage.getItem('image')
   }
 
 
