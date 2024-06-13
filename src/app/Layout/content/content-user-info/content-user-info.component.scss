@@ -17,6 +17,7 @@ label {
   transition: $animation;
   width: 400px;
   color: $font-color-sidebar;
+  font-size:  $font-subtitle-size;
 }
 
 .input-box:focus,
@@ -64,52 +65,15 @@ label {
 .content-user-picture-box {
   display: flex;
   flex-direction: column;
-  height: 460px;
-  width: 400px;
-  }
-  
-  .user__picture {
-    width: 300px;
-    height: 300px;
-    border-radius: $border-radius;
-    border: 1px solid rgb(0, 0, 0);
-    margin: auto;
-  }
-.content-user-actions__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  height: 100px;
-  width: 100%;
+  justify-content: space-between;
+}
 
-  .content-user__add,
-  .content-user__delete {
-    cursor: pointer;
-    margin: 0px;
-    display: flex;
-    border: 1px solid black;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    transition: $animation;
-  }
-
-  .content-user__add:hover,
-  .content-user__delete:hover {
-    background-color: $box-color;
-  }
-  .content-user__add:active,
-  .content-user__delete:active {
-    background-color: $primary-color;
-  }
-
-  .user-add__icon {
-    width: 50px;
-    height: 50px;
-  }
+.user__picture {
+  width: 300px;
+  height: 300px;
+  border-radius: $border-radius;
+  border: 1px solid rgb(0, 0, 0);
+  object-fit: cover;
 }
 
 input[type="file"] {
@@ -124,7 +88,13 @@ input[type="file"] {
   justify-content: space-around;
   gap: 30px;
 }
+.content-user-image-fields{
+  margin-top:40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px ;
 
+}
 .user-info-fullname-box {
   display: flex;
   justify-content: space-between;
@@ -165,6 +135,7 @@ textarea {
   border-radius: 4%;
   color: $button-color1;
   transition: $animation;
+  margin-top: 40px;
 }
 
 .send__button:active {

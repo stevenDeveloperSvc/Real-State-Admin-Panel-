@@ -79,6 +79,7 @@
         name="description"
         required
         autocomplete="off"
+        placeholder="Write your description here"
       ></textarea>
 
       <input class="send__button" type="submit" value="SAVE" />
@@ -92,33 +93,42 @@
     </header>
 
     <div class="content-user-picture-box">
-      <img [src]="imgURL" alt="user picture" class="user__picture" />
-      <div class="content-user-actions__buttons">
-        <label for="fileInput" class="content-user__add">
-          <input
-            type="file"
-            (change)="onFileSelected($event)"
-            id="fileInput"
-            accept="image/*"
-            hidden
-          />
-
-          <img
-            class="user-add__icon"
-            src="/assets/icon/add.svg"
-            alt="add icon button"
-            srcset=""
-          />
+      <label for="fileInput" class="content-user__add">
+        <input 
+        type="file"
+        (change)="onFileSelected($event)" 
+        id="fileInput"
+        accept="image/*"
+        hidden
+        />
+        <img [src]="imgURL" alt="user picture" class="user__picture" />
         </label>
-        <div class="content-user__delete">
-          <img
-            class="user-add__icon"
-            src="/assets/icon/delete.svg"
-            alt="delete icon button"
-            srcset=""
+
+        <div class="content-user-image-fields">
+          <label for="title" class="label-name">Title</label>
+          <input
+            class="input-box"
+            type="text"
+            id="title"
+            name="title"
+            required
+            autocomplete="off"
+            placeholder="Title"
+            [(ngModel)] = "image.title"
           />
+          <label for="ImageDescription" class="label-name">Description</label>
+          <textarea
+          class="input-box"
+          id="ImageDescription"
+          name="ImageDescription"
+          required
+          autocomplete="off"
+          placeholder="Write your picture description here"
+          [(ngModel)] = "image.description"
+
+        ></textarea>
         </div>
-      </div>
+   
       <input
         class="send__button"
         type="button"

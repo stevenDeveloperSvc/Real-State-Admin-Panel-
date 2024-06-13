@@ -48,7 +48,7 @@
 .user-box__profileImage {
   width: 70px;
   height: 70px;
-  background-size: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 

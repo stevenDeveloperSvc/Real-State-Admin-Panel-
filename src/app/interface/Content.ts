@@ -16,6 +16,8 @@ export interface User{
     phone: string;
     email: string;
     username: string;
+    imageLabel: string;
+    imageTitle : string;
 }
 
 
