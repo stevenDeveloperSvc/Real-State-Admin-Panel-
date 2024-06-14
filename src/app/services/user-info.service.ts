@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
 import { Observable, lastValueFrom } from 'rxjs';
-import { User, UserInfo } from '../interface/Content';
+import { User, UserInfo, Password } from '../interface/Content';
 
 @Injectable({
   providedIn: 'root',
@@ -43,5 +43,10 @@ export class UserInfoService {
 
   public UpdateImage(Image: any){
     return this.httpClient.put(`${BaseUrl}/user/image`, Image,{headers :this.headers })
+  }
+
+  public UpdatePassword(Password: Password){
+    return this.httpClient.put(`${BaseUrl}/user/passowrd`, Password,{headers: this.headers})
+
   }
 }

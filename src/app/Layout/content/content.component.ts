@@ -11,7 +11,5 @@ import { RouterOutlet } from '@angular/router';
 export class ContentComponent {
 
   constructor(){}
-  refreshImage(): void {
-    console.log("DONE")
-  }
+
 }

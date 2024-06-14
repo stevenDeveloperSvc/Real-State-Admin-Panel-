@@ -1,23 +1,20 @@
 <div class="sidebar-container">
     <div class="sidebar-menuitems">
-        <ul class="sidebar-container-menu-items">
-            <li class="menu-item-list" *ngFor="let item of menuItems; let i = index" [ngClass]="{'active': activeIndex === i}"
-                (click)="setActive(i)">
-                <a class="menu-item" [routerLink]="item.link">
-                    <img class="item-icon" [src]="item.icon" [alt]="item.alt">
-                    <p>{{ item.label }}</p>
-                </a>
+      <ul class="sidebar-container-menu-items">
+        <li class="menu-item-list" *ngFor="let item of menuItems; let i = index" 
+            [ngClass]="{'active': activeIndex === i}" 
+            (mouseover)="setActive(i)" (mouseleave)="setActive(null)">
+          <a class="menu-item" [routerLink]="item.link">
+            <img class="item-icon" [src]="item.icon" [alt]="item.alt">
+            <p>{{ item.label }}</p>
+          </a>
+          <ul *ngIf="item != undefined && item!.subItems!.length > 0" class="submenu" [ngClass]="{'show': activeIndex === i}">
+            <li *ngFor="let subItem of item.subItems">
+              <a [routerLink]="subItem.link">{{ subItem.label }}</a>
             </li>
-        </ul>
-        <!-- <ul class="sidebar-container-menu-items">
-            <li>
-                <a class="menu-item" (click)="LogOut()">
-                    <img class="item-icon" src="/assets/icon/logout.svg" alt="home casa default view button">
-                    <p>Logout</p>
-                </a>
-            </li>
-        </ul> -->
-
+          </ul>
+        </li>
+      </ul>
     </div>
-
-</div>
+  </div>
+  

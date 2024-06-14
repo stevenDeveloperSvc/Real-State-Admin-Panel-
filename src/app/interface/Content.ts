@@ -30,3 +30,7 @@ export interface Ocupation {
     ocupationId: number;
     description: string;
 }
+export interface Password{
+    Password : string;
+    RepeatPassword : string;
+}
