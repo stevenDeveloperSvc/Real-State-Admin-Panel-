@@ -42,10 +42,11 @@
           class="form__send"
           name="login"
           value="Login"
-          [disabled]="loginform.invalid "
+          [disabled]="loginform.invalid || IsLoading"
         />
       </form>
       <h5>Forget password? <a href="#">Click Here</a></h5>
+        <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
     </body>
   </div>
 </div>

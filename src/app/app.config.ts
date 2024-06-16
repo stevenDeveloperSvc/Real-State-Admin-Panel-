@@ -7,5 +7,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideAnimations(), provideHttpClient(), MessageService]
+  providers: [provideRouter(routes), provideAnimations(), provideHttpClient(), MessageService],
+
 };

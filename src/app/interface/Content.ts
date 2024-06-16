@@ -33,4 +33,5 @@ export interface Ocupation {
 export interface Password{
     Password : string;
     RepeatPassword : string;
+    LastPasword: string;
 }

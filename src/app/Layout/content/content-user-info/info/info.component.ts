@@ -1,4 +1,4 @@
-import { Component,  OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { SpeedDialModule } from 'primeng/speeddial';
 import { UserInfoService } from '../../../../services/user-info.service';
@@ -8,37 +8,66 @@ import { OcupationService } from '../../../../services/ocupation.service';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { EventBusService } from '../../../../services/event-bus.service';
+import { ProgressSpinnerComponent } from '../../../../progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-info',
   standalone: true,
-  imports: [SpeedDialModule, DropdownModule, ReactiveFormsModule, FormsModule],
+  imports: [
+    SpeedDialModule,
+    DropdownModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ProgressSpinnerComponent,
+  ],
   templateUrl: './info.component.html',
-  styleUrl: './info.component.scss'
+  styleUrl: './info.component.scss',
 })
 export class InfoComponent implements OnInit {
   IsDisabled: any;
-
+  IsUserInfoLoading: boolean = false;
+  IsUserImageLoading: boolean = false;
   items!: MenuItem[] | null;
   Ocupations!: Ocupation[];
   Ocupation: Ocupation | undefined;
   value: any;
   imgURL: string | ArrayBuffer | null = null;
   selectedFile: File | null = null;
-  image : {title: string | null; description: string | null;} = {
-    title:'',
-    description:''
-  }
+  image: { title: string | null; description: string | null } = {
+    title: '',
+    description: '',
+  };
 
   UserInfoForm = this.formBuilder.group({
-    FirstName: ['', Validators.required],
-    LastName: ['', Validators.required],
-    ocupationId: [0, Validators.required],
-    ocupation: [''],
-    Description: ['', Validators.required],
-    Phone: ['', Validators.required],
-    Email: ['', [Validators.required, Validators.email]],
-    UserName: ['', Validators.required],
+    FirstName: [
+      { value: '', disabled: this.IsUserInfoLoading },
+      Validators.required,
+    ],
+    LastName: [
+      { value: '', disabled: this.IsUserInfoLoading },
+      Validators.required,
+    ],
+    ocupationId: [
+      { value: 0, disabled: this.IsUserInfoLoading },
+      Validators.required,
+    ],
+    ocupation: [{ value: '', disabled: this.IsUserImageLoading }],
+    Description: [
+      { value: '', disabled: this.IsUserInfoLoading },
+      Validators.required,
+    ],
+    Phone: [
+      { value: '', disabled: this.IsUserInfoLoading },
+      Validators.required,
+    ],
+    Email: [
+      { value: '', disabled: this.IsUserInfoLoading },
+      [Validators.required, Validators.email],
+    ],
+    UserName: [
+      { value: '', disabled: this.IsUserInfoLoading },
+      Validators.required,
+    ],
   });
   constructor(
     private messageService: MessageService,
@@ -46,7 +75,9 @@ export class InfoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private OcupationService: OcupationService,
     private EventBusService: EventBusService
-  ) {}
+  ) {
+    //sessionStorage.clear();
+  }
   async ngOnInit() {
     if (this.CheckIfCacheInfo()) {
       this.LoadUserInfoFromCaching();
@@ -57,7 +88,8 @@ export class InfoComponent implements OnInit {
   }
 
   async submitUserInfo() {
-      this.userInfo
+    this.IsUserInfoLoading = true;
+    this.userInfo
       .UpdateUser(this.UserInfoForm.value as unknown as UserInfo)
       .subscribe({
         next: () => {
@@ -71,15 +103,35 @@ export class InfoComponent implements OnInit {
           this.LoadOcupations();
           this.LoadUserData();
           this.CatchDataAndEmitEvent();
+
+          this.IsUserInfoLoading = false;
         },
         error: (e) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'error',
-            detail: `An error happen, try again`,
-          });
+         this.ShowErrorMessage(e);
+          this.IsUserInfoLoading = false;
         },
       });
+  }
+  ShowErrorMessage(e: any) {
+    let Message: string = '';
+    let ErrorMessages: string[] = [];
+    if (e.error.status === 400) {
+      Message = e.error.errors[0];
+      const { errors } = e.error;
+      for (const key in e.error.errors) {
+        if (errors.hasOwnProperty(key)) {
+          ErrorMessages.push(errors[key]);
+        }
+      }
+    }
+    for (const value of ErrorMessages) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'error',
+        detail: value,
+      });
+    }
+   
   }
   get FirstName() {
     return this.UserInfoForm.controls['FirstName'];
@@ -107,28 +159,27 @@ export class InfoComponent implements OnInit {
     if (this.selectedFile) {
       formData.append('ImageUrl', this.selectedFile, this.selectedFile.name);
     }
-      formData.append('Description', this.image.description as string);
-      formData.append('Title', this.image.title as string);
-      this.userInfo.UpdateImage(formData).subscribe({
-        next: () => {
-          this.messageService.add({
-            severity: 'success',
-            summary: 'Success',
-            detail: `Image updated succesfully`,
-          });
-          this.LoadOcupations();
-          this.LoadUserData();
-          this.CatchDataAndEmitEvent();
-        },
-        error: (e) => {
-          this.messageService.add({
-            severity: 'error',
-            summary: 'error',
-            detail: `An error happen, try again`,
-          });
-        },
-      });
-    
+    formData.append('Description', this.image.description as string);
+    formData.append('Title', this.image.title as string);
+    this.IsUserImageLoading = true;
+
+    this.userInfo.UpdateImage(formData).subscribe({
+      next: () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Image updated succesfully`,
+        });
+        this.LoadOcupations();
+        this.LoadUserData();
+        this.CatchDataAndEmitEvent();
+        this.IsUserImageLoading = false;
+      },
+      error: (e) => {
+          this.ShowErrorMessage(e);
+        this.IsUserImageLoading = false;
+      },
+    });
   }
   private CatchDataAndEmitEvent() {
     localStorage.setItem(
@@ -166,8 +217,11 @@ export class InfoComponent implements OnInit {
     }
     sessionStorage.setItem('ocupations', JSON.stringify(this.Ocupations));
     sessionStorage.setItem('image', this.imgURL as string);
-    sessionStorage.setItem('ImageDescription', this.image.description as string)
-    sessionStorage.setItem('ImageTitle',this.image.title as string)
+    sessionStorage.setItem(
+      'ImageDescription',
+      this.image.description as string
+    );
+    sessionStorage.setItem('ImageTitle', this.image.title as string);
     sessionStorage.setItem('IsLoaded', '1');
   }
   private async LoadUserData() {
@@ -215,9 +269,10 @@ export class InfoComponent implements OnInit {
     const image = sessionStorage.getItem('image');
     this.imgURL = image;
 
-    this.image.description = sessionStorage.getItem('ImageDescription') as string | null;
+    this.image.description = sessionStorage.getItem('ImageDescription') as
+      | string
+      | null;
     this.image.title = sessionStorage.getItem('ImageTitle') as string | null;
-
   }
   IsNullOrEmpty(value: string | null): any {
     return value === null || value === 'null' || value.length === 0;

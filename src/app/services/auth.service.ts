@@ -19,6 +19,7 @@ export class AuthService {
     return this.UserInfo;
   }
   private SaveToken(): void {
+    this.Logout();
     this.UserInfo.subscribe({
       next: (value) => {
         localStorage.setItem('token', value.result);

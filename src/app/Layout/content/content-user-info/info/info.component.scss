@@ -43,6 +43,7 @@ label {
   background-color: $header-background-color;
   padding: $padding;
   height: fit-content;
+  position: relative;
 }
 
 .header__title {
@@ -60,6 +61,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: start;
+  position: relative;
 }
 
 .content-user-picture-box {

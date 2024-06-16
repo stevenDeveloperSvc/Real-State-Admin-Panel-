@@ -34,7 +34,8 @@ export class UserInfoService {
 
 
   public async GetUserInfoByRequestPromise() : Promise<User> {
-    return await lastValueFrom(this.GetUserInfoByRequest());
+   const res = await lastValueFrom(this.GetUserInfoByRequest());
+   return res;
   }
 
   public UpdateUser(User : UserInfo){
@@ -46,7 +47,7 @@ export class UserInfoService {
   }
 
   public UpdatePassword(Password: Password){
-    return this.httpClient.put(`${BaseUrl}/user/passowrd`, Password,{headers: this.headers})
+    return this.httpClient.put(`${BaseUrl}/user/password`, Password,{headers: this.headers})
 
   }
 }
