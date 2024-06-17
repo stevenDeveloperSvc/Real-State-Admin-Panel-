@@ -35,19 +35,16 @@ export class SidebarComponent {
       icon: '/assets/icon/home.svg',
       alt: 'home casa default view button',
       label: 'Home',
-      subItems: [{
-        link:'',
-        label:''
-      }]
+      subItems: []
     },
     {
-      link: '/main/property-list',
+      link: '/main/property',
       icon: '/assets/icon/building.svg',
       alt: 'home casa default view button',
       label: 'Properties',
       subItems: [
-        { link: '/main/property-list/property1', label: 'New Property' },
-        { link: '/main/property-list/property2', label: 'View All Properties' }
+        { link: '/main/property/maintenance', label: 'New Property' },
+        { link: '/main/property/view', label: 'View All Properties' }
       ]
     },
     {

@@ -1,0 +1,213 @@
+@import "variables.scss";
+
+label {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+  margin-bottom: -15px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: transparent !important;
+  border: $border !important;
+  padding: calc($padding - 11px);
+  transition: $animation;
+  width: 400px;
+  color: $font-color-sidebar;
+  font-size:  $font-subtitle-size;
+}
+
+.input-box:focus,
+.input-box:focus {
+  border-color: $primary-color !important;
+  outline: none;
+}
+
+.content-user {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+}
+.content-user__info {
+  position: relative;
+  background-color: $header-background-color;
+  border-radius: $border-radius;
+  display: flex;
+  gap: 20px;
+  padding: $padding;
+}
+.content-user__info-image {
+  background-color: $header-background-color;
+  padding: $padding;
+  height: fit-content;
+}
+
+.header__title {
+  margin: 0px;
+  font-family: $font-subtitle;
+  font-size: $font-title-size;
+  color: $font-color-sidebar; 
+}
+.header__subtitle {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+}
+.content-user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+
+.content-user-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+}
+
+.user-info-fullname-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.content-name {
+  position: absolute;
+  transition: all 0.3s ease;
+}
+.speed-box {
+  width: 100%;
+  height: 30px;
+}
+
+.send__button {
+  width: 120px;
+  height: 45px;
+  min-height: 45px;
+  outline: none;
+  border: none;
+  background-color: $button-background-color;
+  border-radius: 4%;
+  color: $button-color1;
+  transition: $animation;
+  margin-top: -15px;
+}
+
+.send__button:active {
+  background-color: $button-background-color-active;
+  color: $button-color-active;
+}
+
+
+
+
+
+
+
+
+
+
+// @import "variables.scss";
+
+// .maintenance-box {
+//     border-radius: $border-radius;
+//     padding: $padding;
+//     background-color: $primary-color;
+//     display: flex;
+//     flex-direction: row;
+//     width: 80vw;
+//     height: 100%;
+//     justify-content: space-between;
+// }
+
+// .header-box__title {
+//     font-size: $font-title-size;
+// }
+
+// .maintenance-box-maintenance {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+// .maintenance-box-select-image {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     border: 5px dashed $button-color;
+//     border-radius: $border-radius;
+//     width: 500px;
+//     height: 400px;
+//     transition: all $animation-time ease-in-out;
+// }
+
+// .No-border {
+//     border: 5px solid transparent;
+// }
+
+// .select-image__label {
+//     color: $button-color;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     font-size: calc($font-title-size + 12px);
+//     font-family: $font-title;
+//     height: 100%; 
+//     width: 100%;
+//     transition: all $animation-time ease-in-out;
+// }
+
+// .image__preview {
+//     height: 400px !important;
+//     width: 300px !important;
+// }
+
+
+// .right-save-edit-box {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     gap: 25px;
+//     width: 500px;
+// }
+
+// .right-save-box {
+//     margin-top: 15px;
+//     display: flex;
+//     justify-content: center;
+//     width: 55px;
+//     height: 55px;
+//     border-radius: $border-radius-button;
+//     border: 1px solid $button-color;
+//     background-color: transparent;
+//     transition: all $animation-time ease-in-out;
+// }
+
+// .right-save-box:hover {
+//     background-color: $button-color;
+// }
+
+// .right__save {
+//     width: 50px;
+//     height: 50px;
+//     transition: all $animation-time ease-in-out;
+// }
+
+// .right__save:hover {
+//     cursor: pointer;
+//     filter: brightness(0) invert(1);
+// }
+
+// #select__image {
+//     display: none;
+// }
+
+// .maintenance-box-slider {
+//     width: auto;
+//     height: 200px;
+// }

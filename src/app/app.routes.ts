@@ -3,11 +3,12 @@ import { LayoutComponent } from './Layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { ContentDashboardComponent } from './Layout/content/content-dashboard/content-dashboard.component';
 import { ContentUserInfoComponent } from './Layout/content/content-user-info/content-user-info.component';
-import { ContentPropertyListComponent } from './Layout/content/content-property-list/content-property-list.component';
-import { ContentPropertyMaintenanceComponent } from './Layout/content/content-property-maintenance/content-property-maintenance.component';
+import { ContentPropertyListComponent } from './Layout/content/content-property-container/content-property-list/content-property-list.component';
+import { ContentPropertyMaintenanceComponent } from './Layout/content/content-property-container/content-property-maintenance/content-property-maintenance.component';
 import { authGuard } from './guard/auth.guard';
 import { InfoComponent } from './Layout/content/content-user-info/info/info.component';
 import { PasswordComponent } from './Layout/content/content-user-info/password/password.component';
+import { ContentPropertyContainerComponent } from './Layout/content/content-property-container/content-property-container.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,7 @@ export const routes: Routes = [
     canActivate: [authGuard],
     canActivateChild: [authGuard],
     children: [
+   
       {
         path: 'dashboard',
         component: ContentDashboardComponent,
@@ -47,19 +49,30 @@ export const routes: Routes = [
       },
 
       {
-        path: 'property-list',
-        component: ContentPropertyListComponent,
+        path: 'property',
+        component: ContentPropertyContainerComponent,
         canActivate: [authGuard],
         canActivateChild: [authGuard],
-        title: 'Admin - Propety List',
+        title: 'Admin - Propety',
         children: [
           {
-            title: 'property-maintenance',
+              path:'',
+              redirectTo:'view',
+              pathMatch:'full'
+          },
+          {
+            title: 'Admin - Property - Maintenance',
             path: 'maintenance',
             component: ContentPropertyMaintenanceComponent,
           },
+          {
+            title: 'Admin - Property - View',
+            path: 'view',
+            component: ContentPropertyListComponent,
+          }
         ],
       },
+
     ],
   },
   {

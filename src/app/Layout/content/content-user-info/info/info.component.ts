@@ -177,6 +177,7 @@ export class InfoComponent implements OnInit {
       },
       error: (e) => {
           this.ShowErrorMessage(e);
+          
         this.IsUserImageLoading = false;
       },
     });
