@@ -62,15 +62,14 @@
         autocomplete="off"
       />
 
-      <label for="Password" class="label-name">Type</label>
-      <input
-        class="input-box"
-        formControlName="Password"
-        type="password"
-        id="Password"
-        name="Password"
-        required
-        autocomplete="off"
+      <label for="type" class="label-name">Type</label>
+      <p-dropdown
+        id="types"
+        name="type"
+        [options]="Types"
+        optionLabel="description"
+        placeholder="Select a Type"
+        formControlName="typeid"
       />
       <!-- <label for="RepeatPassword" class="label-name">Repeat Password</label>
       <input
