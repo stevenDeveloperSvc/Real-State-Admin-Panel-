@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ImageModule } from 'primeng/image';
 import { DividerModule } from 'primeng/divider';
 import { CarouselModule } from 'primeng/carousel';
-import { MultiSelectModule } from 'primeng/multiselect'
+import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressSpinnerComponent } from '../../../../progress-spinner/progress-spinner.component';
 import {
   FormBuilder,
@@ -11,13 +11,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Category, Type,Status, Amenity} from '../../../../interface/Content';
+import { Category, Type, Status, Amenity } from '../../../../interface/Content';
 import { TypesService } from '../../../../services/types.service';
 import { MessageService } from 'primeng/api';
 import { DropdownModule } from 'primeng/dropdown';
 import { CategoryService } from '../../../../services/category.service';
 import { StatusService } from '../../../../services/status.service';
 import { AmenityService } from '../../../../services/amenity.service';
+import { GalleriaModule } from 'primeng/galleria';
+import { ListboxModule } from 'primeng/listbox';
+
 
 interface iImage {
   alt: string;
@@ -37,12 +40,20 @@ interface iImage {
     ProgressSpinnerComponent,
     FormsModule,
     ReactiveFormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    GalleriaModule,
+    ListboxModule
   ],
   templateUrl: './content-property-maintenance.component.html',
   styleUrl: './content-property-maintenance.component.scss',
 })
 export class ContentPropertyMaintenanceComponent implements OnInit {
+deleteImage() {
+throw new Error('Method not implemented.');
+}
+editImage() {
+throw new Error('Method not implemented.');
+}
   IsLoading: boolean = false;
   PropertyForm = this.formBuilder.group({
     Password: ['', [Validators.required]],
@@ -51,9 +62,10 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   });
 
   Types!: Type[];
-  Status! : Status[];
+  Status!: Status[];
   Category!: Category[];
   Amenity!: Amenity[];
+showOverlay: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,7 +73,8 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     private TypeService: TypesService,
     private CategoryService: CategoryService,
     private StatusService: StatusService,
-    private AmenityService: AmenityService
+    private AmenityService: AmenityService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -76,39 +89,39 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
         this.Types = value.types;
       },
       error: () => {
-        this.ShowErrorMesage("Types")
+        this.ShowErrorMesage('Types');
       },
     });
   }
-  private GetAllCategories(){
+  private GetAllCategories() {
     this.CategoryService.GetAllCategories().subscribe({
-      next:(value)=>{
+      next: (value) => {
         this.Category = value.categories;
       },
-      error: ()=>{
-        this.ShowErrorMesage("Categories")
-      }
-    })
+      error: () => {
+        this.ShowErrorMesage('Categories');
+      },
+    });
   }
-  private GetAllStatus(){
+  private GetAllStatus() {
     this.StatusService.GetAllStatus().subscribe({
-      next:(value)=>{
+      next: (value) => {
         this.Status = value.status;
       },
-      error:()=>{
-        this.ShowErrorMesage("Status");
-      }
-    })
-  }
-  private GetAllAmenities(){
-    this.AmenityService.GetAllAmenities().subscribe({
-      next:(value)=>{
-        this.Amenity = value.amenities
+      error: () => {
+        this.ShowErrorMesage('Status');
       },
-      error:()=>{
-        this.ShowErrorMesage("Amenity")
-      }
-    })
+    });
+  }
+  private GetAllAmenities() {
+    this.AmenityService.GetAllAmenities().subscribe({
+      next: (value) => {
+        this.Amenity = value.amenities;
+      },
+      error: () => {
+        this.ShowErrorMesage('Amenity');
+      },
+    });
   }
   private ShowErrorMesage(Message: string) {
     this.Message.add({
@@ -122,79 +135,78 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  // selectedImageUrl?: string | undefined;
-  // display?: string | undefined = "SELECT AN IMAGE";
-  // images: iImage[] | undefined = [];
-  // responsiveOptions: any[] = [
-  //   {
-  //     breakpoint: '1024px',
-  //     numVisible: 5
-  //   },
-  //   {
-  //     breakpoint: '768px',
-  //     numVisible: 3
-  //   },
-  //   {
-  //     breakpoint: '560px',
-  //     numVisible: 1
-  //   }
-  // ];
+  selectedImageUrl?: string | undefined;
+  display?: string | undefined = "SELECT AN IMAGE";
+  images: any[]  = [];
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1
+    }
+  ];
 
-  // AddCurrentImage() {
-  //   if (this.selectedImageUrl) {
-  //     const newImage: iImage = {
-  //       alt: "property image",
-  //       url: this.selectedImageUrl,
-  //       userid: 10
-  //     };
-  //     this.images?.push(newImage);
-  //     console.log(this.images);
+  AddCurrentImage() {
+    if (this.selectedImageUrl) {
+      const newImage: iImage = {
+        alt: "property image",
+        url: this.selectedImageUrl,
+        userid: 10
+      };
+      this.images?.push(newImage);
+      console.log(this.images);
 
-  //     this.cdr.detectChanges();
+      this.cdr.detectChanges();
 
-  //     this.selectedImageUrl = undefined;
-  //     this.display = "SELECT AN IMAGE";
-  //   } else {
-  //     console.error('No image selected!');
-  //   }
-  // }
-  // constructor(private cdr: ChangeDetectorRef) { }
+      this.selectedImageUrl = undefined;
+      this.display = "SELECT AN IMAGE";
+    } else {
+      console.error('No image selected!');
+    }
+  }
 
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
 
-  //   if (file) {
-  //     const fileReader = new FileReader();
+    if (file) {
+      const fileReader = new FileReader();
 
-  //     fileReader.onload = (e: any) => {
-  //       const img = new Image();
-  //       img.src = e.target.result;
+      fileReader.onload = (e: any) => {
+        const img = new Image();
+        img.src = e.target.result;
 
-  //       img.onload = () => {
-  //         const watermark = new Image();
-  //         watermark.src = 'assets/watermark.png'
-  //         watermark.onload = () => {
-  //           const canvas = document.createElement('canvas');
-  //           const ctx = canvas.getContext('2d');
-  //           canvas.width = img.width;
-  //           canvas.height = img.height;
+        img.onload = () => {
+          const watermark = new Image();
+          watermark.src = 'assets/watermark.png'
+          watermark.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = img.width;
+            canvas.height = img.height;
 
-  //           ctx?.drawImage(img, 0, 0);
+            ctx?.drawImage(img, 0, 0);
 
-  //           const xPos = canvas.width - watermark.width - 90
-  //           const yPos = canvas.height - watermark.height - 90
-  //           ctx?.drawImage(watermark, xPos, yPos);
-  //           this.selectedImageUrl = canvas.toDataURL('image/png');
-  //         }
-  //       }
-  //     }
-  //     fileReader.readAsDataURL(file);
-  //   }
-  // }
+            const xPos = canvas.width - watermark.width - 90
+            const yPos = canvas.height - watermark.height - 90
+            ctx?.drawImage(watermark, xPos, yPos);
+            this.selectedImageUrl = canvas.toDataURL('image/png');
+          }
+        }
+      }
+      fileReader.readAsDataURL(file);
+    }
+  }
 
-  // DeleteCurrentImage() {
-  //   this.selectedImageUrl = undefined;
-  //   this.display = "SELECT AN IMAGE";
+  DeleteCurrentImage() {
+    this.selectedImageUrl = undefined;
+    this.display = "SELECT AN IMAGE";
 
-  // }
+  }
 }
