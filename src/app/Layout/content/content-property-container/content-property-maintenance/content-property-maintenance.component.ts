@@ -1,10 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImageModule } from 'primeng/image';
 import { DividerModule } from 'primeng/divider';
 import { CarouselModule } from 'primeng/carousel';
+import { MultiSelectModule } from 'primeng/multiselect'
 import { ProgressSpinnerComponent } from '../../../../progress-spinner/progress-spinner.component';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Category, Type,Status, Amenity} from '../../../../interface/Content';
+import { TypesService } from '../../../../services/types.service';
+import { MessageService } from 'primeng/api';
+import { DropdownModule } from 'primeng/dropdown';
+import { CategoryService } from '../../../../services/category.service';
+import { StatusService } from '../../../../services/status.service';
+import { AmenityService } from '../../../../services/amenity.service';
 
 interface iImage {
   alt: string;
@@ -18,26 +31,91 @@ interface iImage {
   imports: [
     CommonModule,
     ImageModule,
+    DropdownModule,
     CarouselModule,
     DividerModule,
     ProgressSpinnerComponent,
     FormsModule,
-     ReactiveFormsModule
+    ReactiveFormsModule,
+    MultiSelectModule
   ],
   templateUrl: './content-property-maintenance.component.html',
   styleUrl: './content-property-maintenance.component.scss',
 })
-export class ContentPropertyMaintenanceComponent {
+export class ContentPropertyMaintenanceComponent implements OnInit {
   IsLoading: boolean = false;
   PropertyForm = this.formBuilder.group({
     Password: ['', [Validators.required]],
     RepeatPassword: ['', [Validators.required]],
     LastPassword: ['', [Validators.required]],
   });
-  Types: any; 
 
-  constructor(private formBuilder : FormBuilder){
+  Types!: Type[];
+  Status! : Status[];
+  Category!: Category[];
+  Amenity!: Amenity[];
 
+  constructor(
+    private formBuilder: FormBuilder,
+    private Message: MessageService,
+    private TypeService: TypesService,
+    private CategoryService: CategoryService,
+    private StatusService: StatusService,
+    private AmenityService: AmenityService
+  ) {}
+
+  ngOnInit(): void {
+    this.GetAllTypes();
+    this.GetAllCategories();
+    this.GetAllStatus();
+    this.GetAllAmenities();
+  }
+  private GetAllTypes() {
+    this.TypeService.GetAllTypes().subscribe({
+      next: (value) => {
+        this.Types = value.types;
+      },
+      error: () => {
+        this.ShowErrorMesage("Types")
+      },
+    });
+  }
+  private GetAllCategories(){
+    this.CategoryService.GetAllCategories().subscribe({
+      next:(value)=>{
+        this.Category = value.categories;
+      },
+      error: ()=>{
+        this.ShowErrorMesage("Categories")
+      }
+    })
+  }
+  private GetAllStatus(){
+    this.StatusService.GetAllStatus().subscribe({
+      next:(value)=>{
+        this.Status = value.status;
+      },
+      error:()=>{
+        this.ShowErrorMesage("Status");
+      }
+    })
+  }
+  private GetAllAmenities(){
+    this.AmenityService.GetAllAmenities().subscribe({
+      next:(value)=>{
+        this.Amenity = value.amenities
+      },
+      error:()=>{
+        this.ShowErrorMesage("Amenity")
+      }
+    })
+  }
+  private ShowErrorMesage(Message: string) {
+    this.Message.add({
+      detail: `An error ocurred while triying to get ${Message}`,
+      summary: 'error',
+      severity: 'error',
+    });
   }
 
   SubmitPropertyInfo() {

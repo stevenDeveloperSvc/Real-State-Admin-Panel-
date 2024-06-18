@@ -21,7 +21,7 @@
     background: transparent;
 }
 
-.p-dtatable-tfoot{
+.p-datatable-tfoot{
   background: transparent;
 }
 .p-paginator{
@@ -80,7 +80,7 @@ td{
 // }
 
 
-.p-dropdown {
+.p-dropdown, .p-multiselect{
   background: none;
   border: $border;
   border-radius: 0px;

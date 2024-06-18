@@ -1,0 +1,53 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { BaseUrl } from './cosntant';
+import { ApiResponse, Status, StatusResponse } from '../interface/Content';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class StatusService {
+  private headers?: HttpHeaders;
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
+    let Token: string = '';
+    this.route.queryParams.subscribe({
+      next: ({ token }) => {
+        Token = token;
+      },
+    });
+
+    this.headers = new HttpHeaders({
+      Authorization:
+        'Bearer ' +
+        (Token === undefined ? localStorage.getItem('token') : Token),
+    });
+  }
+
+  public GetAllStatus() {
+    return this.httpClient.get<StatusResponse>(`${BaseUrl}/status`, {
+      headers: this.headers,
+    });
+  }
+  public AddStatus(Status: Status) {
+    return this.httpClient.post<ApiResponse>(
+      `${BaseUrl}/types`,
+      { Status },
+      { headers: this.headers }
+    );
+  }
+  public ModifyStatus(Status: Status) {
+    return this.httpClient.put<ApiResponse>(
+      `${BaseUrl}/types`,
+      { Status },
+      { headers: this.headers }
+    );
+  }
+  public Deletestatus(Id: number) {
+    return this.httpClient.delete<ApiResponse>(
+      `${BaseUrl}/types/${Id}`,
+      { headers: this.headers },
+
+    );
+  }
+}

@@ -20,14 +20,52 @@ export interface UserInfo {
   imageTitle: string;
 }
 
+export type ApiResponse={
+  isSuccess: boolean;
+  value: string;
+}
+
+export interface StatusResponse{
+  response: ApiResponse;
+  status: Status[];
+}
+
 export interface OcupationResponse {
-  response: { isSuccess: boolean; value: string };
+  response: ApiResponse;
   ocupations: Ocupation[];
 }
 
+export interface AmenityResponse{
+  response: ApiResponse;
+  amenities:  Amenity[];
+}
+export interface TypeReponse{
+  response: ApiResponse;
+  types : Type[];
+}
+export interface CategoryReponse{
+  response: ApiResponse;
+  categories: Category[];
+}
+export interface Category{
+  id?: number;
+  description?: string;
+}
+export interface Type{
+  id?: number;
+  description?: string;
+}
+export interface Amenity{
+   id?: number;
+   description?: string | null;
+}
 export interface Ocupation {
-  ocupationId: number;
-  description: string;
+  ocupationId?: number | null;
+  description?: string | null;
+}
+export interface Status{
+  statusId : number;
+  status: string;
 }
 export interface Password {
   Password: string;
