@@ -10,7 +10,6 @@ label {
 .input-box {
   display: flex;
   flex-direction: column;
-  gap: 10px;
   background-color: transparent !important;
   border: $border !important;
   padding: calc($padding - 11px);
@@ -67,8 +66,8 @@ label {
 .content-user-info-box {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   gap: 30px;
+  
 }
 
 .user-info-fullname-box {
@@ -96,7 +95,6 @@ label {
   border-radius: 4%;
   color: $button-color1;
   transition: $animation;
-  margin-top: -15px;
 }
 
 .send__button:active {
@@ -105,7 +103,7 @@ label {
 }
 
 .textarea-property-info{
-  min-height: 478px;
+  min-height:360px;
 
 }
 .textarea{
@@ -242,4 +240,21 @@ label {
 
 .overlay button:hover {
   background-color: #ddd;
+}
+
+.button-wrapper{
+  display: flex;
+  width: 100%;
+  gap: 30px;
+}
+
+.clear-action{
+  background-color: $button-clear-color;
+  color:$button-color;
+  border:1px solid transparent;
+}
+.clear-action:active{
+  background-color: transparent;
+  color:$button-color1;
+  border:1px solid $button-color1;
 }

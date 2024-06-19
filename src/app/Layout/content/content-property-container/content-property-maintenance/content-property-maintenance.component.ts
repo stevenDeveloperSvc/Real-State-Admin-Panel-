@@ -21,11 +21,11 @@ import { AmenityService } from '../../../../services/amenity.service';
 import { GalleriaModule } from 'primeng/galleria';
 import { ListboxModule } from 'primeng/listbox';
 
-
 interface iImage {
+  id?: number;
   alt: string;
   url: string;
-  userid: number;
+  description: string;
 }
 
 @Component({
@@ -42,39 +42,68 @@ interface iImage {
     ReactiveFormsModule,
     MultiSelectModule,
     GalleriaModule,
-    ListboxModule
+    ListboxModule,
   ],
   templateUrl: './content-property-maintenance.component.html',
   styleUrl: './content-property-maintenance.component.scss',
 })
 export class ContentPropertyMaintenanceComponent implements OnInit {
-deleteImage() {
-throw new Error('Method not implemented.');
-}
-editImage() {
-throw new Error('Method not implemented.');
-}
   IsLoading: boolean = false;
-  PropertyForm = this.formBuilder.group({
-    Password: ['', [Validators.required]],
-    RepeatPassword: ['', [Validators.required]],
-    LastPassword: ['', [Validators.required]],
-  });
-
+  Title!: string;
+  Description!: string;
   Types!: Type[];
   Status!: Status[];
   Category!: Category[];
   Amenity!: Amenity[];
-showOverlay: any;
 
+
+  showOverlay: any;
+  selectedImageUrl?: string | undefined;
+  display?: string | undefined = 'SELECT AN IMAGE';
+  images: any[] = [];
+  image!: iImage;
+  FormData={
+    title:'',
+    type:{},
+    category:{},
+    status: {},
+    amenity:[]
+  }
+  Form = {
+    title: '',
+    shortdescription: '',
+    typeid: 0,
+    statusid: 0,
+    Description: '',
+    money: '',
+    categoryid: 0,
+    amenityIds: [],
+    Images: [],
+  };
+  responsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 5,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 3,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 1,
+    },
+  ];
+
+  CheckValues() {
+    console.log(this.FormData);
+  }
   constructor(
-    private formBuilder: FormBuilder,
     private Message: MessageService,
     private TypeService: TypesService,
     private CategoryService: CategoryService,
     private StatusService: StatusService,
-    private AmenityService: AmenityService,
-    private cdr: ChangeDetectorRef
+    private AmenityService: AmenityService
   ) {}
 
   ngOnInit(): void {
@@ -135,41 +164,29 @@ showOverlay: any;
     throw new Error('Method not implemented.');
   }
 
-  selectedImageUrl?: string | undefined;
-  display?: string | undefined = "SELECT AN IMAGE";
-  images: any[]  = [];
-  responsiveOptions: any[] = [
-    {
-      breakpoint: '1024px',
-      numVisible: 5
-    },
-    {
-      breakpoint: '768px',
-      numVisible: 3
-    },
-    {
-      breakpoint: '560px',
-      numVisible: 1
-    }
-  ];
-
   AddCurrentImage() {
     if (this.selectedImageUrl) {
       const newImage: iImage = {
-        alt: "property image",
+        alt: this.Title,
+        description: this.Description,
         url: this.selectedImageUrl,
-        userid: 10
       };
       this.images?.push(newImage);
-      console.log(this.images);
-
-      this.cdr.detectChanges();
 
       this.selectedImageUrl = undefined;
-      this.display = "SELECT AN IMAGE";
+      this.display = 'SELECT AN IMAGE';
+      this.Title = '';
+      this.Description = '';
     } else {
       console.error('No image selected!');
     }
+  }
+  LoadImage() {
+    console.log(this.image);
+    const { url, alt, description } = this.image;
+    this.selectedImageUrl = url;
+    this.Title = alt;
+    this.Description = description;
   }
 
   onFileSelected(event: any) {
@@ -184,7 +201,7 @@ showOverlay: any;
 
         img.onload = () => {
           const watermark = new Image();
-          watermark.src = 'assets/watermark.png'
+          watermark.src = 'assets/watermark.png';
           watermark.onload = () => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
@@ -193,20 +210,19 @@ showOverlay: any;
 
             ctx?.drawImage(img, 0, 0);
 
-            const xPos = canvas.width - watermark.width - 90
-            const yPos = canvas.height - watermark.height - 90
+            const xPos = canvas.width - watermark.width - 90;
+            const yPos = canvas.height - watermark.height - 90;
             ctx?.drawImage(watermark, xPos, yPos);
             this.selectedImageUrl = canvas.toDataURL('image/png');
-          }
-        }
-      }
+          };
+        };
+      };
       fileReader.readAsDataURL(file);
     }
   }
 
   DeleteCurrentImage() {
     this.selectedImageUrl = undefined;
-    this.display = "SELECT AN IMAGE";
-
+    this.display = 'SELECT AN IMAGE';
   }
 }

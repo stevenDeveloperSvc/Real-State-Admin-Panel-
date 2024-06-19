@@ -4,20 +4,16 @@
       <h4 class="header__title">Property Info</h4>
       <p class="header__subtitle">Add a basic property info!</p>
     </header>
-    <form
-      class="content-user-info-box"
-      [formGroup]="PropertyForm"
-      (submit)="SubmitPropertyInfo()"
-    >
-      <label for="LastPassword" class="label-name">Title</label>
+    <form class="content-user-info-box">
+      <label for="title" class="label-name">Title</label>
       <input
         class="input-box"
-        formControlName="LastPassword"
         type="text"
-        id="LastPassword"
-        name="LastPassword"
+        id="title"
+        name="title"
         required
         autocomplete="off"
+        [(ngModel)]="Form.title"
       />
 
       <label for="type" class="label-name">Type</label>
@@ -27,7 +23,7 @@
         [options]="Types"
         optionLabel="description"
         placeholder="Select a Type"
-        formControlName="typeid"
+        [(ngModel)]="FormData.type"
       />
       <label for="categories" class="label-name">Categories</label>
       <p-dropdown
@@ -36,7 +32,7 @@
         [options]="Category"
         optionLabel="description"
         placeholder="Select a Category"
-        formControlName="categoryid"
+        [(ngModel)]="FormData.category"
       />
       <label for="status" class="label-name">Status</label>
       <p-dropdown
@@ -45,23 +41,27 @@
         [options]="Status"
         optionLabel="status"
         placeholder="Select a Status"
-        formControlName="statusid"
+        [(ngModel)]="FormData.status"
       />
       <label for="Amenity" class="label-name">Amenities</label>
       <p-multiSelect
         id="Amenity"
         name="Amenity"
         [options]="Amenity"
-        formControlName="selectedAmenities"
         optionLabel="description"
         placeholder="Select Amenities"
+        [(ngModel)]="FormData.amenity"
       />
-
-      <input class="send__button" type="submit" value="SAVE" />
+      <input
+        class="send__button"
+        (click)="CheckValues()"
+        type="button"
+        value="SAVE"
+      />
     </form>
     <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
   </section>
-  <section class="content-user__info">
+  <!-- <section class="content-user__info">
     <header class="content-user__header">
       <h4 class="header__title">Property Info</h4>
       <p class="header__subtitle">Add a property description information!</p>
@@ -81,13 +81,17 @@
         autocomplete="off"
         placeholder="Write your description here"
       ></textarea>
+    
+      <div class="button-wrapper">
+        <input class="send__button" type="submit" value="SAVE" />
+        <input class="send__button clear-action"  type="button" value="CLEAR" />
+      </div>
 
-      <input class="send__button" type="submit" value="SAVE" />
     </form>
     <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
-  </section>
+  </section> -->
 </section>
-<section class="maintenance-box">
+<!-- <section class="maintenance-box">
   <div class="maintenance-box-maintenance">
     <header class="content-user__header">
       <h4 class="header__title">Property Images</h4>
@@ -156,6 +160,7 @@
       required
       autocomplete="off"
       placeholder="Title"
+      [(ngModel)]="Title"
     />
     <label for="ImageDescription" class="label-name">Description</label>
     <textarea
@@ -165,15 +170,10 @@
       required
       autocomplete="off"
       placeholder="Write your picture description here"
+      [(ngModel)]="Description"
     ></textarea>
-    <!-- <div class="right-save-box" (click)="AddCurrentImage()">
-      <img
-        src="assets/icon/save.svg"
-        alt="save button"
-        class="right__save"
-      />
-    </div> -->
-    <input class="send__button" type="submit" value="SAVE" />
+
+    <input class="send__button" type="button" (click)="AddCurrentImage()" value="SAVE" />
 
   </div>
   <p-divider layout="vertical"></p-divider>
@@ -181,18 +181,12 @@
     <p-listbox
       [options]="images"
       formControlName="selectedCity"
-      optionLabel="name"
+      optionLabel="description"
+      (onSelectAllChange)="LoadImage()"
+      
       [style]="{ width: '15rem' }"
+      [(ngModel)]="image"
       [listStyle]="{ 'max-height': '220px' }"
     />
-
-    <!-- <p-galleria [value]="images" [containerStyle]="{ 'width': '640px' }" [numVisible]="5">
-        <img *ngFor="let item of images" [src]="item.url" style="width: 100px; height: 400px;" />
-      <ng-template pTemplate="thumbnail" let-item>
-        <div class="grid grid-nogutter justify-content-center">
-          <img [src]="item.url" />
-        </div>
-      </ng-template> 
- </p-galleria>  -->
   </div>
-</section>
+</section> -->
