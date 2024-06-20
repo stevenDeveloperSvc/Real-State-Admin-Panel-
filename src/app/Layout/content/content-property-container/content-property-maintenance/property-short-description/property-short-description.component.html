@@ -1,23 +1,14 @@
-<section class="content-user__info property_box">
-    <header class="content-user__header">
-      <h4 class="header__title">Property Info</h4>
-      <p class="header__subtitle">Add a basic property info!</p>
-    </header>
-    <form class="content-user-info-box">
-      <label for="title" class="label-name">Title</label>
-      <input class="input-box"  (onChange)="onSelectionChange()"  type="text" id="title" name="title" required autocomplete="off"
-        [(ngModel)]="FormData.title" />
-      <label for="type" class="label-name">Type</label>
-      <p-dropdown id="types" name="type" [options]="Types" optionLabel="description"  (onChange)="onSelectionChange()"  placeholder="Select a Type"
-        [(ngModel)]="FormData.type" />
-      <label for="categories" class="label-name">Categories</label>
-      <p-dropdown id="categories" name="categories" [options]="Category" optionLabel="description"
-        placeholder="Select a Category" [(ngModel)]="FormData.category"   (onChange)="onSelectionChange()" />
-      <label for="status" class="label-name">Status</label>
-      <p-dropdown id="status" name="status" [options]="Status" optionLabel="status" placeholder="Select a Status"  (onChange)="onSelectionChange()"
-        [(ngModel)]="FormData.status" />
-      <label for="Amenity" class="label-name">Amenities</label>
-      <p-multiSelect id="Amenity" name="Amenity" [options]="Amenity" optionLabel="description" (onChange)="onSelectionChange()"
-        placeholder="Select Amenities" [(ngModel)]="FormData.amenity" />
-    </form>
-  </section>
+<section class="content-user__info">
+  <header class="content-user__header">
+    <h4 class="header__title">Property Info</h4>
+    <p class="header__subtitle">Add a property short description information!</p>
+  </header>
+  <form class="content-user-info-box">
+
+    <label for="description" class="label-name">Short Description</label>
+    <textarea class="input-box textarea-short__description" id="description" name="description" required
+      [(ngModel)]="FormData.shortDescription" (ngModelChange)="onSelectionChange()" autocomplete="off"
+      placeholder="Write your short description here"></textarea>
+
+  </form>
+</section>

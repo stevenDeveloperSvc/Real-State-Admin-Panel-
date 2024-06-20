@@ -12,6 +12,13 @@ export interface PropertyBasicInfoEvent {
   status: Status | null;
   amenity: Amenity[] | null;
 }
+export interface PropertyShortDescriptionEvent {
+  ShortDescription : string  | null;
+}
+
+export interface PropertyDescriptionEvent {
+  Description : string;
+}
 export interface UserInfo {
   [key: string]: any;
   firstname: string;

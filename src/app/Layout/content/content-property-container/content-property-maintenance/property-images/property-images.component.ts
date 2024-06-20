@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-property-images',
@@ -8,5 +8,4 @@ import { Component } from '@angular/core';
   styleUrl: './property-images.component.scss'
 })
 export class PropertyImagesComponent {
-
 }
