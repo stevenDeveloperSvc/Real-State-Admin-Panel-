@@ -5,6 +5,13 @@ export interface User {
   imageTitle: string;
   userInfo: UserInfo;
 }
+export interface PropertyBasicInfoEvent {
+  title: string | null;
+  type: Type | null;
+  category: Category | null;
+  status: Status | null;
+  amenity: Amenity[] | null;
+}
 export interface UserInfo {
   [key: string]: any;
   firstname: string;
@@ -20,12 +27,12 @@ export interface UserInfo {
   imageTitle: string;
 }
 
-export type ApiResponse={
+export type ApiResponse = {
   isSuccess: boolean;
   value: string;
 }
 
-export interface StatusResponse{
+export interface StatusResponse {
   response: ApiResponse;
   status: Status[];
 }
@@ -35,36 +42,36 @@ export interface OcupationResponse {
   ocupations: Ocupation[];
 }
 
-export interface AmenityResponse{
+export interface AmenityResponse {
   response: ApiResponse;
-  amenities:  Amenity[];
+  amenities: Amenity[];
 }
-export interface TypeReponse{
+export interface TypeReponse {
   response: ApiResponse;
-  types : Type[];
+  types: Type[];
 }
-export interface CategoryReponse{
+export interface CategoryReponse {
   response: ApiResponse;
   categories: Category[];
 }
-export interface Category{
+export interface Category {
   id?: number;
   description?: string;
 }
-export interface Type{
+export interface Type {
   id?: number;
   description?: string;
 }
-export interface Amenity{
-   id?: number;
-   description?: string | null;
+export interface Amenity {
+  id?: number;
+  description?: string | null;
 }
 export interface Ocupation {
   ocupationId?: number | null;
   description?: string | null;
 }
-export interface Status{
-  statusId : number;
+export interface Status {
+  statusId: number;
   status: string;
 }
 export interface Password {

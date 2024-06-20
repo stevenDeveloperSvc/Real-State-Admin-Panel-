@@ -1,133 +1,35 @@
 <section class="content-user">
-  <section class="content-user__info property_box">
+  <app-property-short-description (selectionChange)="handleSelectionChange($event)" ></app-property-short-description>
+  <section class="content-user__info">
     <header class="content-user__header">
       <h4 class="header__title">Property Info</h4>
-      <p class="header__subtitle">Add a basic property info!</p>
+      <p class="header__subtitle">Add a property short description information!</p>
     </header>
     <form class="content-user-info-box">
-      <label for="title" class="label-name">Title</label>
-      <input
-        class="input-box"
-        type="text"
-        id="title"
-        name="title"
-        required
-        autocomplete="off"
-        [(ngModel)]="Form.title"
-      />
 
-      <label for="type" class="label-name">Type</label>
-      <p-dropdown
-        id="types"
-        name="type"
-        [options]="Types"
-        optionLabel="description"
-        placeholder="Select a Type"
-        [(ngModel)]="FormData.type"
-      />
-      <label for="categories" class="label-name">Categories</label>
-      <p-dropdown
-        id="categories"
-        name="categories"
-        [options]="Category"
-        optionLabel="description" 
-        placeholder="Select a Category"
-        [(ngModel)]="FormData.category"
-      />
-      <label for="status" class="label-name">Status</label>
-      <p-dropdown
-        id="status"
-        name="status"
-        [options]="Status"
-        optionLabel="status"
-        placeholder="Select a Status"
-        [(ngModel)]="FormData.status"
-      />
-      <label for="Amenity" class="label-name">Amenities</label>
-      <p-multiSelect
-        id="Amenity"
-        name="Amenity"
-        [options]="Amenity"
-        optionLabel="description"
-        placeholder="Select Amenities"
-        [(ngModel)]="FormData.amenity"
-      />
+      <label for="description" class="label-name">Short Description</label>
+      <textarea class="input-box textarea-short__description" id="description" name="description" required
+        autocomplete="off" placeholder="Write your short description here"></textarea>
+
     </form>
     <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
   </section>
-  <section class="content-user__info">
+  <section class="content-user__info horizontal-box">
     <header class="content-user__header">
       <h4 class="header__title">Property Info</h4>
       <p class="header__subtitle">Add a property description information!</p>
     </header>
-    <form
-    class="content-user-info-box"
-    
-    >
-    
-    <label for="description" class="label-name">Short Description</label>
-    <textarea
-    class="input-box textarea-short__description"
-    id="description"
-    name="description"
-    required
-    autocomplete="off"
-    placeholder="Write your short description here"
-    ></textarea>
-<!--     
-    <label for="description" class="label-name">Description</label>
-    <textarea
-    class="input-box textarea-property-info"
-    formControlName="Description"
-    id="description"
-    name="description"
-    required
-    autocomplete="off"
-    placeholder="Write your description here"
-    ></textarea>
-     -->
-    <div class="button-wrapper">
-      <input class="send__button" 
-      type="button"
-      (click)="CheckValues()"
-      value="SAVE" />
-      <input class="send__button clear-action"  type="button" value="CLEAR" />
-    </div>
-    
-  </form>
-    <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
-  </section>
-  <section class="content-user__info">
-    <header class="content-user__header">
-      <h4 class="header__title">Property Info</h4>
-      <p class="header__subtitle">Add a property description information!</p>
-    </header>
-    <form
-    class="content-user-info-box"
-    
-    >
+    <form class="content-user-info-box">
+      <label for="description" class="label-name">Description</label>
+      <textarea class="input-box textarea-property-info" formControlName="Description" id="description"
+        name="description" required autocomplete="off" placeholder="Write your description here"></textarea>
 
-<!--     
-    <label for="description" class="label-name">Description</label>
-    <textarea
-    class="input-box textarea-property-info"
-    formControlName="Description"
-    id="description"
-    name="description"
-    required
-    autocomplete="off"
-    placeholder="Write your description here"
-    ></textarea>
-     -->
-    <div class="button-wrapper">
-      <input class="send__button" 
-      type="button"
-      (click)="CheckValues()"
-      value="SAVE" />
-      <input class="send__button clear-action"  type="button" value="CLEAR" />
-    </div>
-    
-  </form>
+      <div class="button-wrapper">
+        <input class="send__button" type="button" (click)="CheckValues()" value="SAVE" />
+        <input class="send__button clear-action" type="button" value="CLEAR" />
+      </div>
+
+    </form>
     <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
   </section>
 </section>
