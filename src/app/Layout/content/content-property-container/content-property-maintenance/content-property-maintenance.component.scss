@@ -30,13 +30,17 @@ label {
   display: flex;
   justify-content: start;
   gap: 30px;
+  flex-wrap: wrap;
 }
 .content-user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
   position: relative;
   background-color: $header-background-color;
   border-radius: $border-radius;
-  display: flex;
   gap: 20px;
+  height: auto;
   padding: $padding;
 }
 .content-user__info-image {
@@ -56,12 +60,6 @@ label {
   font-size: $font-subtitle-size;
   color: $font-color-secondary;
 }
-.content-user__info {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-}
-
 
 .content-user-info-box {
   display: flex;
@@ -96,6 +94,9 @@ label {
   color: $button-color1;
   transition: $animation;
 }
+.property_box{
+  height: 680px;
+}
 
 .send__button:active {
   background-color: $button-background-color-active;
@@ -103,8 +104,11 @@ label {
 }
 
 .textarea-property-info{
-  min-height:360px;
+  min-height:210px;
 
+}
+.textarea-short__description{
+  min-height: 400px;
 }
 .textarea{
   min-height: 300px;

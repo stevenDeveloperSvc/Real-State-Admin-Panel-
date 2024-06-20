@@ -64,6 +64,8 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   image!: iImage;
   FormData={
     title:'',
+    shortdescription  :'',
+    money:0.00,
     type:{},
     category:{},
     status: {},
