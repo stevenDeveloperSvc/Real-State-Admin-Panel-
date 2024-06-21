@@ -8,6 +8,7 @@ import { ConfirmationService } from 'primeng/api';
 import { SkeletonModule } from 'primeng/skeleton';
 import { ContextMenuModule } from 'primeng/contextmenu';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -25,28 +26,32 @@ export class ContentPropertyListComponent implements OnInit {
   Page: number = 1;
   TotalPages: number = 0;
   IsLoading: boolean = false;
-
+  constructor(
+    private PropertyService: PropertyService,
+    private Message: MessageService,
+    private confirmationService: ConfirmationService,
+    private route: Router
+  ) {}
   onRowSelect(event: any) {
     console.log('Selected row data:', event.data);
   }
 
   editProperty(property: Property) {
     console.log('Edit property:', property);
-    // Implementa la lógica para editar aquí
+    this.navigateToMaintenance(property.propertyId)
+   
   }
-
+  navigateToMaintenance(propertyId: number): void {
+    this.route.navigate(['/main/property/maintenance', propertyId]);
+  }
   deleteProperty(property: Property) {
     console.log('Delete property:', property);
     // Implementa la lógica para eliminar aquí
   }
 
-  constructor(
-    private PropertyService: PropertyService,
-    private Message: MessageService,
-    private confirmationService: ConfirmationService
-  ) {}
+
   ngOnInit(): void {
-    this.PropertyService.GetAllProperties(this.Page).subscribe({
+    this.PropertyService.GetAllProperties(this.Page ).subscribe({
       next: ({ data }) => {
         this.Data = data;
       },
@@ -77,8 +82,9 @@ export class ContentPropertyListComponent implements OnInit {
 
   loadProperties(event: any) {
     this.IsLoading = true;
-    const page = event.first / event.rows;
-    console.log(page);
+    const page = (event.first / event.rows) + 1;
+
+
     this.PropertyService.GetAllProperties(page).subscribe(
       {
         next: (data) => {

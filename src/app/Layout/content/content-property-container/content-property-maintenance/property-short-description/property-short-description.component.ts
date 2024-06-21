@@ -1,5 +1,5 @@
 import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { PropertyShortDescriptionEvent } from "@interface/Content";
 
@@ -13,6 +13,7 @@ import { PropertyShortDescriptionEvent } from "@interface/Content";
 export class PropertyShortDescriptionComponent  {
 
   @Output() selectionChange = new EventEmitter<PropertyShortDescriptionEvent>();
+  @Input() PropertyId : number | null =  null;
   
   FormData = {
     shortDescription: ''

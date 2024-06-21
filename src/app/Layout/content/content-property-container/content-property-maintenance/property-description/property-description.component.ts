@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PropertyDescriptionEvent } from '@interface/Content';
 
@@ -12,7 +12,8 @@ import { PropertyDescriptionEvent } from '@interface/Content';
 })
 export class PropertyDescriptionComponent {
   @Output() selectionChange = new EventEmitter<PropertyDescriptionEvent>()
-
+  @Input() PropertyId: number | null = null;
+  
   FormData: any = {
     Description: ''
   }
@@ -20,7 +21,7 @@ export class PropertyDescriptionComponent {
     this.selectionChange.emit({
       Description: this.FormData.Description
     })
-    console.log(this.FormData.Description  )
+    console.log(this.FormData.Description)
   }
 
 }

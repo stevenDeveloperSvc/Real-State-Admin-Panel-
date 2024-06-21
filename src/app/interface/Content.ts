@@ -97,11 +97,6 @@ export interface PropertyResponse {
   data: Property[];
 }
 
-export interface Info {
-  countItems: number;
-  currentPage: number;
-}
-
 export interface Property {
   propertyId: number;
   title: string;
@@ -111,4 +106,54 @@ export interface Property {
   price: number;
   agent: string;
   images: any[];
+}
+
+
+
+export interface Info {
+  countItems: number;
+  currentPage: number;
+}
+
+
+
+
+export interface PropertyResponseInfo {
+  apiResponse: ApiResponse
+  responseDTO: ResponseDto
+}
+
+export interface ResponseDto {
+  propertyId: number
+  title: string
+  status: Status
+  description: string
+  publishDate: string
+  address: any
+  type: Type
+  category: Category
+  location: any
+  price: number
+  agent: Agent
+  images: string[]
+  ameneties: Amenety[]
+  comments: any[]
+  commentsCount: number
+}
+
+export interface Status {
+  statusId: number
+  status: string
+}
+
+export interface Agent {
+  info: any
+  fullName: string
+  image: string
+  ocupation: string
+}
+
+export interface Amenety {
+  id: number
+  description: string
 }

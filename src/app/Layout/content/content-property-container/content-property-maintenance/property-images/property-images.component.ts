@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { DividerModule } from 'primeng/divider';
@@ -24,6 +24,7 @@ import { SelectItem } from 'primeng/api';
 export class PropertyImagesComponent implements OnInit {
 
   @Output() selectionChange = new EventEmitter<{ images: SelectItem[] }>();
+  @Input() PropertyId : null | number = null;
 
   Title!: string;
   Description!: string;

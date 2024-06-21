@@ -10,12 +10,12 @@ import {
   PropertyShortDescriptionEvent,
 } from '@interface/Content';
 import { MessageService, SelectItem } from 'primeng/api';
-
 import { PropertyShortDescriptionComponent } from './property-short-description/property-short-description.component';
 import { PropertyBasicInfoComponent } from './property-basic-info/property-basic-info.component';
 import { PropertyDescriptionComponent } from './property-description/property-description.component';
 import { PropertyImagesComponent } from './property-images/property-images.component';
 import { PropertyService } from '@services/property.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-content-property-maintenance',
@@ -35,7 +35,7 @@ import { PropertyService } from '@services/property.service';
   styleUrl: './content-property-maintenance.component.scss',
 })
 export class ContentPropertyMaintenanceComponent implements OnInit {
-
+  PropertyId: null | number = 0;
   IsLoading: boolean = false;
   value!: any;
   responsiveOptions: any[] = [
@@ -52,7 +52,9 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       numVisible: 1,
     },
   ];
-  constructor(private Property: PropertyService, private Message: MessageService) { }
+
+
+  constructor(private Property: PropertyService, private Message: MessageService, private route: ActivatedRoute) { }
 
   handlePropertyShortDescriptionSelectionChange(
     e: PropertyShortDescriptionEvent
@@ -75,20 +77,33 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     const simplifiedImages = {
       images: e.images.map(image => image.value)
     }
-
     this.value = { ...this.value, ...simplifiedImages }
-
   }
-  ngOnInit(): void { }
-  // async AddSelectedImageToFormData() {
-  //   await fetch(this.imageURL.changingThisBreaksApplicationSecurity).then(e => e.blob())
-  //       .then(blob => {
-  //           const archivo = new File([blob], 'nombre_archivo.png', { type: 'image/png' })
-
-  //           this.formData.append('image', archivo, 'profile-image.png');
-
-  //           console.log(archivo);
-  //       }).catch(e => console.log(e));
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      this.PropertyId = Number(params.get('propertyId?'));
+    });
+    if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
+      this.Property.GetPropertyById(this.PropertyId).subscribe({
+        next: (data) => {
+          this.Message.add({
+            detail: `info from property ${data.responseDTO.title} succesfully fetched`,
+            severity: 'success',
+            summary: 'success'
+          })
+          console.log(data)
+        },
+        error: () => {
+          this.Message.add({
+            detail: `error while trying to get property detail`,
+            severity: 'error',
+            summary: 'error'
+          })
+      }
+    })
+  }
+  
+  }
 
   UpdateProperty() {
   }
@@ -100,7 +115,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     formData.append('typeId', this.value.type.id);
     formData.append('categoryId', this.value.category.id);
     formData.append('statusId', this.value.status.statusId);
-    const amenityIds = this.value.amenity.map((amenity : any) => amenity.id).join(',');
+    const amenityIds = this.value.amenity.map((amenity: any) => amenity.id).join(',');
 
     formData.append(`amenityIds`, amenityIds);
     const simplifiedImages = this.value.images.map((image: any) => {
@@ -119,17 +134,17 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     });
 
     this.Property.AddProperty(formData).subscribe({
-      next: (value)=>{
+      next: (value) => {
         this.Message.add({
-          detail:'success',
+          detail: 'success',
           severity: 'success',
           summary: 'sucess'
         })
       },
-      error: (value)=>{
+      error: (value) => {
         console.log(value)
         this.Message.add({
-          detail:'error',
+          detail: 'error',
           severity: 'error',
           summary: 'error'
         })

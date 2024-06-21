@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
-import { PropertyResponse } from '../interface/Content';
+import { PropertyResponse, PropertyResponseInfo } from '../interface/Content';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +26,10 @@ export class PropertyService {
 
   public GetAllProperties(page:number | null) {
     return this.httpClient.get<PropertyResponse>(`${BaseUrl}/Property?page=${page??1}`, { headers: this.headers });
+  }
+  
+  public GetPropertyById(id:number | null) {
+    return this.httpClient.get<PropertyResponseInfo>(`${BaseUrl}/Property/detail/${id}`, { headers: this.headers });
   }
 
   public AddProperty(value: any) {

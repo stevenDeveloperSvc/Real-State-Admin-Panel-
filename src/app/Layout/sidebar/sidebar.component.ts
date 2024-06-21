@@ -43,7 +43,7 @@ export class SidebarComponent {
       alt: 'home casa default view button',
       label: 'Properties',
       subItems: [
-        { link: '/main/property/maintenance', label: 'New Property' },
+        { link: '/main/property/maintenance/0', label: 'New Property' },
         { link: '/main/property/view', label: 'View All Properties' }
       ]
     },

@@ -60,9 +60,10 @@ export const routes: Routes = [
               redirectTo:'view',
               pathMatch:'full'
           },
+
           {
             title: 'Admin - Property - Maintenance',
-            path: 'maintenance',
+            path: 'maintenance/:propertyId?',
             component: ContentPropertyMaintenanceComponent,
           },
           {

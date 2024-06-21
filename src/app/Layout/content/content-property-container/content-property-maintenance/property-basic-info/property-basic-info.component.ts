@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { Category, Type, Status, Amenity, PropertyBasicInfoEvent } from '@interface/Content';
@@ -12,13 +12,15 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-property-basic-info',
   standalone: true,
-  imports: [CommonModule,DropdownModule,FormsModule,MultiSelectModule],
+  imports: [CommonModule, DropdownModule, FormsModule, MultiSelectModule],
   templateUrl: './property-basic-info.component.html',
   styleUrl: './property-basic-info.component.scss'
 })
-export class PropertyBasicInfoComponent implements OnInit {
+export class PropertyBasicInfoComponent implements OnInit, AfterViewInit {
 
   @Output() selectionChange = new EventEmitter<PropertyBasicInfoEvent>();
+
+  @Input() PropertyId: number | null = null;
 
   Types!: Type[];
   Status!: Status[];
@@ -48,6 +50,12 @@ export class PropertyBasicInfoComponent implements OnInit {
     this.GetAllStatus();
     this.GetAllAmenities();
   }
+
+  ngAfterViewInit(): void {
+    console.log(this.PropertyId)
+
+  }
+
   private GetAllTypes() {
     this.TypeService.GetAllTypes().subscribe({
       next: (value) => {
