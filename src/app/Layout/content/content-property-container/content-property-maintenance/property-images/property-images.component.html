@@ -1,1 +1,103 @@
-<p>property-images works!</p>
+
+<section class="maintenance-box">
+  <header class="content-user__header">
+    <h4 class="header__title">Property Images</h4>
+    <p class="header__subtitle">Add a images to the carrusel!</p>
+  </header>
+  <body class="maintenance-box-body">
+
+    <div class="maintenance-box-maintenance">
+      
+      <div
+      class="maintenance-box-select-image"
+      [ngClass]="selectedImageUrl !== undefined ? 'No-border' : ''"
+    >
+      <div
+      class="image-container"
+      (mouseenter)="showOverlay = true"
+      (mouseleave)="showOverlay = false"
+      >
+      <p-image
+          *ngIf="selectedImageUrl !== undefined"
+          width="400px"
+          height="300px"
+          [src]="selectedImageUrl"
+          alt="Image"
+          [preview]="true"
+        ></p-image>
+        <h3 *ngIf="selectedImageUrl === undefined" class="select-image__label">
+          {{ display }}
+        </h3>
+        
+        <div class="overlay" *ngIf="showOverlay">
+          <div class="right-save-edit-box">
+            <div class="right-save-box">
+              <label for="select__image">
+                <img
+                  src="assets/icon/add.svg"
+                  alt="add button"
+                  class="right__save"
+                />
+                <input
+                  id="select__image"
+                  type="file"
+                  accept="image/png, image/gif, image/jpeg"
+                  name="files"
+                  (change)="onFileSelected($event)"
+                  />
+                </label>
+            </div>
+
+            <div class="right-save-box" (click)="DeleteCurrentImage()">
+              <img
+                src="assets/icon/delete.svg"
+                alt="delete button"
+                class="right__save"
+                />
+            </div>
+          </div>
+
+        </div>
+        
+      </div>
+
+    </div>
+    <label for="title" class="label-name">Title</label>
+    <input
+      class="input-box"
+      type="text"
+      id="title"
+      name="title"
+      required
+      autocomplete="off"
+      placeholder="Title"
+      [(ngModel)]="Title"
+    />
+    <label for="ImageDescription" class="label-name">Description</label>
+    <textarea
+      class="input-box textarea"
+      id="ImageDescription"
+      name="ImageDescription"
+      required
+      autocomplete="off"
+      placeholder="Write your picture description here"
+      [(ngModel)]="Description"
+    ></textarea>
+
+    <div class="button-box">
+      <input class="send__button" type="button" (click)="AddCurrentImage()" value="SAVE" />
+      <input class="delete__button"  type="button" (click)="DeleteCurrentImage()"  value="DELETE">
+    </div>
+    
+  </div>
+  <div class="maintenance-box-slider">
+    <p-listbox
+    [options]="items"
+    (onChange)="LoadImage($event)"
+    [style]="{ width: '15rem' }"
+    [(ngModel)]="selectedItem"
+    [listStyle]="{ 'max-height': '220px' }"
+    />
+  </div>
+</body>
+</section>   

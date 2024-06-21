@@ -48,6 +48,12 @@ export interface OcupationResponse {
   response: ApiResponse;
   ocupations: Ocupation[];
 }
+export interface iImage {
+  id?: number;
+  alt: string;
+  url: string;
+  description: string;
+}
 
 export interface AmenityResponse {
   response: ApiResponse;

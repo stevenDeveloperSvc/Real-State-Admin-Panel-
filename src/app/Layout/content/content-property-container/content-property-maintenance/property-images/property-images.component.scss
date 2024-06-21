@@ -1,0 +1,276 @@
+@import "variables.scss";
+
+label {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+  margin-bottom: -15px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent !important;
+  border: $border !important;
+  padding: calc($padding - 11px);
+  transition: $animation;
+  width: 400px;
+  color: $font-color-sidebar;
+  font-size: $font-subtitle-size;
+}
+
+.input-box:focus,
+.input-box:focus {
+  border-color: $primary-color !important;
+  outline: none;
+}
+
+.content-user {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.content-user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+  background-color: $header-background-color;
+  border-radius: $border-radius;
+  gap: 20px;
+  height: auto;
+  padding: $padding;
+}
+
+.content-user__info-image {
+  background-color: $header-background-color;
+  padding: $padding;
+  height: fit-content;
+}
+
+.header__title {
+  margin: 0px;
+  font-family: $font-subtitle;
+  font-size: $font-title-size;
+  color: $font-color-sidebar;
+}
+
+.header__subtitle {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+}
+
+.content-user-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+}
+.speed-box {
+  width: 100%;
+  height: 30px;
+}
+
+.button-box{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.send__button {
+  width: 120px;
+  height: 45px;
+  min-height: 45px;
+  outline: none;
+  border: none;
+  background-color: $button-background-color;
+  border-radius: 4%;
+  color: $button-color1;
+  transition: $animation;
+}
+.send__button:active {
+    background-color: $button-background-color-active;
+    color: $button-color-active;
+}
+
+.delete__button{
+    width: 120px;
+    height: 45px;
+    min-height: 45px;
+
+    background:transparent;
+    transition:$animation;
+    border: 1px solid white;
+    color: white;
+}
+.delete__button:active{
+    background: black;
+    color:white;
+    border: 1px solid transparent;
+}
+.textarea-property-info {
+  min-height: 510px;
+  width: 100%;
+}
+.textarea {
+  min-height: 300px;
+}
+
+/*Imagen*/
+.maintenance-box {
+  border-radius: $border-radius;
+  padding: $padding;
+  background-color: $primary-color-sidebar;
+  justify-content: space-between;
+  width: 100%;
+}
+.maintenance-box-body{
+    display: flex;
+    flex-direction: row;
+    gap: 160px;
+}
+
+.header-box__title {
+  font-size: $font-title-size;
+}
+
+.maintenance-box-maintenance {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.maintenance-box-select-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 5px dashed $button-color;
+  border-radius: $border-radius;
+  width: 400px;
+  height: 300px;
+  transition: all $animation-time ease-in-out;
+}
+
+.No-border {
+  border: 5px solid transparent;
+}
+
+.select-image__label {
+  color: $button-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc($font-title-size + 12px);
+  font-family: $font-title;
+  height: 100%;
+  width: 100%;
+  transition: all $animation-time ease-in-out;
+}
+
+.image__preview {
+  height: 400px !important;
+  width: 300px !important;
+}
+
+
+.right-save-edit-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  width: 500px;
+}
+
+.right-save-box {
+  display: flex;
+  justify-content: center;
+  width: 55px;
+  height: 55px;
+  border-radius: $border-radius-button;
+  border: 1px solid $button-color;
+  background-color: transparent;
+  transition: all $animation-time ease-in-out;
+}
+
+.right-save-box:hover {
+  background-color: $button-color;
+}
+
+.right__save {
+  width: 50px;
+  height: 50px;
+  transition: all $animation-time ease-in-out;
+}
+
+.right__save:hover {
+  cursor: pointer;
+  filter: brightness(0) invert(1);
+}
+
+#select__image {
+  display: none;
+}
+
+.maintenance-box-slider {
+  width: auto;
+  height: 200px;
+}
+
+.image-container {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  transition: $animation;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.035);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: all 0.9s ease;
+}
+
+.image-container:hover .overlay {
+  opacity: 1;
+}
+
+.overlay button {
+  background-color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background-color: #ddd;
+}
+
+.button-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 30px;
+}
+
+.clear-action {
+  background-color: $button-clear-color;
+  color: $button-color;
+  border: 1px solid transparent;
+}
+
+.clear-action:active {
+  background-color: transparent;
+  color: $button-color1;
+  border: 1px solid $button-color1;
+}

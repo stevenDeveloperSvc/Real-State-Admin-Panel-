@@ -20,7 +20,15 @@
   font-weight: 700;
     background: transparent;
 }
-
+.p-listbox {
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  background: none;
+  width: 340px !important;
+}
+.p-listbox .p-listbox-list{
+  width: 300px;
+}
 .p-datatable-tfoot{
   background: transparent;
 }
