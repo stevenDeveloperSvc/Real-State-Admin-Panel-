@@ -3,12 +3,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { DividerModule } from 'primeng/divider';
-import { DropdownModule } from 'primeng/dropdown';
-import { GalleriaModule } from 'primeng/galleria';
 import { ListboxModule } from 'primeng/listbox';
 import { iImage } from '@interface/Content';
 import { SelectItem } from 'primeng/api';
-import { title } from 'process';
 
 @Component({
   selector: 'app-property-images',
@@ -25,6 +22,9 @@ import { title } from 'process';
   styleUrl: './property-images.component.scss',
 })
 export class PropertyImagesComponent implements OnInit {
+
+  @Output() selectionChange = new EventEmitter<{images: SelectItem[]}>();
+
   Title!: string;
   Description!: string;
   IsEditing: boolean = false;
@@ -37,12 +37,16 @@ export class PropertyImagesComponent implements OnInit {
 
   image!: iImage;
 
-  text1: string = '';
-  text2: string = '';
-
   constructor() {}
 
   ngOnInit(): void {}
+
+  OnSelectionChange(){
+    this.selectionChange.emit({
+        images:this.items
+    })
+  console.log(this.items)
+  }
 
   AddCurrentImage() {
     if (this.IsEditing) {

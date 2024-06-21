@@ -97,6 +97,7 @@
     [style]="{ width: '15rem' }"
     [(ngModel)]="selectedItem"
     [listStyle]="{ 'max-height': '220px' }"
+    (ngModelChange)="OnSelectionChange()"
     />
   </div>
 </body>
