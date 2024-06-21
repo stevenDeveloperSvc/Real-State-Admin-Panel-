@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   PropertyBasicInfoEvent,
   PropertyDescriptionEvent,
+  PropertyResponseInfo,
   PropertyShortDescriptionEvent,
 } from '@interface/Content';
 import { MessageService, SelectItem } from 'primeng/api';
@@ -16,6 +17,7 @@ import { PropertyDescriptionComponent } from './property-description/property-de
 import { PropertyImagesComponent } from './property-images/property-images.component';
 import { PropertyService } from '@services/property.service';
 import { ActivatedRoute } from '@angular/router';
+import { PropertyStateService } from '@services/property-state.service';
 
 @Component({
   selector: 'app-content-property-maintenance',
@@ -38,6 +40,9 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   PropertyId: null | number = 0;
   IsLoading: boolean = false;
   value!: any;
+  PropertyInfo!: PropertyResponseInfo;
+
+
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -54,7 +59,10 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   ];
 
 
-  constructor(private Property: PropertyService, private Message: MessageService, private route: ActivatedRoute) { }
+  constructor(private Property: PropertyService, private Message: MessageService, private route: ActivatedRoute, private propertyStateService: PropertyStateService) { 
+
+
+  }
 
   handlePropertyShortDescriptionSelectionChange(
     e: PropertyShortDescriptionEvent
@@ -79,32 +87,54 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     }
     this.value = { ...this.value, ...simplifiedImages }
   }
+  // ngOnInit(): void {
+  //   this.route.paramMap.subscribe(params => {
+  //     this.PropertyId = Number(params.get('propertyId?'));
+  //   });
+  //   if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
+  //     // this.Property.GetPropertyById(this.PropertyId).subscribe({
+  //     //   next: (data) => {
+  //     //     this.Message.add({
+  //     //       detail: `info from property ${data.responseDTO.title} succesfully fetched`,
+  //     //       severity: 'success',
+  //     //       summary: 'success'
+  //     //     })
+  //     //     this.propertyStateService.setPropertyInfo(data)
+  //     //     this.PropertyInfo = data;
+  //     //   },
+  //     //   error: () => {
+  //     //     this.Message.add({
+  //     //       detail: `error while trying to get property detail`,
+  //     //       severity: 'error',
+  //     //       summary: 'error'
+  //     //     })
+  //     //   }
+  //     // })
+
+      
+  //   }
+
+  // }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.PropertyId = Number(params.get('propertyId?'));
     });
     if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
-      this.Property.GetPropertyById(this.PropertyId).subscribe({
-        next: (data) => {
-          this.Message.add({
-            detail: `info from property ${data.responseDTO.title} succesfully fetched`,
-            severity: 'success',
-            summary: 'success'
-          })
-          console.log(data)
-        },
-        error: () => {
-          this.Message.add({
-            detail: `error while trying to get property detail`,
-            severity: 'error',
-            summary: 'error'
-          })
-      }
-    })
+      this.propertyStateService.fetchPropertyInfo(this.PropertyId).then((data) => {
+        this.Message.add({
+          detail: `info from property ${data.responseDTO.title} successfully fetched`,
+          severity: 'success',
+          summary: 'success'
+        });
+      }).catch((error) => {
+        this.Message.add({
+          detail: `error while trying to get property detail`,
+          severity: 'error',
+          summary: 'error'
+        });
+      });
+    }
   }
-  
-  }
-
   UpdateProperty() {
   }
   SaveProperty() {

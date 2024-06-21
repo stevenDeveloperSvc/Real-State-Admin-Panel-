@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Category, Type, Status, Amenity, PropertyBasicInfoEvent } from '@interface/Content';
+import { Category, Type, Status, Amenity, PropertyBasicInfoEvent, PropertyResponseInfo } from '@interface/Content';
 
 import { TypesService, CategoryService, StatusService, AmenityService } from "@services";
 
 import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
+import { PropertyStateService } from '@services/property-state.service';
 
 @Component({
   selector: 'app-property-basic-info',
@@ -16,11 +17,11 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './property-basic-info.component.html',
   styleUrl: './property-basic-info.component.scss'
 })
-export class PropertyBasicInfoComponent implements OnInit, AfterViewInit {
+export class PropertyBasicInfoComponent implements OnInit {
 
   @Output() selectionChange = new EventEmitter<PropertyBasicInfoEvent>();
 
-  @Input() PropertyId: number | null = null;
+  @Input() PropertyInfo: PropertyResponseInfo | null = null;
 
   Types!: Type[];
   Status!: Status[];
@@ -38,23 +39,34 @@ export class PropertyBasicInfoComponent implements OnInit, AfterViewInit {
     private CategoryService: CategoryService,
     private StatusService: StatusService,
     private AmenityService: AmenityService,
-    private Message: MessageService
+    private Message: MessageService,
+    private propertyStateService : PropertyStateService
 
   ) {
 
   }
 
   ngOnInit(): void {
-    this.GetAllTypes();
-    this.GetAllCategories();
-    this.GetAllStatus();
-    this.GetAllAmenities();
+    this.propertyStateService.getPropertyInfo().subscribe((propertyInfo) => {
+      this.PropertyInfo = propertyInfo;
+      console.log(this.PropertyInfo);
+
+      if (this.PropertyInfo) {
+        // Perform actions that depend on PropertyInfo
+        this.GetAllTypes();
+        this.GetAllCategories();
+        this.GetAllStatus();
+        this.GetAllAmenities();
+      }
+    });
   }
 
-  ngAfterViewInit(): void {
-    console.log(this.PropertyId)
-
-  }
+  // async ngAfterViewInit()  {
+  //   await this.propertyStateService.getPropertyInfo().then((propertyInfo) => {
+  //     this.PropertyInfo = propertyInfo;
+  //   });
+  //   console.log(this.PropertyInfo);
+  // }
 
   private GetAllTypes() {
     this.TypeService.GetAllTypes().subscribe({
