@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { DividerModule } from 'primeng/divider';
@@ -23,7 +23,7 @@ import { SelectItem } from 'primeng/api';
 })
 export class PropertyImagesComponent implements OnInit {
 
-  @Output() selectionChange = new EventEmitter<{images: SelectItem[]}>();
+  @Output() selectionChange = new EventEmitter<{ images: SelectItem[] }>();
 
   Title!: string;
   Description!: string;
@@ -32,20 +32,31 @@ export class PropertyImagesComponent implements OnInit {
   showOverlay: any;
   selectedImageUrl?: string | undefined;
   display?: string | undefined = 'SELECT AN IMAGE';
-  items: SelectItem[] = [];
+  _items: SelectItem[] = [];
   selectedItem: SelectItem | null = null;
 
   image!: iImage;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
 
-  OnSelectionChange(){
+  ngOnInit(): void { }
+  @Input()
+  set items(value: SelectItem[]) {
+    this._items = value;
+    this.OnSelectionChange();
+  }
+
+  get items(): SelectItem[] {
+    return this._items;
+  }
+  OnSelectionChange() {
     this.selectionChange.emit({
-        images:this.items
+      images: this.items
     })
-  console.log(this.items)
+    console.log(this.items
+
+    )
   }
 
   AddCurrentImage() {
@@ -59,11 +70,10 @@ export class PropertyImagesComponent implements OnInit {
   AddImageInfo() {
     if (this.selectedImageUrl) {
       const newItem: SelectItem = {
-        label: `${this.Title} - ${
-          this.Description.length > 10
-            ? this.Description.substring(1, 10)
-            : this.Description
-        }`,
+        label: `${this.Title} - ${this.Description.length > 10
+          ? this.Description.substring(1, 10)
+          : this.Description
+          }`,
         value: {
           title: this.Title,
           description: this.Description,
@@ -87,10 +97,15 @@ export class PropertyImagesComponent implements OnInit {
         },
       };
       this.items = [...this.items];
+    } else {
+      this.ClearInfo();
     }
   }
   GetCurrentImageIndex(): number {
     let Index = -1;
+    if (this.selectedItem?.title === null) {
+      return Index
+    }
     for (let i = 0; i <= this.items.length; i++) {
       // @ts-ignore
       if (this.items[i].value.title === this.selectedItem?.title) {
@@ -109,7 +124,7 @@ export class PropertyImagesComponent implements OnInit {
   }
   LoadImage(e: any) {
     this.IsEditing = true;
-    if (e.value !== undefined || e.value !== null) {
+    if (e.value !== undefined || e.value !== null || e.value.title !== null) {
       this.Title = e.value.title;
       this.Description = e.value.description;
       this.selectedImageUrl = e.value.img;

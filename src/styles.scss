@@ -92,10 +92,15 @@ td{
   background: none;
   border: $border;
   border-radius: 0px;
-  color: $font-color-sidebar;
-  font-family: $font-subtitle;
+  color: $font-color-sidebar !important;
+  font-family: $font-subtitle !important;
 }
 
+.p-inputtext{
+  font-family: $font-subtitle;
+  color: $font-color-sidebar !important;
+
+}
 
 html {
   line-height: 1.15;

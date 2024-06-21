@@ -28,4 +28,8 @@ export class PropertyService {
     return this.httpClient.get<PropertyResponse>(`${BaseUrl}/Property?page=${page??1}`, { headers: this.headers });
   }
 
+  public AddProperty(value: any) {
+
+    return this.httpClient.post(`${BaseUrl}/Property`,value, { headers: this.headers });
+  }
 }

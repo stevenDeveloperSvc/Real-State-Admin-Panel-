@@ -9,12 +9,13 @@ import {
   PropertyDescriptionEvent,
   PropertyShortDescriptionEvent,
 } from '@interface/Content';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 
 import { PropertyShortDescriptionComponent } from './property-short-description/property-short-description.component';
 import { PropertyBasicInfoComponent } from './property-basic-info/property-basic-info.component';
 import { PropertyDescriptionComponent } from './property-description/property-description.component';
 import { PropertyImagesComponent } from './property-images/property-images.component';
+import { PropertyService } from '@services/property.service';
 
 @Component({
   selector: 'app-content-property-maintenance',
@@ -34,8 +35,9 @@ import { PropertyImagesComponent } from './property-images/property-images.compo
   styleUrl: './content-property-maintenance.component.scss',
 })
 export class ContentPropertyMaintenanceComponent implements OnInit {
+
   IsLoading: boolean = false;
- 
+  value!: any;
   responsiveOptions: any[] = [
     {
       breakpoint: '1024px',
@@ -50,20 +52,119 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       numVisible: 1,
     },
   ];
-  constructor() {}
+  constructor(private Property: PropertyService, private Message: MessageService) { }
 
   handlePropertyShortDescriptionSelectionChange(
     e: PropertyShortDescriptionEvent
-  ) {}
-  handlePropertySelectionSelectionChange(e: PropertyBasicInfoEvent) {}
-  handlePropertyDescription(e: PropertyDescriptionEvent) {}
+  ) {
+
+    this.value = { ...this.value, ...e }
+  }
+  handlePropertySelectionSelectionChange(e: PropertyBasicInfoEvent) {
+    this.value = { ...this.value, ...e }
+  }
+  handlePropertyDescription(e: PropertyDescriptionEvent) {
+    this.value = { ...this.value, ...e }
+  }
 
   handleSelectionChange(e: PropertyBasicInfoEvent) {
-    console.log(e);
+    this.value = { ...this.value, ...e }
   }
-  ngOnInit(): void {}
 
-  SubmitPropertyInfo() {
-    throw new Error('Method not implemented.');
+  handlePropertyImages(e: { images: SelectItem<any>[]; }) {
+    const simplifiedImages = {
+      images: e.images.map(image => image.value)
+    }
+
+    this.value = { ...this.value, ...simplifiedImages }
+
   }
+  ngOnInit(): void { }
+  // async AddSelectedImageToFormData() {
+  //   await fetch(this.imageURL.changingThisBreaksApplicationSecurity).then(e => e.blob())
+  //       .then(blob => {
+  //           const archivo = new File([blob], 'nombre_archivo.png', { type: 'image/png' })
+
+  //           this.formData.append('image', archivo, 'profile-image.png');
+
+  //           console.log(archivo);
+  //       }).catch(e => console.log(e));
+
+  UpdateProperty() {
+  }
+  SaveProperty() {
+    const formData = new FormData();
+    formData.append('title', this.value.title);
+    formData.append('ShortDescription', this.value.ShortDescription);
+    formData.append('Description', this.value.Description);
+    formData.append('typeId', this.value.type.id);
+    formData.append('categoryId', this.value.category.id);
+    formData.append('statusId', this.value.status.statusId);
+    const amenityIds = this.value.amenity.map((amenity : any) => amenity.id).join(',');
+
+    formData.append(`amenityIds`, amenityIds);
+    const simplifiedImages = this.value.images.map((image: any) => {
+      const base64Image = image.img.replace(/^data:image\/[a-z]+;base64,/, '');
+      return base64Image;
+    });
+    simplifiedImages.forEach((img: any, index: any) => {
+      const byteCharacters = atob(img);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/png' });
+      formData.append(`Images`, blob, `image${index}.png`);
+    });
+
+    this.Property.AddProperty(formData).subscribe({
+      next: (value)=>{
+        this.Message.add({
+          detail:'success',
+          severity: 'success',
+          summary: 'sucess'
+        })
+      },
+      error: (value)=>{
+        console.log(value)
+        this.Message.add({
+          detail:'error',
+          severity: 'error',
+          summary: 'error'
+        })
+      }
+    })
+
+  }
+}
+export interface Property {
+  title: string
+  type: Type
+  category: Category
+  status: Status
+  amenity: Amenity[]
+  ShortDescription: string
+  Description: string
+  images: Image[]
+}
+
+export interface Type {
+  id: number
+}
+
+export interface Category {
+  id: number
+}
+
+export interface Status {
+  statusId: number
+}
+
+export interface Amenity {
+  id: number
+}
+
+export interface Image {
+  img: string
 }

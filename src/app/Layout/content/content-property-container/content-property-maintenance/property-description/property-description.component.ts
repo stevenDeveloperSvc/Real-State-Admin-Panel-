@@ -20,6 +20,7 @@ export class PropertyDescriptionComponent {
     this.selectionChange.emit({
       Description: this.FormData.Description
     })
+    console.log(this.FormData.Description  )
   }
 
 }

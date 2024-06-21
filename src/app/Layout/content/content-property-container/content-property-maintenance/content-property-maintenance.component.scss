@@ -33,7 +33,7 @@ label {
   flex-wrap: wrap;
 }
 
-.content-user__info {
+.content-user__info,.action-buttons-box {
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -44,7 +44,27 @@ label {
   height: auto;
   padding: $padding;
 }
-
+.clear__button{
+  width: 120px;
+  height: 45px;
+  min-height: 45px;
+  background:transparent;
+  transition:$animation;
+  border: 1px solid white;
+  color: white;
+}
+.clear__button:active{
+  background: black;
+  color:white;
+  border: 1px solid transparent;
+}
+.action-buttons-box{
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  width: 68.5%;
+  
+}
 .content-user__info-image {
   background-color: $header-background-color;
   padding: $padding;
