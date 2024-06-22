@@ -1,38 +1,64 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Category, Type, Status, Amenity, PropertyBasicInfoEvent, PropertyResponseInfo } from '@interface/Content';
+import {
+  Category,
+  Type,
+  Status,
+  Amenity,
+  PropertyBasicInfoEvent,
+  PropertyResponseInfo,
+  PropertyBasic,
+} from '@interface/Content';
 
-import { TypesService, CategoryService, StatusService, AmenityService } from "@services";
+import {
+  TypesService,
+  CategoryService,
+  StatusService,
+  AmenityService,
+} from '@services';
 
 import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { PropertyStateService } from '@services/property-state.service';
+import { PropertyService } from '@services/property.service';
+import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-property-basic-info',
   standalone: true,
-  imports: [CommonModule, DropdownModule, FormsModule, MultiSelectModule],
+  imports: [
+    CommonModule,
+    DropdownModule,
+    FormsModule,
+    ProgressSpinnerComponent,
+    MultiSelectModule,
+  ],
   templateUrl: './property-basic-info.component.html',
-  styleUrl: './property-basic-info.component.scss'
+  styleUrl: './property-basic-info.component.scss',
 })
 export class PropertyBasicInfoComponent implements OnInit {
-
   @Output() selectionChange = new EventEmitter<PropertyBasicInfoEvent>();
-
-  @Input() PropertyInfo: PropertyResponseInfo | null = null;
-
+  IsLoading: boolean = false;
   Types!: Type[];
   Status!: Status[];
   Category!: Category[];
   Amenity!: Amenity[];
-  FormData = {
+  FormData: PropertyBasic = {
     title: null,
     type: null,
     category: null,
     status: null,
-    amenity: []
+    amenity: [],
   };
   constructor(
     private TypeService: TypesService,
@@ -40,33 +66,35 @@ export class PropertyBasicInfoComponent implements OnInit {
     private StatusService: StatusService,
     private AmenityService: AmenityService,
     private Message: MessageService,
-    private propertyStateService : PropertyStateService
+    private Property: PropertyService,
+    private propertyStateService: PropertyStateService
+  ) {}
 
-  ) {
-
-  }
-
-  ngOnInit(): void {
-    this.propertyStateService.getPropertyInfo().subscribe((propertyInfo) => {
-      this.PropertyInfo = propertyInfo;
-      console.log(this.PropertyInfo);
-
-      if (this.PropertyInfo) {
-        // Perform actions that depend on PropertyInfo
-        this.GetAllTypes();
-        this.GetAllCategories();
-        this.GetAllStatus();
-        this.GetAllAmenities();
-      }
+  LoadCacheData() {
+    this.IsLoading  = true;
+    this.Property.GetPropertyById().subscribe({
+      next: (a) => {
+        const { title, category, ameneties, type, status } = a.responseDTO;
+        this.FormData = {
+          category: category,
+          title: title,
+          status: status,
+          amenity: ameneties,
+          type: type,
+        };
+        this.IsLoading  = false;
+        console.log(ameneties);
+      },
+      error: (b) => {},
     });
   }
-
-  // async ngAfterViewInit()  {
-  //   await this.propertyStateService.getPropertyInfo().then((propertyInfo) => {
-  //     this.PropertyInfo = propertyInfo;
-  //   });
-  //   console.log(this.PropertyInfo);
-  // }
+  ngOnInit(): void {
+    this.GetAllTypes();
+    this.GetAllCategories();
+    this.GetAllStatus();
+    this.GetAllAmenities();
+    this.LoadCacheData();
+  }
 
   private GetAllTypes() {
     this.TypeService.GetAllTypes().subscribe({
@@ -116,15 +144,13 @@ export class PropertyBasicInfoComponent implements OnInit {
     });
   }
 
-
-
   onSelectionChange() {
     this.selectionChange.emit({
       title: this.FormData.title,
       type: this.FormData.type,
       category: this.FormData.category,
       status: this.FormData.status,
-      amenity: this.FormData.amenity
+      amenity: this.FormData.amenity,
     });
   }
 }

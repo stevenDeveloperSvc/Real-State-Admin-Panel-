@@ -1,13 +1,19 @@
 <section class="content-user__info horizontal-box">
-    <header class="content-user__header">
-        <h4 class="header__title">Property Info</h4>
-        <p class="header__subtitle">Add a property description information!</p>
-    </header>
-    <form class="content-user-info-box">
-        <label for="description" class="label-name">Description</label>
-        <textarea class="input-box textarea-property-info horizontal-box" id="description"
-            [(ngModel)]="FormData.Description" name="description" required autocomplete="off"
-            (ngModelChange)="OnSelectionChange()"
-            placeholder="Write your description here"></textarea>
-    </form>
+  <header class="content-user__header">
+    <h4 class="header__title">Property Info</h4>
+    <p class="header__subtitle">Add a property description information!</p>
+  </header>
+  <form class="content-user-info-box">
+    <label for="description" class="label-name">Description</label>
+    <textarea
+      class="input-box textarea-property-info horizontal-box"
+      id="description"
+      [(ngModel)]="FormData.Description"
+      name="description"
+      required
+      autocomplete="off"
+      (ngModelChange)="OnSelectionChange()"
+      placeholder="Write your description here"
+    ></textarea>
+  </form>
 </section>

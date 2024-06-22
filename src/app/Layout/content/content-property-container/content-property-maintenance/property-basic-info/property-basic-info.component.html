@@ -2,7 +2,7 @@
 <section class="content-user__info property_box">
     <header class="content-user__header">
       <h4 class="header__title">Property Info</h4>
-      <p class="header__subtitle">Add a basic property info!</p>
+      <p  class="header__subtitle">Add a basic property info!</p>
     </header>
     <form class="content-user-info-box">
       <label for="title" class="label-name">Title</label>
@@ -21,4 +21,5 @@
       <p-multiSelect id="Amenity" name="Amenity" [options]="Amenity" optionLabel="description" (onChange)="onSelectionChange()"
         placeholder="Select Amenities" [(ngModel)]="FormData.amenity" />
     </form>
+    <app-progress-spinner [IsLoading]="IsLoading" ></app-progress-spinner>
   </section>

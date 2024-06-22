@@ -120,19 +120,14 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       this.PropertyId = Number(params.get('propertyId?'));
     });
     if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
-      this.propertyStateService.fetchPropertyInfo(this.PropertyId).then((data) => {
-        this.Message.add({
-          detail: `info from property ${data.responseDTO.title} successfully fetched`,
-          severity: 'success',
-          summary: 'success'
-        });
-      }).catch((error) => {
-        this.Message.add({
-          detail: `error while trying to get property detail`,
-          severity: 'error',
-          summary: 'error'
-        });
-      });
+      this.Property.GetPropertyById(this.PropertyId,true).subscribe({
+        next:(a)=>{
+          console.log(a)
+        },
+        error:(e)=>{
+          console.log(e)
+        }
+      })
     }
   }
   UpdateProperty() {

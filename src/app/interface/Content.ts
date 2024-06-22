@@ -157,3 +157,11 @@ export interface Amenety {
   id: number
   description: string
 }
+
+export interface  PropertyBasic{
+ title: string | null;
+ type: Type | null;
+ category: Category | null;
+ status: Status | null;
+ amenity: Amenity[] | null | any;
+} 
