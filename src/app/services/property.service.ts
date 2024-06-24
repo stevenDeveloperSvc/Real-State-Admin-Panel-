@@ -39,7 +39,7 @@ export class PropertyService {
   public GetPropertyById(id?: number | null, forceRefresh: boolean = false) {
     if (forceRefresh || !this.dataCache$) {
       this.dataCache$ = this.httpClient
-        .get<PropertyResponseInfo>(`${BaseUrl}/Property/detail/${id}`, {
+        .get<PropertyResponseInfo>(`${BaseUrl}/Property/update/detail/${id}`, {
           headers: this.headers,
         })
         .pipe(shareReplay(1));

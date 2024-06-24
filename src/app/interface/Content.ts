@@ -15,7 +15,12 @@ export interface PropertyBasicInfoEvent {
 export interface PropertyShortDescriptionEvent {
   ShortDescription : string  | null;
 }
-
+export interface PropertyShortDescription{
+  shortDescription : string;
+}
+export interface PropertyDescription{
+  Description: string;
+}
 export interface PropertyDescriptionEvent {
   Description : string;
 }
@@ -132,15 +137,24 @@ export interface ResponseDto {
   address: any
   type: Type
   category: Category
-  location: any
+  location: any;
+  shortDescription: string;
   price: number
   agent: Agent
-  images: string[]
+  images: ResImage[];
   ameneties: Amenety[]
   comments: any[]
   commentsCount: number
 }
-
+export interface ResImage{
+  label:string;
+  value: ResponseImage;
+}
+export interface ResponseImage{
+  Title:string;
+  Images:string;
+  Description:string;
+}
 export interface Status {
   statusId: number
   status: string

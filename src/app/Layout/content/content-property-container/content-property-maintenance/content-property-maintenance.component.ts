@@ -41,6 +41,8 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   IsLoading: boolean = false;
   value!: any;
   PropertyInfo!: PropertyResponseInfo;
+  IsEditiingProperty : boolean = false;
+
 
 
   responsiveOptions: any[] = [
@@ -120,12 +122,14 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       this.PropertyId = Number(params.get('propertyId?'));
     });
     if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
+      this.IsEditiingProperty = true;
+      
       this.Property.GetPropertyById(this.PropertyId,true).subscribe({
         next:(a)=>{
-          console.log(a)
+          //console.log(a)
         },
         error:(e)=>{
-          console.log(e)
+         // console.log(e)
         }
       })
     }

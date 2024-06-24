@@ -1,33 +1,43 @@
-import { CommonModule } from "@angular/common";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { PropertyShortDescriptionEvent } from "@interface/Content";
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+  PropertyShortDescription,
+  PropertyShortDescriptionEvent,
+} from '@interface/Content';
+import { PropertyService } from '@services/property.service';
 
 @Component({
   selector: 'app-property-short-description',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './property-short-description.component.html',
-  styleUrl: './property-short-description.component.scss'
+  styleUrl: './property-short-description.component.scss',
 })
-export class PropertyShortDescriptionComponent  {
+export class PropertyShortDescriptionComponent implements OnInit {
+  @Input() OnEditingMode: boolean = false;
 
   @Output() selectionChange = new EventEmitter<PropertyShortDescriptionEvent>();
-  @Input() PropertyId : number | null =  null;
-  
-  FormData = {
-    shortDescription: ''
+
+  FormData: PropertyShortDescription = {
+    shortDescription: '',
+  };
+
+  constructor(private Property: PropertyService) {}
+  ngOnInit(): void {
+    if (!this.OnEditingMode) return;
+    this.Property.GetPropertyById().subscribe({
+      next: ({ responseDTO }) => {
+        this.FormData = {
+          shortDescription: responseDTO.shortDescription,
+        };
+      },
+    });
   }
 
-  constructor(){
-    
-  }
- 
   onSelectionChange() {
     this.selectionChange.emit({
-      ShortDescription : this.FormData.shortDescription
+      ShortDescription: this.FormData.shortDescription,
     });
-    console.log(this.FormData.shortDescription)
   }
-
 }

@@ -1,11 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+  input,
+} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageModule } from 'primeng/image';
 import { DividerModule } from 'primeng/divider';
 import { ListboxModule } from 'primeng/listbox';
 import { iImage } from '@interface/Content';
+import { ImageConverter } from './imageConverter';
 import { SelectItem } from 'primeng/api';
+import { PropertyService } from '@services/property.service';
 
 @Component({
   selector: 'app-property-images',
@@ -22,9 +33,8 @@ import { SelectItem } from 'primeng/api';
   styleUrl: './property-images.component.scss',
 })
 export class PropertyImagesComponent implements OnInit {
-
   @Output() selectionChange = new EventEmitter<{ images: SelectItem[] }>();
-  @Input() PropertyId : null | number = null;
+  @Input() OnEditingMode: boolean = false;
 
   Title!: string;
   Description!: string;
@@ -38,10 +48,20 @@ export class PropertyImagesComponent implements OnInit {
 
   image!: iImage;
 
-  constructor() { }
+  constructor(private Property: PropertyService) {}
 
-
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (!this.OnEditingMode) return;
+    this.Property.GetPropertyById().subscribe({
+      next: ({ responseDTO }) => {
+        this.items = [...responseDTO.images];
+        console.log(responseDTO);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
+  }
   @Input()
   set items(value: SelectItem[]) {
     this._items = value;
@@ -53,11 +73,8 @@ export class PropertyImagesComponent implements OnInit {
   }
   OnSelectionChange() {
     this.selectionChange.emit({
-      images: this.items
-    })
-    console.log(this.items
-
-    )
+      images: this.items,
+    });
   }
 
   AddCurrentImage() {
@@ -71,14 +88,15 @@ export class PropertyImagesComponent implements OnInit {
   AddImageInfo() {
     if (this.selectedImageUrl) {
       const newItem: SelectItem = {
-        label: `${this.Title} - ${this.Description.length > 10
-          ? this.Description.substring(1, 10)
-          : this.Description
-          }`,
+        label: `${this.Title} - ${
+          this.Description.length > 10
+            ? this.Description.substring(1, 10)
+            : this.Description
+        }`,
         value: {
           title: this.Title,
           description: this.Description,
-          img: this.selectedImageUrl,
+          images: this.selectedImageUrl,
         },
       };
       this.items = [...this.items, newItem];
@@ -94,7 +112,7 @@ export class PropertyImagesComponent implements OnInit {
         value: {
           title: this.Title,
           description: this.Description,
-          img: this.selectedImageUrl,
+          images: this.selectedImageUrl,
         },
       };
       this.items = [...this.items];
@@ -105,7 +123,7 @@ export class PropertyImagesComponent implements OnInit {
   GetCurrentImageIndex(): number {
     let Index = -1;
     if (this.selectedItem?.title === null) {
-      return Index
+      return Index;
     }
     for (let i = 0; i <= this.items.length; i++) {
       // @ts-ignore
@@ -114,7 +132,7 @@ export class PropertyImagesComponent implements OnInit {
         break;
       }
     }
-    return Index
+    return Index;
   }
   ClearInfo() {
     this.selectedImageUrl = undefined;
@@ -128,44 +146,22 @@ export class PropertyImagesComponent implements OnInit {
     if (e.value !== undefined || e.value !== null || e.value.title !== null) {
       this.Title = e.value.title;
       this.Description = e.value.description;
-      this.selectedImageUrl = e.value.img;
+      this.selectedImageUrl = e.value.images;
     }
-
     // const { url, alt, description } = this.image;
     // this.selectedImageUrl = url;
     // this.Title = alt;
     // this.Description = description;
   }
 
-  onFileSelected(event: any) {
+  async onFileSelected(event: any) {
     const file: File = event.target.files[0];
 
     if (file) {
-      const fileReader = new FileReader();
-
-      fileReader.onload = (e: any) => {
-        const img = new Image();
-        img.src = e.target.result;
-
-        img.onload = () => {
-          const watermark = new Image();
-          watermark.src = 'assets/watermark.png';
-          watermark.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = img.width;
-            canvas.height = img.height;
-
-            ctx?.drawImage(img, 0, 0);
-
-            const xPos = canvas.width - watermark.width - 90;
-            const yPos = canvas.height - watermark.height - 90;
-            ctx?.drawImage(watermark, xPos, yPos);
-            this.selectedImageUrl = canvas.toDataURL('image/png');
-          };
-        };
-      };
-      fileReader.readAsDataURL(file);
+      this.selectedImageUrl = await ImageConverter.addWatermark(
+        file,
+        'assets/watermark.png'
+      );
     }
   }
 
@@ -173,7 +169,7 @@ export class PropertyImagesComponent implements OnInit {
     if (this.selectedItem) {
       const index = this.GetCurrentImageIndex();
       this.items.splice(index, 1);
-      this.items = [...this.items]
+      this.items = [...this.items];
       this.ClearInfo();
     }
   }

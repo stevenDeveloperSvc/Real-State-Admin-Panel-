@@ -48,6 +48,8 @@ import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.
 })
 export class PropertyBasicInfoComponent implements OnInit {
   @Output() selectionChange = new EventEmitter<PropertyBasicInfoEvent>();
+  @Input() OnEditingMode : boolean = false;
+
   IsLoading: boolean = false;
   Types!: Type[];
   Status!: Status[];
@@ -66,9 +68,8 @@ export class PropertyBasicInfoComponent implements OnInit {
     private StatusService: StatusService,
     private AmenityService: AmenityService,
     private Message: MessageService,
-    private Property: PropertyService,
-    private propertyStateService: PropertyStateService
-  ) {}
+    private Property: PropertyService
+    ) {}
 
   LoadCacheData() {
     this.IsLoading  = true;
@@ -93,6 +94,7 @@ export class PropertyBasicInfoComponent implements OnInit {
     this.GetAllCategories();
     this.GetAllStatus();
     this.GetAllAmenities();
+    if(!this.OnEditingMode) return;
     this.LoadCacheData();
   }
 

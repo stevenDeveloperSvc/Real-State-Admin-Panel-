@@ -1,12 +1,32 @@
 <section class="content-user">
-  <app-property-basic-info (selectionChange)="handlePropertySelectionSelectionChange($event)"></app-property-basic-info>
+  <app-property-basic-info
+  [OnEditingMode]="IsEditiingProperty"
+  (selectionChange)="handlePropertySelectionSelectionChange($event)"
+  ></app-property-basic-info>
   <app-property-short-description
-  [PropertyId]="PropertyId"
-    (selectionChange)="handlePropertyShortDescriptionSelectionChange($event)"></app-property-short-description>
-  <app-property-description  [PropertyId]="PropertyId"  (selectionChange)="handlePropertyDescription($event)"></app-property-description>
-  <app-property-images  [PropertyId]="PropertyId" (selectionChange)="handlePropertyImages($event)" ></app-property-images>
+    [OnEditingMode]="IsEditiingProperty"
+    (selectionChange)="handlePropertyShortDescriptionSelectionChange($event)"
+  ></app-property-short-description>
+  <app-property-description
+    [OnEditingMode]="IsEditiingProperty"
+    (selectionChange)="handlePropertyDescription($event)"
+  ></app-property-description>
+  <app-property-images
+    [OnEditingMode]="IsEditiingProperty"
+    (selectionChange)="handlePropertyImages($event)"
+  ></app-property-images>
   <section class="action-buttons-box">
-    <input class="send__button" type="button" (click)="SaveProperty()" value="SAVE" />
-    <input class="clear__button" type="button" (click)="UpdateProperty()" value="CLEAR">
+    <input
+      class="send__button"
+      type="button"
+      (click)="SaveProperty()"
+      value="SAVE"
+    />
+    <input
+      class="clear__button"
+      type="button"
+      (click)="UpdateProperty()"
+      value="CLEAR"
+    />
   </section>
 </section>
