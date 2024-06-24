@@ -20,7 +20,7 @@
   font-weight: 700;
     background: transparent;
 }
-.p-listbox {
+.p-listbox,.p-inputnumber {
   color: #4b5563;
   border: 1px solid #d1d5db;
   background: none;
@@ -88,7 +88,7 @@ td{
 // }
 
 
-.p-dropdown, .p-multiselect{
+.p-dropdown, .p-multiselect,.p-inputnumber{
   background: none;
   border: $border;
   border-radius: 0px;
@@ -99,6 +99,8 @@ td{
 .p-inputtext{
   font-family: $font-subtitle;
   color: $font-color-sidebar !important;
+  background:none;
+  border-width: 0px 0px 0px 0px;
 
 }
 
