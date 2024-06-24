@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PropertyResponseInfo } from '@interface/Content';
-import { BehaviorSubject, Observable, filter, shareReplay } from 'rxjs';
+import { BehaviorSubject, Observable, filter } from 'rxjs';
 import { PropertyService } from './property.service';
 
 @Injectable({

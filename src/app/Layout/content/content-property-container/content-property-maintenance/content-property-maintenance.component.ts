@@ -41,7 +41,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   IsLoading: boolean = false;
   value!: any;
   PropertyInfo!: PropertyResponseInfo;
-  IsEditiingProperty : boolean = false;
+  IsEditiingProperty: boolean = false;
 
 
 
@@ -61,7 +61,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   ];
 
 
-  constructor(private Property: PropertyService, private Message: MessageService, private route: ActivatedRoute, private propertyStateService: PropertyStateService) { 
+  constructor(private Property: PropertyService, private Message: MessageService, private route: ActivatedRoute, private propertyStateService: PropertyStateService) {
 
 
   }
@@ -113,7 +113,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   //     //   }
   //     // })
 
-      
+
   //   }
 
   // }
@@ -123,13 +123,13 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     });
     if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
       this.IsEditiingProperty = true;
-      
-      this.Property.GetPropertyById(this.PropertyId,true).subscribe({
-        next:(a)=>{
+
+      this.Property.GetPropertyById(this.PropertyId, true).subscribe({
+        next: (a) => {
           //console.log(a)
         },
-        error:(e)=>{
-         // console.log(e)
+        error: (e) => {
+          // console.log(e)
         }
       })
     }
@@ -137,7 +137,9 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   UpdateProperty() {
   }
   SaveProperty() {
+
     const formData = new FormData();
+    formData.append("propertyId", this.PropertyId as any);
     formData.append('title', this.value.title);
     formData.append('ShortDescription', this.value.ShortDescription);
     formData.append('Description', this.value.Description);
@@ -148,19 +150,42 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
 
     formData.append(`amenityIds`, amenityIds);
     const simplifiedImages = this.value.images.map((image: any) => {
-      const base64Image = image.img.replace(/^data:image\/[a-z]+;base64,/, '');
-      return base64Image;
+      const NewObj = {
+        images: image.images.replace(/^data:image\/[a-z]+;base64,/, ''),
+        title: image.title,
+        description: image.description
+      }
+      return NewObj;
     });
     simplifiedImages.forEach((img: any, index: any) => {
-      const byteCharacters = atob(img);
+      const byteCharacters = atob(img.images);
       const byteNumbers = new Array(byteCharacters.length);
       for (let i = 0; i < byteCharacters.length; i++) {
         byteNumbers[i] = byteCharacters.charCodeAt(i);
       }
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: 'image/png' });
-      formData.append(`Images`, blob, `image${index}.png`);
+      formData.append(`Images[${index}].Image`, blob, `image${index}.png`);
+      formData.append(`Images[${index}].Title`, img.title);
+      formData.append(`Images[${index}].Description`, img.description);
+
     });
+
+    if (this.IsEditiingProperty) {
+      this.Property.UpdateProperty(formData).subscribe({
+        next: (value) => {
+          console.log(value)
+        },
+        error: (value) => {
+          this.Message.add({
+            detail: `${value.error.value ?? "Error while triying to update"}`,
+            severity: 'error',
+            summary: 'error'
+          })
+          console.log(value)
+        }
+      })
+    }
 
     this.Property.AddProperty(formData).subscribe({
       next: (value) => {
@@ -171,7 +196,6 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
         })
       },
       error: (value) => {
-        console.log(value)
         this.Message.add({
           detail: 'error',
           severity: 'error',

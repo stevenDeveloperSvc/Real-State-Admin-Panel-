@@ -84,7 +84,7 @@ export class PropertyBasicInfoComponent implements OnInit {
           type: type,
         };
         this.IsLoading  = false;
-        console.log(ameneties);
+        this.onSelectionChange();
       },
       error: (b) => {},
     });

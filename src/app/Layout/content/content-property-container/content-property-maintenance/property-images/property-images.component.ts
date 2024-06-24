@@ -55,7 +55,7 @@ export class PropertyImagesComponent implements OnInit {
     this.Property.GetPropertyById().subscribe({
       next: ({ responseDTO }) => {
         this.items = [...responseDTO.images];
-        console.log(responseDTO);
+        this.OnSelectionChange();
       },
       error: (e) => {
         console.log(e);

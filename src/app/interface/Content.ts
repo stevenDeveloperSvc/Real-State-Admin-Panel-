@@ -115,6 +115,7 @@ export interface Property {
 
 
 
+
 export interface Info {
   countItems: number;
   currentPage: number;
@@ -179,3 +180,23 @@ export interface  PropertyBasic{
  status: Status | null;
  amenity: Amenity[] | null | any;
 } 
+
+export interface ImageInfo {
+  Title: string;
+  Description: string;
+  Image: File;
+}
+
+export interface PropertyDTO {
+  PropertyId: number;
+  Title?: string;
+  Money: number;
+  ShortDescription?: string;
+  Description?: string;
+  IsInOffer: number;
+  TypeId: number;
+  StatusId: number;
+  CategoryId: number;
+  AmenityIds?: string;
+  Images?: ImageInfo[];
+}

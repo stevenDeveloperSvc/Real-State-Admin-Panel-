@@ -31,6 +31,7 @@ export class PropertyShortDescriptionComponent implements OnInit {
         this.FormData = {
           shortDescription: responseDTO.shortDescription,
         };
+        this.onSelectionChange();
       },
     });
   }

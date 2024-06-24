@@ -36,6 +36,7 @@ export class PropertyDescriptionComponent implements OnInit {
           Description : responseDTO.description  
         }
         this.IsLoading = false;
+        this.OnSelectionChange();
       },
       error:()=>{
         this.Message.add({
