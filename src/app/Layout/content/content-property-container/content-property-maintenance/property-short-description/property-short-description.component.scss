@@ -6,6 +6,19 @@ label {
   color: $font-color-secondary;
   margin-bottom: -15px;
 }
+.description-length{
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color:$font-color-secondary;
+  position: relative;
+  top:-30px;
+}
+.warning{
+  color:orange;
+}
+.limit-reached{
+  color:red;
+}
 
 .input-box {
   display: flex;

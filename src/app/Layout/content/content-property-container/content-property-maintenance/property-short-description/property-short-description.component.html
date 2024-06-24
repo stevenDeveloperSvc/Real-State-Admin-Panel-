@@ -7,8 +7,9 @@
 
     <label for="description" class="label-name">Short Description</label>
     <textarea class="input-box textarea-short__description" id="description" name="description" required
-      [(ngModel)]="FormData.shortDescription" (ngModelChange)="onSelectionChange()" autocomplete="off"
+      [(ngModel)]="FormData.shortDescription" (ngModelChange)="onSelectionChange()" (input)="ValidateMaxLength($event)" autocomplete="off"
       placeholder="Write your short description here"></textarea>
+      <p class="description-length" [ngClass]="{'warning': FormData.shortDescription.length > 250  && FormData.shortDescription.length < 300, 'limit-reached' : FormData.shortDescription.length >= 300}" >{{ FormData.shortDescription.length }} / 300</p>
 
   </form>
 </section>

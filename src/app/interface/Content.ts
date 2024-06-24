@@ -7,6 +7,7 @@ export interface User {
 }
 export interface PropertyBasicInfoEvent {
   title: string | null;
+  price: number;
   type: Type | null;
   category: Category | null;
   status: Status | null;
@@ -174,6 +175,7 @@ export interface Amenety {
 }
 
 export interface  PropertyBasic{
+Price: any;
  title: string | null;
  type: Type | null;
  category: Category | null;

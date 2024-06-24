@@ -17,6 +17,7 @@ import { iImage } from '@interface/Content';
 import { ImageConverter } from './imageConverter';
 import { SelectItem } from 'primeng/api';
 import { PropertyService } from '@services/property.service';
+import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-property-images',
@@ -28,6 +29,7 @@ import { PropertyService } from '@services/property.service';
     DividerModule,
     ImageModule,
     ListboxModule,
+    ProgressSpinnerComponent
   ],
   templateUrl: './property-images.component.html',
   styleUrl: './property-images.component.scss',
@@ -36,6 +38,7 @@ export class PropertyImagesComponent implements OnInit {
   @Output() selectionChange = new EventEmitter<{ images: SelectItem[] }>();
   @Input() OnEditingMode: boolean = false;
 
+  IsLoading : boolean = false;
   Title!: string;
   Description!: string;
   IsEditing: boolean = false;
@@ -52,10 +55,12 @@ export class PropertyImagesComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.OnEditingMode) return;
+    this.IsLoading = true;
     this.Property.GetPropertyById().subscribe({
       next: ({ responseDTO }) => {
         this.items = [...responseDTO.images];
         this.OnSelectionChange();
+        this.IsLoading  = false;
       },
       error: (e) => {
         console.log(e);

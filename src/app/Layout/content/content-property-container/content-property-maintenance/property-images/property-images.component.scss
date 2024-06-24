@@ -120,6 +120,7 @@ label {
 
 /*Imagen*/
 .maintenance-box {
+  position: relative;
   border-radius: $border-radius;
   padding: $padding;
   background-color: $primary-color-sidebar;
@@ -127,6 +128,7 @@ label {
   width: 100%;
 }
 .maintenance-box-body{
+  position: relative;
     display: flex;
     flex-direction: row;
     gap: 160px;

@@ -29,9 +29,9 @@ import {
 
 import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
-import { PropertyStateService } from '@services/property-state.service';
 import { PropertyService } from '@services/property.service';
 import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @Component({
   selector: 'app-property-basic-info',
@@ -42,6 +42,7 @@ import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.
     FormsModule,
     ProgressSpinnerComponent,
     MultiSelectModule,
+    InputNumberModule
   ],
   templateUrl: './property-basic-info.component.html',
   styleUrl: './property-basic-info.component.scss',
@@ -60,6 +61,7 @@ export class PropertyBasicInfoComponent implements OnInit {
     type: null,
     category: null,
     status: null,
+    Price : null,
     amenity: [],
   };
   constructor(
@@ -75,13 +77,14 @@ export class PropertyBasicInfoComponent implements OnInit {
     this.IsLoading  = true;
     this.Property.GetPropertyById().subscribe({
       next: (a) => {
-        const { title, category, ameneties, type, status } = a.responseDTO;
+        const { title, category, ameneties, type, status, price } = a.responseDTO;
         this.FormData = {
           category: category,
           title: title,
           status: status,
           amenity: ameneties,
           type: type,
+          Price: price
         };
         this.IsLoading  = false;
         this.onSelectionChange();
@@ -153,6 +156,9 @@ export class PropertyBasicInfoComponent implements OnInit {
       category: this.FormData.category,
       status: this.FormData.status,
       amenity: this.FormData.amenity,
+      price: this.FormData.Price
     });
+
+    console.log(this.FormData)
   }
 }

@@ -9,12 +9,14 @@
       class="input-box textarea-property-info horizontal-box"
       id="description"
       [(ngModel)]="FormData.Description"
+      maxlength="300"
       name="description"
       required
       autocomplete="off"
       (ngModelChange)="OnSelectionChange()"
       placeholder="Write your description here"
     ></textarea>
+
   </form>
   <app-progress-spinner [IsLoading]="IsLoading" ></app-progress-spinner>
 </section>

@@ -89,34 +89,6 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     }
     this.value = { ...this.value, ...simplifiedImages }
   }
-  // ngOnInit(): void {
-  //   this.route.paramMap.subscribe(params => {
-  //     this.PropertyId = Number(params.get('propertyId?'));
-  //   });
-  //   if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
-  //     // this.Property.GetPropertyById(this.PropertyId).subscribe({
-  //     //   next: (data) => {
-  //     //     this.Message.add({
-  //     //       detail: `info from property ${data.responseDTO.title} succesfully fetched`,
-  //     //       severity: 'success',
-  //     //       summary: 'success'
-  //     //     })
-  //     //     this.propertyStateService.setPropertyInfo(data)
-  //     //     this.PropertyInfo = data;
-  //     //   },
-  //     //   error: () => {
-  //     //     this.Message.add({
-  //     //       detail: `error while trying to get property detail`,
-  //     //       severity: 'error',
-  //     //       summary: 'error'
-  //     //     })
-  //     //   }
-  //     // })
-
-
-  //   }
-
-  // }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.PropertyId = Number(params.get('propertyId?'));
@@ -125,11 +97,19 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       this.IsEditiingProperty = true;
 
       this.Property.GetPropertyById(this.PropertyId, true).subscribe({
-        next: (a) => {
-          //console.log(a)
+        next: () => {
+          this.Message.add({
+            detail: "Property Info Loaded succesfully",
+            severity: "success",
+            summary: "success"
+          })
         },
-        error: (e) => {
-          // console.log(e)
+        error: () => {
+          this.Message.add({
+            detail: "Error whily fetching Property Info",
+            severity: "error",
+            summary: "error"
+          })
         }
       })
     }
@@ -137,39 +117,8 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   UpdateProperty() {
   }
   SaveProperty() {
+    const formData = this.GenerateFormDataFromControls();
 
-    const formData = new FormData();
-    formData.append("propertyId", this.PropertyId as any);
-    formData.append('title', this.value.title);
-    formData.append('ShortDescription', this.value.ShortDescription);
-    formData.append('Description', this.value.Description);
-    formData.append('typeId', this.value.type.id);
-    formData.append('categoryId', this.value.category.id);
-    formData.append('statusId', this.value.status.statusId);
-    const amenityIds = this.value.amenity.map((amenity: any) => amenity.id).join(',');
-
-    formData.append(`amenityIds`, amenityIds);
-    const simplifiedImages = this.value.images.map((image: any) => {
-      const NewObj = {
-        images: image.images.replace(/^data:image\/[a-z]+;base64,/, ''),
-        title: image.title,
-        description: image.description
-      }
-      return NewObj;
-    });
-    simplifiedImages.forEach((img: any, index: any) => {
-      const byteCharacters = atob(img.images);
-      const byteNumbers = new Array(byteCharacters.length);
-      for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      const blob = new Blob([byteArray], { type: 'image/png' });
-      formData.append(`Images[${index}].Image`, blob, `image${index}.png`);
-      formData.append(`Images[${index}].Title`, img.title);
-      formData.append(`Images[${index}].Description`, img.description);
-
-    });
 
     if (this.IsEditiingProperty) {
       this.Property.UpdateProperty(formData).subscribe({
@@ -205,34 +154,46 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     })
 
   }
-}
-export interface Property {
-  title: string
-  type: Type
-  category: Category
-  status: Status
-  amenity: Amenity[]
-  ShortDescription: string
-  Description: string
-  images: Image[]
-}
 
-export interface Type {
-  id: number
-}
 
-export interface Category {
-  id: number
-}
 
-export interface Status {
-  statusId: number
-}
+  GenerateFormDataFromControls(): FormData {
+    console.log(this.value)
+    const formData = new FormData();
+    formData.append("propertyId", this.PropertyId as any);
+    formData.append('title', this.value.title);
+    formData.append('ShortDescription', this.value.ShortDescription);
+    formData.append('Description', this.value.Description);
+    formData.append('typeId', this.value.type.id);
+    formData.append('categoryId', this.value.category.id);
+    formData.append('statusId', this.value.status.statusId);
+    formData.append("Money", this.value.price)
+    const amenityIds = this.value.amenity.map((amenity: any) => amenity.id).join(',');
 
-export interface Amenity {
-  id: number
-}
+    formData.append(`amenityIds`, amenityIds);
+    const simplifiedImages = this.value.images.map((image: any) => {
+      const NewObj = {
+        images: image.images.replace(/^data:image\/[a-z]+;base64,/, ''),
+        title: image.title,
+        description: image.description
+      }
+      return NewObj;
+    });
+    simplifiedImages.forEach((img: any, index: any) => {
+      const byteCharacters = atob(img.images);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/png' });
+      formData.append(`Images[${index}].Image`, blob, `image${index}.png`);
+      formData.append(`Images[${index}].Title`, img.title);
+      formData.append(`Images[${index}].Description`, img.description);
 
-export interface Image {
-  img: string
+    });
+
+    return formData;
+  }
+
 }
