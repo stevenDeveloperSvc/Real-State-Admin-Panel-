@@ -31,7 +31,7 @@ import { PropertyStateService } from '@services/property-state.service';
     PropertyBasicInfoComponent,
     PropertyShortDescriptionComponent,
     PropertyDescriptionComponent,
-    PropertyImagesComponent
+    PropertyImagesComponent,
   ],
   templateUrl: './content-property-maintenance.component.html',
   styleUrl: './content-property-maintenance.component.scss',
@@ -42,8 +42,6 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   value!: any;
   PropertyInfo!: PropertyResponseInfo;
   IsEditiingProperty: boolean = false;
-
-
 
   responsiveOptions: any[] = [
     {
@@ -60,80 +58,81 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     },
   ];
 
-
-  constructor(private Property: PropertyService, private Message: MessageService, private route: ActivatedRoute, private propertyStateService: PropertyStateService) {
-
-
+  constructor(
+    private Property: PropertyService,
+    private Message: MessageService,
+    private route: ActivatedRoute
+  ) {
+    this.route.paramMap.subscribe((params) => {
+      this.PropertyId = Number(params.get('propertyId?'));
+    });
+    console.log('Loaded!!')
   }
 
   handlePropertyShortDescriptionSelectionChange(
     e: PropertyShortDescriptionEvent
   ) {
-
-    this.value = { ...this.value, ...e }
+    this.value = { ...this.value, ...e };
   }
   handlePropertySelectionSelectionChange(e: PropertyBasicInfoEvent) {
-    this.value = { ...this.value, ...e }
+    this.value = { ...this.value, ...e };
   }
   handlePropertyDescription(e: PropertyDescriptionEvent) {
-    this.value = { ...this.value, ...e }
+    this.value = { ...this.value, ...e };
   }
 
   handleSelectionChange(e: PropertyBasicInfoEvent) {
-    this.value = { ...this.value, ...e }
+    this.value = { ...this.value, ...e };
   }
 
-  handlePropertyImages(e: { images: SelectItem<any>[]; }) {
+  handlePropertyImages(e: { images: SelectItem<any>[] }) {
     const simplifiedImages = {
-      images: e.images.map(image => image.value)
-    }
-    this.value = { ...this.value, ...simplifiedImages }
+      images: e.images.map((image) => image.value),
+    };
+    this.value = { ...this.value, ...simplifiedImages };
   }
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.PropertyId = Number(params.get('propertyId?'));
-    });
-    if (this.PropertyId !== null && this.PropertyId !== undefined && this.PropertyId !== 0) {
+    this.IsEditiingProperty = false;
+    if (
+      this.PropertyId !== null &&
+      this.PropertyId !== undefined &&
+      this.PropertyId !== 0
+    ) {
       this.IsEditiingProperty = true;
 
       this.Property.GetPropertyById(this.PropertyId, true).subscribe({
         next: () => {
           this.Message.add({
-            detail: "Property Info Loaded succesfully",
-            severity: "success",
-            summary: "success"
-          })
+            detail: 'Property Info Loaded succesfully',
+            severity: 'success',
+            summary: 'success',
+          });
         },
         error: () => {
           this.Message.add({
-            detail: "Error whily fetching Property Info",
-            severity: "error",
-            summary: "error"
-          })
-        }
-      })
+            detail: 'Error whily fetching Property Info',
+            severity: 'error',
+            summary: 'error',
+          });
+        },
+      });
     }
   }
-  UpdateProperty() {
-  }
+  UpdateProperty() {}
   SaveProperty() {
     const formData = this.GenerateFormDataFromControls();
 
-
     if (this.IsEditiingProperty) {
       this.Property.UpdateProperty(formData).subscribe({
-        next: (value) => {
-          console.log(value)
-        },
+        next: (value) => {},
         error: (value) => {
           this.Message.add({
-            detail: `${value.error.value ?? "Error while triying to update"}`,
+            detail: `${value.error.value ?? 'Error while triying to update'}`,
             severity: 'error',
-            summary: 'error'
-          })
-          console.log(value)
-        }
-      })
+            summary: 'error',
+          });
+        },
+      });
     }
 
     this.Property.AddProperty(formData).subscribe({
@@ -141,42 +140,40 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
         this.Message.add({
           detail: 'success',
           severity: 'success',
-          summary: 'sucess'
-        })
+          summary: 'sucess',
+        });
       },
       error: (value) => {
         this.Message.add({
           detail: 'error',
           severity: 'error',
-          summary: 'error'
-        })
-      }
-    })
-
+          summary: 'error',
+        });
+      },
+    });
   }
 
-
-
   GenerateFormDataFromControls(): FormData {
-    console.log(this.value)
     const formData = new FormData();
-    formData.append("propertyId", this.PropertyId as any);
+    formData.append('propertyId', this.PropertyId as any);
     formData.append('title', this.value.title);
     formData.append('ShortDescription', this.value.ShortDescription);
     formData.append('Description', this.value.Description);
     formData.append('typeId', this.value.type.id);
     formData.append('categoryId', this.value.category.id);
     formData.append('statusId', this.value.status.statusId);
-    formData.append("Money", this.value.price)
-    const amenityIds = this.value.amenity.map((amenity: any) => amenity.id).join(',');
+    formData.append('Money', this.value.price);
+    const amenityIds = this.value.amenity
+      .map((amenity: any) => amenity.id)
+      .join(',');
 
     formData.append(`amenityIds`, amenityIds);
     const simplifiedImages = this.value.images.map((image: any) => {
       const NewObj = {
         images: image.images.replace(/^data:image\/[a-z]+;base64,/, ''),
         title: image.title,
-        description: image.description
-      }
+        description: image.description,
+      };
       return NewObj;
     });
     simplifiedImages.forEach((img: any, index: any) => {
@@ -190,10 +187,8 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       formData.append(`Images[${index}].Image`, blob, `image${index}.png`);
       formData.append(`Images[${index}].Title`, img.title);
       formData.append(`Images[${index}].Description`, img.description);
-
     });
 
     return formData;
   }
-
 }

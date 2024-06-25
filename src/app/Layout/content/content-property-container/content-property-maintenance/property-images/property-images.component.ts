@@ -54,7 +54,10 @@ export class PropertyImagesComponent implements OnInit {
   constructor(private Property: PropertyService) {}
 
   ngOnInit(): void {
-    if (!this.OnEditingMode) return;
+    if (!this.OnEditingMode){
+      this.ClearAllInfo();
+      return;
+    };
     this.IsLoading = true;
     this.Property.GetPropertyById().subscribe({
       next: ({ responseDTO }) => {
@@ -63,9 +66,12 @@ export class PropertyImagesComponent implements OnInit {
         this.IsLoading  = false;
       },
       error: (e) => {
-        console.log(e);
       },
     });
+  }
+  ClearAllInfo() {
+    this.ClearInfo();
+    this.items = [];
   }
   @Input()
   set items(value: SelectItem[]) {
@@ -153,10 +159,6 @@ export class PropertyImagesComponent implements OnInit {
       this.Description = e.value.description;
       this.selectedImageUrl = e.value.images;
     }
-    // const { url, alt, description } = this.image;
-    // this.selectedImageUrl = url;
-    // this.Title = alt;
-    // this.Description = description;
   }
 
   async onFileSelected(event: any) {

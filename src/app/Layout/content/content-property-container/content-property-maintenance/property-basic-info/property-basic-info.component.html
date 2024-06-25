@@ -6,7 +6,10 @@
   <form class="content-user-info-box">
     <label for="title" class="label-name">Title</label>
     <input class="input-box" type="text" id="title" name="title" required autocomplete="off"
-      (ngModelChange)="onSelectionChange()" [(ngModel)]="FormData.title" />
+    (ngModelChange)="onSelectionChange()" [(ngModel)]="FormData.title" />
+    <label for="Price" class="label-name">Price</label>
+    <p-inputNumber [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectionChange()" [minFractionDigits]="2"
+      [maxFractionDigits]="2" [(ngModel)]="FormData.Price"></p-inputNumber>
     <label for="type" class="label-name">Type</label>
     <p-dropdown id="types" name="type" [options]="Types" optionLabel="description" (onChange)="onSelectionChange()"
       placeholder="Select a Type" [(ngModel)]="FormData.type" />
@@ -20,9 +23,6 @@
     <p-multiSelect id="Amenity" name="Amenity" [options]="Amenity" optionLabel="description"
       (onChange)="onSelectionChange()" placeholder="Select Amenities" [(ngModel)]="FormData.amenity" />
 
-    <label for="Price" class="label-name">Price</label>
-    <p-inputNumber [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectionChange()" [minFractionDigits]="2"
-      [maxFractionDigits]="2" [(ngModel)]="FormData.Price"></p-inputNumber>
   </form>
   <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
 </section>

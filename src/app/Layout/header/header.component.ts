@@ -31,7 +31,6 @@ export class HeaderComponent implements OnInit {
     this.eventBus.imageUpdated$.subscribe(()=>
       {
         this.GetData()
-        console.log("Event emited")
       }
      
   );

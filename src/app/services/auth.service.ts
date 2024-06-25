@@ -28,7 +28,6 @@ export class AuthService {
         localStorage.setItem('ocupation', value.user?.ocupation)
       },
       error: (e) => {
-        console.log(e)
       }
     });
   }

@@ -15,8 +15,6 @@ import { PropertyService } from '@services/property.service';
   styleUrl: './property-short-description.component.scss',
 })
 export class PropertyShortDescriptionComponent implements OnInit {
-
-
   @Input() OnEditingMode: boolean = false;
 
   @Output() selectionChange = new EventEmitter<PropertyShortDescriptionEvent>();
@@ -25,9 +23,12 @@ export class PropertyShortDescriptionComponent implements OnInit {
     shortDescription: '',
   };
 
-  constructor(private Property: PropertyService) { }
+  constructor(private Property: PropertyService) {}
   ngOnInit(): void {
-    if (!this.OnEditingMode) return;
+    if (!this.OnEditingMode) {
+      this.ClearInfo();
+      return;
+    }
     this.Property.GetPropertyById().subscribe({
       next: ({ responseDTO }) => {
         this.FormData = {
@@ -37,12 +38,15 @@ export class PropertyShortDescriptionComponent implements OnInit {
       },
     });
   }
+  ClearInfo() {
+    this.FormData.shortDescription = '';
+  }
 
   ValidateMaxLength(e: any) {
     const input = e.target as HTMLTextAreaElement;
     if (input.value.length > 300) {
       input.value = input.value.slice(0, 300);
-      this.FormData.shortDescription = input.value;  // Update the model if needed
+      this.FormData.shortDescription = input.value; // Update the model if needed
     }
   }
 

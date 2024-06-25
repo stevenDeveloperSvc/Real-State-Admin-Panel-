@@ -61,12 +61,16 @@ export class SidebarComponent {
   
 
   
-  constructor(private Auth: AuthService, private router: Router, private message: MessageService,
+  constructor(private Auth: AuthService, public router: Router, private message: MessageService,
   ) { }
   LogOut() {
     this.message.add({ detail: 'Logout Successfully', severity: 'success', summary: 'success' })
     this.Auth.Logout();
     this.router.navigate(["/login"])
   }
-
+  navigateWithRefresh(link: string) {
+    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+      this.router.navigate([link]);
+    });
+  }
 }

@@ -104,6 +104,13 @@ td{
 
 }
 
+.p-dropdown:not(.p-disabled).p-focus{
+  animation: $animation;
+  border-color: $primary-color !important;
+  outline: none;
+  box-shadow: none;
+}
+
 html {
   line-height: 1.15;
   /* 1 */

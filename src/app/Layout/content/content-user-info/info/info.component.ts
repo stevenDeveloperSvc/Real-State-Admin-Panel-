@@ -75,9 +75,7 @@ export class InfoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private OcupationService: OcupationService,
     private EventBusService: EventBusService
-  ) {
-    //sessionStorage.clear();
-  }
+  ) {}
   async ngOnInit() {
     if (this.CheckIfCacheInfo()) {
       this.LoadUserInfoFromCaching();
@@ -107,7 +105,7 @@ export class InfoComponent implements OnInit {
           this.IsUserInfoLoading = false;
         },
         error: (e) => {
-         this.ShowErrorMessage(e);
+          this.ShowErrorMessage(e);
           this.IsUserInfoLoading = false;
         },
       });
@@ -131,7 +129,6 @@ export class InfoComponent implements OnInit {
         detail: value,
       });
     }
-   
   }
   get FirstName() {
     return this.UserInfoForm.controls['FirstName'];
@@ -176,8 +173,8 @@ export class InfoComponent implements OnInit {
         this.IsUserImageLoading = false;
       },
       error: (e) => {
-          this.ShowErrorMessage(e);
-          
+        this.ShowErrorMessage(e);
+
         this.IsUserImageLoading = false;
       },
     });
@@ -188,10 +185,12 @@ export class InfoComponent implements OnInit {
       this.UserInfoForm.get('UserName')?.value ?? ''
     );
     localStorage.setItem('image', this.imgURL as string);
-    localStorage.setItem(
-      'ocupation',
-      this.UserInfoForm.get('ocupation')?.value ?? ''
-    );
+
+    const Ocupation = {
+      ...(this.UserInfoForm.get('ocupationId')?.value as unknown as Ocupation),
+    };
+
+    localStorage.setItem('ocupation', Ocupation.description!);
     this.EventBusService.emitImageUpdated();
   }
   onFileSelected(e: any) {

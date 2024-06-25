@@ -159,6 +159,5 @@ export class PropertyBasicInfoComponent implements OnInit {
       price: this.FormData.Price
     });
 
-    console.log(this.FormData)
   }
 }

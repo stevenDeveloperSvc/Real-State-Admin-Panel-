@@ -37,7 +37,6 @@ export class PasswordComponent {
     this.User.UpdatePassword(this.passwordForm.value as Password).subscribe({
       next: (a) => {
         const response = a as { value: string };
-        console.log(response);
         this.message.add({
           detail: response.value,
           severity: 'success',
@@ -47,7 +46,6 @@ export class PasswordComponent {
         this.IsLoading = false;
       },
       error: (e) => {
-        console.log(e.error);
         this.message.add({
           detail: e.error.value ?? e.errors,
           severity: 'warn',

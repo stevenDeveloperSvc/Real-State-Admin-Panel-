@@ -114,15 +114,25 @@ export interface Property {
   images: any[];
 }
 
-
-
-
 export interface Info {
   countItems: number;
   currentPage: number;
 }
 
+export interface LocationResponse {
+  response: Response
+  locations: Location[]
+}
 
+export interface Response {
+  isSuccess: boolean
+  value: string
+}
+
+export interface Location {
+  id: number
+  description: string
+}
 
 
 export interface PropertyResponseInfo {

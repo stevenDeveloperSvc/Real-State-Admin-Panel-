@@ -10,7 +10,7 @@
           </a>
           <ul *ngIf="item != undefined && item!.subItems!.length > 0" class="submenu" [ngClass]="{'show': activeIndex === i}">
             <li *ngFor="let subItem of item.subItems">
-              <a [routerLink]="subItem.link">{{ subItem.label }}</a>
+              <a  (click)="subItem.link === '/main/property/maintenance/0' ? navigateWithRefresh(subItem.link) : this.router.navigate([subItem.link])" [routerLink]="subItem.link">{{ subItem.label }}</a>
             </li>
           </ul>
         </li>

@@ -37,7 +37,6 @@ export class ContentPropertyListComponent implements OnInit {
   }
 
   editProperty(property: Property) {
-    console.log('Edit property:', property);
     this.navigateToMaintenance(property.propertyId)
    
   }
@@ -46,7 +45,6 @@ export class ContentPropertyListComponent implements OnInit {
   }
   deleteProperty(property: Property) {
     console.log('Delete property:', property);
-    // Implementa la lógica para eliminar aquí
   }
 
 
@@ -69,7 +67,6 @@ export class ContentPropertyListComponent implements OnInit {
 
   confirmDeleteProperty(property: Property) {
    // this.propertyToDelete = property;
-   console.log(property)
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this property?',
       header: 'Delete Confirmation',
