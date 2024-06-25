@@ -8,6 +8,7 @@ export interface User {
 export interface PropertyBasicInfoEvent {
   title: string | null;
   price: number;
+  location: Location | null;
   type: Type | null;
   category: Category | null;
   status: Status | null;
@@ -109,9 +110,9 @@ export interface Property {
   status: string;
   type: string;
   category: string;
+  location: string;
   price: number;
   agent: string;
-  images: any[];
 }
 
 export interface Info {
@@ -149,7 +150,7 @@ export interface ResponseDto {
   address: any
   type: Type
   category: Category
-  location: any;
+  location: Location;
   shortDescription: string;
   price: number
   agent: Agent
@@ -185,6 +186,7 @@ export interface Amenety {
 }
 
 export interface  PropertyBasic{
+location: any;
 Price: any;
  title: string | null;
  type: Type | null;

@@ -5,6 +5,7 @@ import { StatusService } from "./status.service";
 import { TypesService } from "./types.service";
 import { AuthService  } from "./auth.service";
 import { UserInfoService } from "./user-info.service";
+import { LocationService } from "./location.service";
 
 
 export{
@@ -14,5 +15,6 @@ export{
     OcupationService,
     TypesService,
     AuthService,
+    LocationService,
     UserInfoService
 }

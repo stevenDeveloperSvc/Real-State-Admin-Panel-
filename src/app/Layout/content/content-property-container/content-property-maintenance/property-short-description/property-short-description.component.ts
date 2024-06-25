@@ -6,11 +6,12 @@ import {
   PropertyShortDescriptionEvent,
 } from '@interface/Content';
 import { PropertyService } from '@services/property.service';
+import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-property-short-description',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ProgressSpinnerComponent],
   templateUrl: './property-short-description.component.html',
   styleUrl: './property-short-description.component.scss',
 })
@@ -22,6 +23,7 @@ export class PropertyShortDescriptionComponent implements OnInit {
   FormData: PropertyShortDescription = {
     shortDescription: '',
   };
+  IsLoading: boolean = false;
 
   constructor(private Property: PropertyService) {}
   ngOnInit(): void {
@@ -29,11 +31,13 @@ export class PropertyShortDescriptionComponent implements OnInit {
       this.ClearInfo();
       return;
     }
+    this.IsLoading = true;
     this.Property.GetPropertyById().subscribe({
       next: ({ responseDTO }) => {
         this.FormData = {
           shortDescription: responseDTO.shortDescription,
         };
+        this.IsLoading = false;
         this.onSelectionChange();
       },
     });

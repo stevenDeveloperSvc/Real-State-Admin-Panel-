@@ -155,7 +155,9 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
 
   GenerateFormDataFromControls(): FormData {
     const formData = new FormData();
+
     formData.append('propertyId', this.PropertyId as any);
+    formData.append("Locationid",this.value.location.id )
     formData.append('title', this.value.title);
     formData.append('ShortDescription', this.value.ShortDescription);
     formData.append('Description', this.value.Description);

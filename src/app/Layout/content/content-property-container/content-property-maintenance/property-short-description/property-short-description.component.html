@@ -10,6 +10,6 @@
       [(ngModel)]="FormData.shortDescription" (ngModelChange)="onSelectionChange()" (input)="ValidateMaxLength($event)" autocomplete="off"
       placeholder="Write your short description here"></textarea>
       <p class="description-length" [ngClass]="{'warning': FormData.shortDescription.length > 250  && FormData.shortDescription.length < 300, 'limit-reached' : FormData.shortDescription.length >= 300}" >{{ FormData.shortDescription.length }} / 300</p>
-
+      <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
   </form>
 </section>

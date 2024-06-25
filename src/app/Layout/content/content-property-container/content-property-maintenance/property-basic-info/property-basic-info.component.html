@@ -5,24 +5,74 @@
   </header>
   <form class="content-user-info-box">
     <label for="title" class="label-name">Title</label>
-    <input class="input-box" type="text" id="title" name="title" required autocomplete="off"
-    (ngModelChange)="onSelectionChange()" [(ngModel)]="FormData.title" />
+    <input
+      class="input-box"
+      type="text"
+      id="title"
+      name="title"
+      required
+      autocomplete="off"
+      (ngModelChange)="onSelectionChange()"
+      [(ngModel)]="FormData.title"
+    />
     <label for="Price" class="label-name">Price</label>
-    <p-inputNumber [ngModelOptions]="{standalone: true}" (ngModelChange)="onSelectionChange()" [minFractionDigits]="2"
-      [maxFractionDigits]="2" [(ngModel)]="FormData.Price"></p-inputNumber>
+    <p-inputNumber
+      [ngModelOptions]="{ standalone: true }"
+      (ngModelChange)="onSelectionChange()"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="2"
+      [(ngModel)]="FormData.Price"
+    ></p-inputNumber>
     <label for="type" class="label-name">Type</label>
-    <p-dropdown id="types" name="type" [options]="Types" optionLabel="description" (onChange)="onSelectionChange()"
-      placeholder="Select a Type" [(ngModel)]="FormData.type" />
+    <p-dropdown
+      id="types"
+      name="type"
+      [options]="Types"
+      optionLabel="description"
+      (onChange)="onSelectionChange()"
+      placeholder="Select a Type"
+      [(ngModel)]="FormData.type"
+    />
+    <label for="Location" class="label-name">Location</label>
+    <p-dropdown
+      id="Location"
+      name="Location"
+      [options]="Locations"
+      optionLabel="description"
+      (onChange)="onSelectionChange()"
+      placeholder="Select a Location"
+      [(ngModel)]="FormData.location"
+    />
     <label for="categories" class="label-name">Categories</label>
-    <p-dropdown id="categories" name="categories" [options]="Category" optionLabel="description"
-      placeholder="Select a Category" [(ngModel)]="FormData.category" (onChange)="onSelectionChange()" />
+    <p-dropdown
+      id="categories"
+      name="categories"
+      [options]="Category"
+      optionLabel="description"
+      placeholder="Select a Category"
+      [(ngModel)]="FormData.category"
+      (onChange)="onSelectionChange()"
+    />
     <label for="status" class="label-name">Status</label>
-    <p-dropdown id="status" name="status" [options]="Status" optionLabel="status" placeholder="Select a Status"
-      (onChange)="onSelectionChange()" [(ngModel)]="FormData.status" />
+    <p-dropdown
+      id="status"
+      name="status"
+      [options]="Status"
+      optionLabel="status"
+      placeholder="Select a Status"
+      (onChange)="onSelectionChange()"
+      [(ngModel)]="FormData.status"
+    />
     <label for="Amenity" class="label-name">Amenities</label>
-    <p-multiSelect id="Amenity" name="Amenity" [options]="Amenity" optionLabel="description"
-      (onChange)="onSelectionChange()" placeholder="Select Amenities" [(ngModel)]="FormData.amenity" />
-
+    <p-multiSelect
+      id="Amenity"
+      name="Amenity"
+      [options]="Amenity"
+      optionLabel="description"
+      (onChange)="onSelectionChange()"
+      placeholder="Select Amenities"
+      [(ngModel)]="FormData.amenity"
+    />
   </form>
   <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
 </section>

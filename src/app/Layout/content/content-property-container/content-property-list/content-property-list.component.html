@@ -16,6 +16,7 @@
       <th>Status</th>
       <th>Type</th>
       <th>Category</th>
+      <th>Location</th>
       <th>Price</th>
       <th>Agent</th>
       <th>Edit</th>
@@ -28,6 +29,7 @@
       <td>{{ property.status }}</td>
       <td>{{ property.type }}</td>
       <td>{{ property.category }}</td>
+      <td>{{ property.location }}</td>
       <td>{{ property.price | currency : 'USD' }}</td>
       <td>{{ property.agent }}</td>
       <td>
@@ -40,6 +42,7 @@
   </ng-template>
   <ng-template #loadingTemplate>
     <tr>
+      <td><p-skeleton width="100%"></p-skeleton></td>
       <td><p-skeleton width="100%"></p-skeleton></td>
       <td><p-skeleton width="100%"></p-skeleton></td>
       <td><p-skeleton width="100%"></p-skeleton></td>

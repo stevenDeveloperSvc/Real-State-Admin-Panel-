@@ -72,8 +72,6 @@ export const routes: Routes = [
             component: ContentPropertyListComponent,
           }
         ],
-      },{
-        path:'features'
       }
 
     ],

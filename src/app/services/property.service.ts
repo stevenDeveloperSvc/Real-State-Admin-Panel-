@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
-import { PropertyDTO, PropertyResponse, PropertyResponseInfo } from '../interface/Content';
+import { ApiResponse, PropertyDTO, PropertyResponse, PropertyResponseInfo } from '../interface/Content';
 import { Observable, Subject, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -63,5 +63,8 @@ export class PropertyService {
     return this.httpClient.post(`${BaseUrl}/Property`, value, {
       headers: this.headers,
     });
+  }
+  public DeleteProperty(id : number){
+    return this.httpClient.delete<ApiResponse>(`${BaseUrl}/Property/${id}`, {headers:this.headers})
   }
 }

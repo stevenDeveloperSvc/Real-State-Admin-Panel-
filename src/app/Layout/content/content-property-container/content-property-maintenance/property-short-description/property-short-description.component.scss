@@ -4,7 +4,6 @@ label {
   font-family: $font-subtitle;
   font-size: $font-subtitle-size;
   color: $font-color-secondary;
-  margin-bottom: -15px;
 }
 .description-length{
   font-family: $font-subtitle;
@@ -42,7 +41,6 @@ label {
   width: 100%;
   display: flex;
   justify-content: start;
-  gap: 30px;
   flex-wrap: wrap;
 }
 
@@ -84,6 +82,6 @@ label {
   gap: 10px;
 }
 .textarea-short__description{
-  height: 466px;
+  height: 600px;
 }
 

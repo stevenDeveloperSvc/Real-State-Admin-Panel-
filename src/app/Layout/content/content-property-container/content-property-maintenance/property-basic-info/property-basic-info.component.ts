@@ -18,6 +18,7 @@ import {
   PropertyBasicInfoEvent,
   PropertyResponseInfo,
   PropertyBasic,
+  Location,
 } from '@interface/Content';
 
 import {
@@ -25,6 +26,7 @@ import {
   CategoryService,
   StatusService,
   AmenityService,
+  LocationService,
 } from '@services';
 
 import { MessageService } from 'primeng/api';
@@ -42,26 +44,29 @@ import { InputNumberModule } from 'primeng/inputnumber';
     FormsModule,
     ProgressSpinnerComponent,
     MultiSelectModule,
-    InputNumberModule
+    InputNumberModule,
   ],
   templateUrl: './property-basic-info.component.html',
   styleUrl: './property-basic-info.component.scss',
 })
 export class PropertyBasicInfoComponent implements OnInit {
   @Output() selectionChange = new EventEmitter<PropertyBasicInfoEvent>();
-  @Input() OnEditingMode : boolean = false;
+  @Input() OnEditingMode: boolean = false;
 
   IsLoading: boolean = false;
   Types!: Type[];
   Status!: Status[];
   Category!: Category[];
   Amenity!: Amenity[];
+  Locations!: Location[];
+
   FormData: PropertyBasic = {
     title: null,
     type: null,
+    location: null,
     category: null,
     status: null,
-    Price : null,
+    Price: null,
     amenity: [],
   };
   constructor(
@@ -70,23 +75,26 @@ export class PropertyBasicInfoComponent implements OnInit {
     private StatusService: StatusService,
     private AmenityService: AmenityService,
     private Message: MessageService,
-    private Property: PropertyService
-    ) {}
+    private Property: PropertyService,
+    private Location: LocationService
+  ) {}
 
   LoadCacheData() {
-    this.IsLoading  = true;
+    this.IsLoading = true;
     this.Property.GetPropertyById().subscribe({
       next: (a) => {
-        const { title, category, ameneties, type, status, price } = a.responseDTO;
+        const { title, category, ameneties, type, status, price, location } =
+          a.responseDTO;
         this.FormData = {
           category: category,
           title: title,
           status: status,
           amenity: ameneties,
+          location: location,
           type: type,
-          Price: price
+          Price: price,
         };
-        this.IsLoading  = false;
+        this.IsLoading = false;
         this.onSelectionChange();
       },
       error: (b) => {},
@@ -97,8 +105,19 @@ export class PropertyBasicInfoComponent implements OnInit {
     this.GetAllCategories();
     this.GetAllStatus();
     this.GetAllAmenities();
-    if(!this.OnEditingMode) return;
+    this.GetAllLocations();
+    if (!this.OnEditingMode) return;
     this.LoadCacheData();
+  }
+  GetAllLocations() {
+    this.Location.GetAllLocations().subscribe({
+      next: (value) => {
+        this.Locations = value.locations;
+      },
+      error: () => {
+        this.ShowErrorMesage("Locations")
+      },
+    });
   }
 
   private GetAllTypes() {
@@ -156,8 +175,8 @@ export class PropertyBasicInfoComponent implements OnInit {
       category: this.FormData.category,
       status: this.FormData.status,
       amenity: this.FormData.amenity,
-      price: this.FormData.Price
+      price: this.FormData.Price,
+      location: this.FormData.location,
     });
-
   }
 }
