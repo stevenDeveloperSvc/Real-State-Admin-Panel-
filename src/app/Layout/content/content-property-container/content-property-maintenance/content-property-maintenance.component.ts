@@ -124,7 +124,13 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
 
     if (this.IsEditiingProperty) {
       this.Property.UpdateProperty(formData).subscribe({
-        next: (value) => {},
+        next: (value) => {
+          this.Message.add({
+            detail: 'Property Updated',
+            severity: 'success',
+            summary: 'sucess',
+          });
+        },
         error: (value) => {
           this.Message.add({
             detail: `${value.error.value ?? 'Error while triying to update'}`,
@@ -133,6 +139,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
           });
         },
       });
+      return;
     }
 
     this.Property.AddProperty(formData).subscribe({
