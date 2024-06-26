@@ -112,7 +112,7 @@ export class ContentPropertyListComponent implements OnInit {
           this.Message.add({
             detail: 'An error ocurred',
             severity: 'error',
-            summary: 'error',
+            summary: 'error', 
           });
           this.IsLoading = false;
         },

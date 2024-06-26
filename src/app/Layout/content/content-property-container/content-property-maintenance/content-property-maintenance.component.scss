@@ -118,14 +118,12 @@ label {
   color: $button-color1;
   transition: $animation;
 }
-
-.property_box {
-  height: 680px;
-}
-
 .send__button:active {
   background-color: $button-background-color-active;
   color: $button-color-active;
+}
+.property_box {
+  height: 680px;
 }
 
 .textarea-property-info {

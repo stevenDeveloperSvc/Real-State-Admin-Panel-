@@ -24,23 +24,24 @@ export class TypesService {
     });
   }
 
-  public GetAllTypes() {
-    return this.httpClient.get<TypeReponse>(`${BaseUrl}/types`, {
+  public GetAllTypes(Page : any = null) {
+    return this.httpClient.get<TypeReponse>(`${BaseUrl}/types/${Page === null? '' : `?page=${Page}`}`, {
       headers: this.headers,
     });
   }
 
   public AddAType(Type: Type) {
+    console.log(Type)
     return this.httpClient.post<ApiResponse>(
       `${BaseUrl}/types`,
-      { Type },
+      Type ,
       { headers: this.headers }
     );
   }
   public ModifyType(Type: Type) {
     return this.httpClient.put<ApiResponse>(
       `${BaseUrl}/types`,
-      { Type },
+      Type ,
       { headers: this.headers }
     );
   }

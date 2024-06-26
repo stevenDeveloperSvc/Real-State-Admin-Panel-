@@ -69,6 +69,7 @@ export interface AmenityResponse {
 export interface TypeReponse {
   response: ApiResponse;
   types: Type[];
+  countItems?: number;
 }
 export interface CategoryReponse {
   response: ApiResponse;

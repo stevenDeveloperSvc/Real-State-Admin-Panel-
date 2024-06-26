@@ -48,6 +48,20 @@ export class SidebarComponent {
       ]
     },
     {
+      link: '/main/features',
+      icon: '/assets/icon/agent_list.svg',
+      alt: 'home casa default view button',
+      label: 'Features',
+      subItems: [
+        { link: '/main/features/category', label: 'Category' },
+        { link: '/main/features/type', label: 'Type' },
+        { link: '/main/features/location', label: 'Location' },
+        { link: '/main/features/amenity', label: 'Amenity' },
+        { link: '/main/features/status', label: 'status' },
+      
+      ]
+    },
+    {
       link: '/main/user-info',
       icon: '/assets/icon/configuration.svg',
       alt: 'configuration user',
@@ -57,6 +71,7 @@ export class SidebarComponent {
         {link:'/main/user-info/password',label:'Password'}
       ]
     }
+    
   ];
   
 
