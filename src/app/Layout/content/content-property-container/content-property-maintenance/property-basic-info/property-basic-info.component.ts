@@ -95,7 +95,7 @@ export class PropertyBasicInfoComponent implements OnInit {
           Price: price,
         };
         this.IsLoading = false;
-        this.onSelectionChange();
+        this.emitSelectionChange();
       },
       error: (b) => {},
     });
@@ -168,7 +168,11 @@ export class PropertyBasicInfoComponent implements OnInit {
     });
   }
 
-  onSelectionChange() {
+  onInputChange() {
+    this.emitSelectionChange();
+  }
+
+  private emitSelectionChange() {
     this.selectionChange.emit({
       title: this.FormData.title,
       type: this.FormData.type,
@@ -178,5 +182,7 @@ export class PropertyBasicInfoComponent implements OnInit {
       price: this.FormData.Price,
       location: this.FormData.location,
     });
+
+    console.log(this.FormData);
   }
 }

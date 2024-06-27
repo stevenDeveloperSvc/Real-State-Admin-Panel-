@@ -17,7 +17,6 @@ import { PropertyDescriptionComponent } from './property-description/property-de
 import { PropertyImagesComponent } from './property-images/property-images.component';
 import { PropertyService } from '@services/property.service';
 import { ActivatedRoute } from '@angular/router';
-import { PropertyStateService } from '@services/property-state.service';
 
 @Component({
   selector: 'app-content-property-maintenance',

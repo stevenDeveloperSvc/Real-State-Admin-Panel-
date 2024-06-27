@@ -31,21 +31,21 @@ export class StatusService {
   }
   public AddStatus(Status: Status) {
     return this.httpClient.post<ApiResponse>(
-      `${BaseUrl}/types`,
-      { Status },
+      `${BaseUrl}/status`,
+      Status ,
       { headers: this.headers }
     );
   }
   public ModifyStatus(Status: Status) {
     return this.httpClient.put<ApiResponse>(
-      `${BaseUrl}/types`,
-      { Status },
+      `${BaseUrl}/status`,
+       Status ,
       { headers: this.headers }
     );
   }
   public Deletestatus(Id: number) {
     return this.httpClient.delete<ApiResponse>(
-      `${BaseUrl}/types/${Id}`,
+      `${BaseUrl}/status/${Id}`,
       { headers: this.headers },
 
     );

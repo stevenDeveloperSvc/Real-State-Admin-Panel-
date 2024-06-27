@@ -58,7 +58,7 @@ export class ContentPropertyListComponent implements OnInit {
       },
       error:(value)=>{
         this.Message.add({
-          detail: value.value,
+          detail: value.error.value,
           summary:"error",
           severity:'error'
         })
@@ -71,7 +71,7 @@ export class ContentPropertyListComponent implements OnInit {
   }
 
   LoadProperties(){
-    this.PropertyService.GetAllProperties(this.Page).subscribe({
+    this.PropertyService.GetAllPropertyList(this.Page).subscribe({
       next: ({ data }) => {
         this.Data = data;
         console.log(data);
@@ -100,7 +100,7 @@ export class ContentPropertyListComponent implements OnInit {
     this.IsLoading = true;
     const page = event.first / event.rows + 1;
 
-    this.PropertyService.GetAllProperties(page).subscribe(
+    this.PropertyService.GetAllPropertyList(page).subscribe(
       {
         next: (data) => {
           this.Data = data.data;

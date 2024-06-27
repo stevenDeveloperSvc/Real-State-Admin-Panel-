@@ -35,6 +35,12 @@ export class PropertyService {
       { headers: this.headers }
     );
   }
+  public GetAllPropertyList(page: number | null) {
+    return this.httpClient.get<PropertyResponse>(
+      `${BaseUrl}/Property/list?page=${page ?? 1}`,
+      { headers: this.headers }
+    );
+  }
 
   public GetPropertyById(id?: number | null, forceRefresh: boolean = false) {
     if (forceRefresh || !this.dataCache$) {
@@ -64,7 +70,7 @@ export class PropertyService {
       headers: this.headers,
     });
   }
-  public DeleteProperty(id : number){
+  public  DeleteProperty(id : number){
     return this.httpClient.delete<ApiResponse>(`${BaseUrl}/Property/${id}`, {headers:this.headers})
   }
 }

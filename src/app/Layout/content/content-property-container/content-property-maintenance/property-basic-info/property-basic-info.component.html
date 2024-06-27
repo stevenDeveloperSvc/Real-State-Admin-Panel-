@@ -12,16 +12,16 @@
       name="title"
       required
       autocomplete="off"
-      (ngModelChange)="onSelectionChange()"
       [(ngModel)]="FormData.title"
+      (ngModelChange)="onInputChange()"
     />
     <label for="Price" class="label-name">Price</label>
     <p-inputNumber
       [ngModelOptions]="{ standalone: true }"
-      (ngModelChange)="onSelectionChange()"
       [minFractionDigits]="2"
       [maxFractionDigits]="2"
       [(ngModel)]="FormData.Price"
+      (ngModelChange)="onInputChange()"
     ></p-inputNumber>
     <label for="type" class="label-name">Type</label>
     <p-dropdown
@@ -29,9 +29,9 @@
       name="type"
       [options]="Types"
       optionLabel="description"
-      (onChange)="onSelectionChange()"
       placeholder="Select a Type"
       [(ngModel)]="FormData.type"
+      (onChange)="onInputChange()"
     />
     <label for="Location" class="label-name">Location</label>
     <p-dropdown
@@ -39,9 +39,9 @@
       name="Location"
       [options]="Locations"
       optionLabel="description"
-      (onChange)="onSelectionChange()"
       placeholder="Select a Location"
       [(ngModel)]="FormData.location"
+      (onChange)="onInputChange()"
     />
     <label for="categories" class="label-name">Categories</label>
     <p-dropdown
@@ -51,7 +51,7 @@
       optionLabel="description"
       placeholder="Select a Category"
       [(ngModel)]="FormData.category"
-      (onChange)="onSelectionChange()"
+      (onChange)="onInputChange()"
     />
     <label for="status" class="label-name">Status</label>
     <p-dropdown
@@ -60,8 +60,8 @@
       [options]="Status"
       optionLabel="status"
       placeholder="Select a Status"
-      (onChange)="onSelectionChange()"
       [(ngModel)]="FormData.status"
+      (onChange)="onInputChange()"
     />
     <label for="Amenity" class="label-name">Amenities</label>
     <p-multiSelect
@@ -69,9 +69,9 @@
       name="Amenity"
       [options]="Amenity"
       optionLabel="description"
-      (onChange)="onSelectionChange()"
       placeholder="Select Amenities"
       [(ngModel)]="FormData.amenity"
+      (onChange)="onInputChange()"
     />
   </form>
   <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>

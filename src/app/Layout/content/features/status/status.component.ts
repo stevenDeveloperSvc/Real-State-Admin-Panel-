@@ -11,95 +11,103 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-status',
   standalone: true,
-  imports: [ TableModule,
+  imports: [
+    TableModule,
     ConfirmDialogModule,
     SkeletonModule,
     CommonModule,
     ProgressSpinnerComponent,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+  ],
   templateUrl: './status.component.html',
-  styleUrl: './status.component.scss'
+  styleUrl: './status.component.scss',
 })
 export class StatusComponent {
   TotalPages!: number;
   Data!: Status[];
-  Value: Status ={
-    status:'',
-    statusId: 0
-  }
+  Value: Status = {
+    status: '',
+    statusId: 0,
+  };
   IsEditing: boolean = false;
-  IsLoading : boolean = false;
+  IsLoading: boolean = false;
   any: any;
 
-  constructor(private Status: StatusService, private message: MessageService, private confirmationService: ConfirmationService) {}
+  constructor(
+    private Status: StatusService,
+    private message: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
   SaveTypes() {
     const TypeObject = this.CreateTypeObjet();
-    if(this.IsEditing){
-      this.Update(TypeObject)
-    }else{
+    
+    if (this.IsEditing) {
+      this.Update(TypeObject);
+    } else {
       this.Save(TypeObject);
     }
-
   }
   ClearTypes() {
     this.Value.status = '';
   }
   Update(TypeObject: Status) {
-    this.Status.AddStatus(TypeObject).subscribe({
-      next:(value)=>{
+    this.Status.ModifyStatus(TypeObject).subscribe({
+      next: (value) => {
         this.message.add({
-          detail:value.value,
-          summary:'success',
-          severity:'success'
-        })
-        this.ClearTypes();
-        this.LoadInfo();
-        this.IsEditing = false;
+          detail: value.value,
+          summary: 'success',
+          severity: 'success',
+        });
       },
-      error:()=>{
+      error: () => {
         this.message.add({
-          detail:'Error while trying to save',
-          summary:'error',
-          severity:'error'
-        })
+          detail: 'Error while trying to save',
+          summary: 'error',
+          severity: 'error',
+        });
+      },
+      complete:()=>{
         this.ClearTypes();
         this.LoadInfo();
         this.IsEditing = false;
       }
-    })  
+    });
+
   }
-  Save(TypeObject : Status) {
+  Save(TypeObject: Status) {
     this.Status.AddStatus(TypeObject).subscribe({
-      next:(value)=>{
+      next: (value) => {
         this.message.add({
-          detail:value.value,
-          summary:'success',
-          severity:'success'
-        })
-        this.ClearTypes();
-        this.LoadInfo();
-        this.IsEditing = false;
+          detail: value.value,
+          summary: 'success',
+          severity: 'success',
+        });
       },
-      error:(e)=>{
+      error: (e) => {
+        console.log(e)
         this.message.add({
-          detail:'Error while trying to save',
-          summary:'error',
-          severity:'error'
-        })
+          detail: 'Error while trying to save',
+          summary: 'error',
+          severity: 'error',
+        
+        } );      
+      },
+      complete:()=>{
         this.ClearTypes();
         this.LoadInfo();
         this.IsEditing = false;
       }
-    })  }
-  CreateTypeObjet() : Status{
-    const data = {...this.Value};
+    });
+  }
+  CreateTypeObjet(): Status {
+    const data = { ...this.Value };
     data.status = this.Value.status;
     return data;
   }
   ngOnInit(): void {
-  this.LoadInfo()
+    this.LoadInfo();
   }
   LoadInfo() {
     this.IsLoading = true;
@@ -107,13 +115,6 @@ export class StatusComponent {
       next: (data) => {
         this.Data = data.status;
         this.TotalPages = data.countItems as number;
-
-        this.IsLoading = false;
-        this.message.add({
-          detail: data.response.value,
-          summary: 'success',
-          severity: 'success',
-        });
       },
       error: () => {
         this.message.add({
@@ -122,7 +123,12 @@ export class StatusComponent {
           severity: 'error',
         });
       },
-    });  }
+      complete:()=>{
+      this.IsLoading = false;
+
+      }
+    });
+  }
   confirmDeleteProperty(e: any) {
     this.confirmationService.confirm({
       message: 'Are you sure you want to delete this property?',
@@ -131,37 +137,36 @@ export class StatusComponent {
       accept: () => {
         this.deleteProperty(e);
       },
-    });  }
+    });
+  }
   deleteProperty(e: Status) {
     this.IsLoading = true;
     this.Status.Deletestatus(e.statusId as number).subscribe({
-      next:(value)=>{
+      next: (value) => {
         this.message.add({
           detail: value.value,
-          summary:"success",
-          severity:'success'
-        })
+          summary: 'success',
+          severity: 'success',
+        });
         this.LoadInfo();
-        
       },
-      error:(value)=>{
+      error: (value) => {
         this.message.add({
-          detail:value.value,
-          summary:"error",
-          severity:'error'
-        })
+          detail: value.value,
+          summary: 'error',
+          severity: 'error',
+        });
       },
-      complete:()=>{
+      complete: () => {
         this.IsLoading = false;
-      }
-    })
+      },
+    });
   }
   editProperty(e: Status) {
-    this.IsEditing= true;
-    this.Value = {...e};
+    this.IsEditing = true;
+    this.Value = { ...e };
   }
-  onRowSelect(e: TableRowSelectEvent) {
-  }
+  onRowSelect(e: TableRowSelectEvent) {}
   loadProperties(e: any) {
     const page = e.first / e.rows + 1;
     this.Status.GetAllStatus(page).subscribe({
@@ -177,6 +182,6 @@ export class StatusComponent {
           severity: 'error',
         });
       },
-    })
+    });
   }
 }
