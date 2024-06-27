@@ -47,7 +47,6 @@ export class ContentPropertyListComponent implements OnInit {
     this.route.navigate(['/main/property/maintenance', propertyId]);
   }
   deleteProperty(property: Property) {
-    console.log('Delete property:', property.propertyId);
     this.PropertyService.DeleteProperty(property.propertyId).subscribe({
       next:(value)=>{
         this.Message.add({

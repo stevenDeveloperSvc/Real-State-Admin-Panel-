@@ -49,6 +49,8 @@ export type ApiResponse = {
 export interface StatusResponse {
   response: ApiResponse;
   status: Status[];
+  countItems?: number;
+
 }
 
 export interface OcupationResponse {
@@ -65,6 +67,7 @@ export interface iImage {
 export interface AmenityResponse {
   response: ApiResponse;
   amenities: Amenity[];
+  countItems?: number;
 }
 export interface TypeReponse {
   response: ApiResponse;
@@ -74,6 +77,7 @@ export interface TypeReponse {
 export interface CategoryReponse {
   response: ApiResponse;
   categories: Category[];
+  countItems?: number;
 }
 export interface Category {
   id?: number;

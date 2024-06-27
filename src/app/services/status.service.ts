@@ -24,8 +24,8 @@ export class StatusService {
     });
   }
 
-  public GetAllStatus() {
-    return this.httpClient.get<StatusResponse>(`${BaseUrl}/status`, {
+  public GetAllStatus(Page: null | number = null) {
+    return this.httpClient.get<StatusResponse>(`${BaseUrl}/status${Page === null? '' : `?page=${Page}`}`, {
       headers: this.headers,
     });
   }

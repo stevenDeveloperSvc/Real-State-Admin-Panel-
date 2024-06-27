@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Type } from '@interface/Content';
 import { TypesService } from '@services/types.service';
-import { MessageService } from 'primeng/api';
+import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialog, ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SkeletonModule } from 'primeng/skeleton';
 import {
@@ -20,6 +21,7 @@ import {
     ConfirmDialogModule,
     SkeletonModule,
     CommonModule,
+    ProgressSpinnerComponent,
     FormsModule,
     ReactiveFormsModule,
   ],
@@ -37,7 +39,7 @@ export class TypesComponent implements OnInit {
   IsLoading : boolean = false;
   any: any;
 
-  constructor(private Types: TypesService, private message: MessageService) {}
+  constructor(private Types: TypesService, private message: MessageService, private confirmationService: ConfirmationService) {}
 
   SaveTypes() {
     const TypeObject = this.CreateTypeObjet();
@@ -129,7 +131,37 @@ export class TypesComponent implements OnInit {
       },
     });  }
   confirmDeleteProperty(e: any) {
-    throw new Error('Method not implemented.');
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to delete this property?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.deleteProperty(e);
+      },
+    });  }
+  deleteProperty(e: Type) {
+    this.IsLoading = true;
+    this.Types.DeleteType(e.id as number).subscribe({
+      next:(value)=>{
+        this.message.add({
+          detail: value.value,
+          summary:"success",
+          severity:'success'
+        })
+        this.LoadInfo();
+        
+      },
+      error:(value)=>{
+        this.message.add({
+          detail:value.value,
+          summary:"error",
+          severity:'error'
+        })
+      },
+      complete:()=>{
+        this.IsLoading = false;
+      }
+    })
   }
   editProperty(e: Type) {
     this.IsEditing= true;
@@ -153,6 +185,5 @@ export class TypesComponent implements OnInit {
         });
       },
     })
-    // throw new Error('Method not implemented.');
   }
 }

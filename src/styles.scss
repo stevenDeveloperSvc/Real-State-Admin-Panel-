@@ -2,7 +2,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
-@import 'variables.scss';
+@import "variables.scss";
 
 /* Document
    ========================================================================== */
@@ -11,47 +11,63 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+.p-dialog {
+  .p-dialog-footer,
+  .p-dialog-content,
+  .p-dialog-header {
+    background-color: $primary-color-sidebar;
+    color:$font-color-secondary;  
+  }
+}
 
- .p-datatable .p-datatable-tfoot > tr > td {
+.p-button {
+  background-color: $button-background-color;
+}
+.p-confirm-dialog-reject {
+  background-color: transparent;
+  border:1px solid white;
+  margin-right: 10px;
+}
+.p-datatable .p-datatable-tfoot > tr > td {
   text-align: right;
   padding: 1rem 11rem;
   border: 1px solid transparent;
   border-width: 0px 0px 0px 0px;
   font-weight: 700;
-    background: transparent;
+  background: transparent;
 }
-.p-listbox,.p-inputnumber {
+.p-listbox,
+.p-inputnumber {
   color: #4b5563;
   border: 1px solid #d1d5db;
   background: none;
   width: 340px !important;
 }
-.p-listbox .p-listbox-list{
+.p-listbox .p-listbox-list {
   width: 300px;
 }
-.p-datatable-tfoot{
+.p-datatable-tfoot {
   background: transparent;
 }
-.p-paginator{
-  background:transparent;
+.p-paginator {
+  background: transparent;
   border: none;
 }
 
-tr{
-
+tr {
   background-color: transparent;
 }
 
-.p-datatable .p-datatable-tbody > tr > td{
-  border-bottom: .5px solid $font-color-secondary;
+.p-datatable .p-datatable-tbody > tr > td {
+  border-bottom: 0.5px solid $font-color-secondary;
 }
 .p-highlight {
-  background-color:  $primary-color;
-  color: #F9FAF5;
+  background-color: $primary-color;
+  color: #f9faf5;
 }
 
-.p-skeleton{
-  background:none;
+.p-skeleton {
+  background: none;
 }
 table {
   border-collapse: separate;
@@ -63,19 +79,18 @@ table {
   border-collapse: separate;
   flex-shrink: 0;
   border-radius: 22px;
-  
 }
 
 th {
   color: $font-color-sidebar;
   font-family: $font-subtitle;
   font-size: 14px;
-  font-style: bold;    
+  font-style: bold;
   line-height: normal;
   background-color: transparent;
 }
-td{
-  color:$font-color-secondary;
+td {
+  color: $font-color-secondary;
 }
 
 // td:nth-child(2){
@@ -87,8 +102,9 @@ td{
 //   border-bottom-right-radius: 15px;
 // }
 
-
-.p-dropdown, .p-multiselect,.p-inputnumber{
+.p-dropdown,
+.p-multiselect,
+.p-inputnumber {
   background: none;
   border: $border;
   border-radius: 0px;
@@ -96,15 +112,14 @@ td{
   font-family: $font-subtitle !important;
 }
 
-.p-inputtext{
+.p-inputtext {
   font-family: $font-subtitle;
   color: $font-color-sidebar !important;
-  background:none;
+  background: none;
   border-width: 0px 0px 0px 0px;
-
 }
 
-.p-dropdown:not(.p-disabled).p-focus{
+.p-dropdown:not(.p-disabled).p-focus {
   animation: $animation;
   border-color: $primary-color !important;
   outline: none;
