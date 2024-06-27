@@ -61,9 +61,7 @@ export class TypesComponent implements OnInit {
           summary:'success',
           severity:'success'
         })
-        this.ClearTypes();
-        this.LoadInfo();
-        this.IsEditing = false;
+
       },
       error:()=>{
         this.message.add({
@@ -71,6 +69,9 @@ export class TypesComponent implements OnInit {
           summary:'error',
           severity:'error'
         })
+  
+      },
+      complete:()=>{
         this.ClearTypes();
         this.LoadInfo();
         this.IsEditing = false;
@@ -85,9 +86,6 @@ export class TypesComponent implements OnInit {
           summary:'success',
           severity:'success'
         })
-        this.ClearTypes();
-        this.LoadInfo();
-        this.IsEditing = false;
       },
       error:(e)=>{
         this.message.add({
@@ -95,6 +93,8 @@ export class TypesComponent implements OnInit {
           summary:'error',
           severity:'error'
         })
+      },
+      complete:()=>{
         this.ClearTypes();
         this.LoadInfo();
         this.IsEditing = false;
@@ -114,13 +114,7 @@ export class TypesComponent implements OnInit {
       next: (data) => {
         this.Data = data.types;
         this.TotalPages = data.countItems as number;
-
         this.IsLoading = false;
-        this.message.add({
-          detail: data.response.value,
-          summary: 'success',
-          severity: 'success',
-        });
       },
       error: () => {
         this.message.add({
@@ -143,13 +137,7 @@ export class TypesComponent implements OnInit {
     this.IsLoading = true;
     this.Types.DeleteType(e.id as number).subscribe({
       next:(value)=>{
-        this.message.add({
-          detail: value.value,
-          summary:"success",
-          severity:'success'
-        })
-        this.LoadInfo();
-        
+        this.LoadInfo();    
       },
       error:(value)=>{
         this.message.add({
