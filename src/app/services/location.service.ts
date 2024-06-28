@@ -26,8 +26,8 @@ export class LocationService {
     });
   }
 
-  public GetAllLocations() {
-    return this.httpClient.get<LocationResponse>(`${BaseUrl}/location`, {
+  public GetAllLocations(page : null | number = null) {
+    return this.httpClient.get<LocationResponse>(`${BaseUrl}/location${BaseUrl}/category${page === null? '' : `?page=${page}`}`, {
       headers: this.headers,
     });
   }
@@ -35,14 +35,14 @@ export class LocationService {
   public AddLocation(Location: Location) {
     return this.httpClient.post<ApiResponse>(
       `${BaseUrl}/location`,
-      { Location },
+       Location ,
       { headers: this.headers }
     );
   }
   public ModifyLocation(Location: Location) {
     return this.httpClient.put<ApiResponse>(
       `${BaseUrl}/location`,
-      { Location },
+       Location ,
       { headers: this.headers }
     );
   }

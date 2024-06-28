@@ -25,8 +25,8 @@ export class AmenityService {
   }
 
   
-  public GetAllAmenities() {
-    return this.httpClient.get<AmenityResponse>(`${BaseUrl}/amenity`, {
+  public GetAllAmenities(page: null | number = null) {
+    return this.httpClient.get<AmenityResponse>(`${BaseUrl}/amenity${page === null? '' : `?page=${page}`}`, {
       headers: this.headers,
     });
   }
@@ -34,18 +34,18 @@ export class AmenityService {
   public AddAmenity(Amenity : Amenity) {
     return this.httpClient.post<ApiResponse>(
       `${BaseUrl}/amenity`,
-      { Amenity },
+       Amenity ,
       { headers: this.headers }
     );
   }
-  public ModifyCategory(Amenity: Amenity) {
+  public ModifyAmenity(Amenity: Amenity) {
     return this.httpClient.put<ApiResponse>(
       `${BaseUrl}/amenity`,
-      { Amenity },
+       Amenity ,
       { headers: this.headers }
     );
   }
-  public DelteCateogry(Id: number) {
+  public DelteAmenity(Id: number) {
     return this.httpClient.delete<ApiResponse>(
       `${BaseUrl}/amenity/${Id}`,
       { headers: this.headers },

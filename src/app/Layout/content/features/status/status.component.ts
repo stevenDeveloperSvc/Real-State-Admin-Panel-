@@ -131,7 +131,7 @@ export class StatusComponent {
   }
   confirmDeleteProperty(e: any) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete this property?',
+      message: 'Are you sure you want to delete this Status?',
       header: 'Delete Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

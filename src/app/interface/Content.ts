@@ -128,6 +128,7 @@ export interface Info {
 export interface LocationResponse {
   response: Response
   locations: Location[]
+  countItems: number;
 }
 
 export interface Response {

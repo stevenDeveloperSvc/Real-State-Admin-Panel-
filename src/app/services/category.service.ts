@@ -25,8 +25,8 @@ export class CategoryService {
     });
   }
 
-  public GetAllCategories() {
-    return this.httpClient.get<CategoryReponse>(`${BaseUrl}/category`, {
+  public GetAllCategories(page:null | number = null ) {
+    return this.httpClient.get<CategoryReponse>(`${BaseUrl}/category${page === null? '' : `?page=${page}`}`, {
       headers: this.headers,
     });
   }
@@ -34,14 +34,14 @@ export class CategoryService {
   public AddCategory(Category: Category) {
     return this.httpClient.post<ApiResponse>(
       `${BaseUrl}/category`,
-      { Category },
+       Category ,
       { headers: this.headers }
     );
   }
   public ModifyCategory(Category: Category) {
     return this.httpClient.put<ApiResponse>(
       `${BaseUrl}/category`,
-      { Category },
+       Category ,
       { headers: this.headers }
     );
   }
