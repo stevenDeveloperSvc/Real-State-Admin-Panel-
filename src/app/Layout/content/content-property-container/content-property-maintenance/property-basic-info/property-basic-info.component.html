@@ -1,0 +1,78 @@
+<section class="content-user__info property_box">
+  <header class="content-user__header">
+    <h4 class="header__title">Property Info</h4>
+    <p class="header__subtitle">Add a basic property info!</p>
+  </header>
+  <form class="content-user-info-box">
+    <label for="title" class="label-name">Title</label>
+    <input
+      class="input-box"
+      type="text"
+      id="title"
+      name="title"
+      required
+      autocomplete="off"
+      [(ngModel)]="FormData.title"
+      (ngModelChange)="onInputChange()"
+    />
+    <label for="Price" class="label-name">Price</label>
+    <p-inputNumber
+      [ngModelOptions]="{ standalone: true }"
+      [minFractionDigits]="2"
+      [maxFractionDigits]="2"
+      [(ngModel)]="FormData.Price"
+      (ngModelChange)="onInputChange()"
+    ></p-inputNumber>
+    <label for="type" class="label-name">Type</label>
+    <p-dropdown
+      id="types"
+      name="type"
+      [options]="Types"
+      optionLabel="description"
+      placeholder="Select a Type"
+      [(ngModel)]="FormData.type"
+      (onChange)="onInputChange()"
+    />
+    <label for="Location" class="label-name">Location</label>
+    <p-dropdown
+      id="Location"
+      name="Location"
+      [options]="Locations"
+      optionLabel="description"
+      placeholder="Select a Location"
+      [(ngModel)]="FormData.location"
+      (onChange)="onInputChange()"
+    />
+    <label for="categories" class="label-name">Categories</label>
+    <p-dropdown
+      id="categories"
+      name="categories"
+      [options]="Category"
+      optionLabel="description"
+      placeholder="Select a Category"
+      [(ngModel)]="FormData.category"
+      (onChange)="onInputChange()"
+    />
+    <label for="status" class="label-name">Status</label>
+    <p-dropdown
+      id="status"
+      name="status"
+      [options]="Status"
+      optionLabel="status"
+      placeholder="Select a Status"
+      [(ngModel)]="FormData.status"
+      (onChange)="onInputChange()"
+    />
+    <label for="Amenity" class="label-name">Amenities</label>
+    <p-multiSelect
+      id="Amenity"
+      name="Amenity"
+      [options]="Amenity"
+      optionLabel="description"
+      placeholder="Select Amenities"
+      [(ngModel)]="FormData.amenity"
+      (onChange)="onInputChange()"
+    />
+  </form>
+  <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
+</section>

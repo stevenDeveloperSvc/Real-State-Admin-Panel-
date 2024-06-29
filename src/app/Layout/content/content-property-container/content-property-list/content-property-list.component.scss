@@ -1,0 +1,23 @@
+@import 'variables.scss';
+$width-heigth: 50px;
+i{
+    margin:0px;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:$width-heigth;
+    height:$width-heigth;
+    transition: $animation;
+    border-radius: 50px;
+}
+i:hover{
+    background: $button-background-color;
+    border-radius: 50px;
+    width:$width-heigth;
+    height:$width-heigth;
+}
+
+.custom-table{
+    width: 100%;
+}

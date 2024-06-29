@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'AdminPanel' title`, () => {
+  it(`should have the 'RealEstateAdminPanel' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('AdminPanel');
+    expect(app.title).toEqual('RealEstateAdminPanel');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, AdminPanel');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, RealEstateAdminPanel');
   });
 });

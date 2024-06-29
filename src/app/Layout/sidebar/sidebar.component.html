@@ -1,1 +1,20 @@
-<p>sidebar works!</p>
+<div class="sidebar-container">
+    <div class="sidebar-menuitems">
+      <ul class="sidebar-container-menu-items">
+        <li class="menu-item-list" *ngFor="let item of menuItems; let i = index" 
+            [ngClass]="{'active': activeIndex === i}" 
+            (mouseover)="setActive(i)" (mouseleave)="setActive(null)">
+          <a class="menu-item" [routerLink]="item.link">
+            <img class="item-icon" [src]="item.icon" [alt]="item.alt">
+            <p>{{ item.label }}</p>
+          </a>
+          <ul *ngIf="item != undefined && item!.subItems!.length > 0" class="submenu" [ngClass]="{'show': activeIndex === i}">
+            <li *ngFor="let subItem of item.subItems">
+              <a  (click)="subItem.link === '/main/property/maintenance/0' ? navigateWithRefresh(subItem.link) : this.router.navigate([subItem.link])" [routerLink]="subItem.link">{{ subItem.label }}</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  

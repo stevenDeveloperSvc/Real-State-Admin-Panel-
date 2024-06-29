@@ -1,0 +1,10 @@
+@import "variables.scss";
+
+.container-content {
+    display: flex;
+    position: relative;
+    justify-content: start;
+    padding: $padding;
+    background-color: $background-color;
+    min-height: 100vh;
+}

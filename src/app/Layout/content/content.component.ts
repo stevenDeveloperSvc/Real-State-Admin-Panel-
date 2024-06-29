@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [],
+  imports: [RouterOutlet],
   templateUrl: './content.component.html',
-  styleUrl: './content.component.scss'
+  styleUrl: './content.component.scss',
 })
 export class ContentComponent {
 
+  constructor() {}
 }

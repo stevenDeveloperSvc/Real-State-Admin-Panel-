@@ -1,0 +1,15 @@
+<section class="content-user__info">
+  <header class="content-user__header">
+    <h4 class="header__title">Property Info</h4>
+    <p class="header__subtitle">Add a property short description information!</p>
+  </header>
+  <form class="content-user-info-box">
+
+    <label for="description" class="label-name">Short Description</label>
+    <textarea class="input-box textarea-short__description" id="description" name="description" required
+      [(ngModel)]="FormData.shortDescription" (ngModelChange)="onSelectionChange()" (input)="ValidateMaxLength($event)" autocomplete="off"
+      placeholder="Write your short description here"></textarea>
+      <p class="description-length" [ngClass]="{'warning': FormData.shortDescription.length > 250  && FormData.shortDescription.length < 300, 'limit-reached' : FormData.shortDescription.length >= 300}" >{{ FormData.shortDescription.length }} / 300</p>
+      <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
+  </form>
+</section>

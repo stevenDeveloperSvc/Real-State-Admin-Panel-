@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "AdminPanel": {
+    "RealEstateAdminPanel": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/admin-panel",
+            "stylePreprocessorOptions": {"includePaths": [
+              "src/styles"
+            ]},
+            "outputPath": "dist/real-estate-admin-panel",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,8 +33,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
-            ],
+              "src/styles.scss",
+              "src/styles/variables.scss",
+              "primeng/resources/primeng.min.css",
+              "primeng/resources/themes/lara-light-blue/theme.css"
+                        ],
             "scripts": []
           },
           "configurations": {
@@ -62,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "AdminPanel:build:production"
+              "buildTarget": "RealEstateAdminPanel:build:production"
             },
             "development": {
-              "buildTarget": "AdminPanel:build:development"
+              "buildTarget": "RealEstateAdminPanel:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "AdminPanel:build"
+            "buildTarget": "RealEstateAdminPanel:build"
           }
         },
         "test": {
@@ -90,8 +96,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
-            ],
+              "src/styles.scss",
+              "src/styles/variables.scss"
+                        ],
             "scripts": []
           }
         }
@@ -99,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": "5f6bee7f-f685-4c8d-a64f-da5a6d1947f9"
+    "analytics": false
   }
 }

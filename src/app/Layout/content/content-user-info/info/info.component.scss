@@ -1,0 +1,147 @@
+@import "variables.scss";
+
+label {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+  margin-bottom: -15px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: transparent !important;
+  border: $border !important;
+  padding: calc($padding - 11px);
+  transition: $animation;
+  width: 400px;
+  color: $font-color-sidebar;
+  font-size:  $font-subtitle-size;
+}
+
+.input-box:focus,
+.input-box:focus {
+  border-color: $primary-color !important;
+  outline: none;
+}
+
+.content-user {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+}
+.content-user__info {
+  background-color: $header-background-color;
+  border-radius: $border-radius;
+  display: flex;
+  gap: 20px;
+  padding: $padding;
+}
+.content-user__info-image {
+  background-color: $header-background-color;
+  padding: $padding;
+  height: fit-content;
+  position: relative;
+}
+
+.header__title {
+  margin: 0px;
+  font-family: $font-subtitle;
+  font-size: $font-title-size;
+  color: $font-color-sidebar;
+}
+.header__subtitle {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+}
+.content-user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+}
+
+.content-user-picture-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.user__picture {
+  width: 300px;
+  height: 300px;
+  border-radius: $border-radius;
+  border: 1px solid rgb(0, 0, 0);
+  object-fit: cover;
+}
+
+input[type="file"] {
+  background-color: transparent;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+.content-user-info-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 30px;
+}
+.content-user-image-fields{
+  margin-top:40px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px ;
+  margin-bottom: 30px;
+
+}
+.user-info-fullname-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.content-name {
+  position: absolute;
+  transition: all 0.3s ease;
+}
+
+textarea {
+  background: transparent;
+  min-height: 250px;
+  max-height: 300px;
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+}
+.textarea {
+  height: 250px;
+  width: 450px;
+  border: $input-focus-border;
+  padding: 10px;
+}
+
+.speed-box {
+  width: 100%;
+  height: 30px;
+}
+
+.send__button {
+  width: 120px;
+  height: 45px;
+  min-height: 45px;
+  outline: none;
+  border: none;
+  background-color: $button-background-color;
+  border-radius: 4%;
+  color: $button-color1;
+  transition: $animation;
+  margin-top: -20px;
+}
+
+.send__button:active {
+  background-color: $button-background-color-active;
+  color: $button-color-active;
+}

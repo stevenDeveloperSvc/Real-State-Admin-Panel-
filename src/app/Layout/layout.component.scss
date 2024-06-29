@@ -1,0 +1,21 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "header header header"
+      "sidebar content content";
+  }
+  
+  app-sidebar {
+    grid-area: sidebar;
+  }
+  
+  app-header {
+    grid-area: header;
+  }
+  
+  app-content {
+    grid-area: content;
+  }
+  

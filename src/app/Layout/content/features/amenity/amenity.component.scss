@@ -1,0 +1,134 @@
+@import 'variables.scss';
+$width-heigth: 50px;
+i{
+    margin:0px;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:$width-heigth;
+    height:$width-heigth;
+    transition: $animation;
+    border-radius: 50px;
+}
+i:hover{
+    background: $button-background-color;
+    border-radius: 50px;
+    width:$width-heigth;
+    height:$width-heigth;
+}
+label {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+  margin-bottom: -15px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent !important;
+  border: $border !important;
+  padding: calc($padding - 11px);
+  transition: $animation;
+  width: 400px;
+  color: $font-color-sidebar;
+  font-size: $font-subtitle-size;
+}
+
+.input-box:focus,
+.input-box:focus {
+  border-color: $primary-color !important;
+  outline: none;
+}
+
+.content-user {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.content-user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+  background-color: $header-background-color;
+  border-radius: $border-radius;
+  padding: $padding;
+  height: 300px;
+}
+.action-buttons-box {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    background-color: $header-background-color;
+    border-radius: $border-radius;
+    gap: 20px;
+    height: auto;
+    padding: $padding;
+  }
+.header__title {
+  margin: 0px;
+  font-family: $font-subtitle;
+  font-size: $font-title-size;
+  color: $font-color-sidebar;
+}
+
+.header__subtitle {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+}
+
+.content-user-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+}
+
+.user-info-fullname-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.type-container{
+    display: flex;
+    gap: 30px;
+}
+.send__button {
+    width: 120px;
+    height: 45px;
+    min-height: 45px;
+    outline: none;
+    border: none;
+    background-color: $button-background-color;
+    border-radius: 4%;
+    color: $button-color1;
+    transition: $animation;
+  }
+  .send__button:active {
+    background-color: $button-background-color-active;
+    color: $button-color-active;
+  }
+  .clear__button{
+    width: 120px;
+    height: 45px;
+    min-height: 45px;
+    background:transparent;
+    transition:$animation;
+    border: 1px solid white;
+    color: white;
+  }
+  .clear__button:active{
+    background: black;
+    color:white;
+    border: 1px solid transparent;
+  } 
+
+  

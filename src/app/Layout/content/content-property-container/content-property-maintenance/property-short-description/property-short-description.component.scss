@@ -1,0 +1,87 @@
+@import "variables.scss";
+
+label {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+}
+.description-length{
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color:$font-color-secondary;
+  position: relative;
+  top:-30px;
+}
+.warning{
+  color:orange;
+}
+.limit-reached{
+  color:red;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent !important;
+  border: $border !important;
+  padding: calc($padding - 11px);
+  transition: $animation;
+  width: 400px;
+  color: $font-color-sidebar;
+  font-size: $font-subtitle-size;
+}
+
+.input-box:focus,
+.input-box:focus {
+  border-color: $primary-color !important;
+  outline: none;
+}
+
+.content-user {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  flex-wrap: wrap;
+}
+
+.content-user__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  position: relative;
+  background-color: $header-background-color;
+  border-radius: $border-radius;
+  gap: 20px;
+  height: auto;
+  padding: $padding;
+}
+
+.header__title {
+  margin: 0px;
+  font-family: $font-subtitle;
+  font-size: $font-title-size;
+  color: $font-color-sidebar;
+}
+
+.header__subtitle {
+  font-family: $font-subtitle;
+  font-size: $font-subtitle-size;
+  color: $font-color-secondary;
+}
+
+.content-user-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+}
+
+.user-info-fullname-box {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+.textarea-short__description{
+  height: 600px;
+}
+

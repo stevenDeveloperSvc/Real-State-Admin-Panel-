@@ -1,0 +1,89 @@
+<section class="type-container">
+    <section class="content-user__info property_box">
+      <header class="content-user__header">
+        <h4 class="header__title">Location info</h4>
+        <p class="header__subtitle">Add property Location!</p>
+      </header>
+      <form class="content-user-info-box">
+        <label for="title" class="label-name">Location</label>
+        <input
+          class="input-box"
+          type="text"
+          id="Type"
+          name="Type"
+          required
+          autocomplete="off"
+          [(ngModel)]="Value.description"
+        />
+      </form>
+  
+      <section class="action-buttons-box">
+        <input
+          class="send__button"
+          type="button"
+          (click)="SaveTypes()"
+          value="SAVE"
+        />
+        <input
+          class="clear__button"
+          type="button"
+          (click)="ClearTypes()"
+          value="CLEAR"
+        />
+      </section>
+    </section>
+  
+    <p-table
+      [value]="Data"
+      class="custom-table"
+      [paginator]="true"
+      selectionMode="single"
+      [lazy]="true"
+      [totalRecords]="TotalPages"
+      [rows]="5"
+      (onLazyLoad)="loadProperties($event)"
+      (onRowSelect)="onRowSelect($event)"
+      [tableStyle]="{ width: '40rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Location</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-location>
+        <tr
+          *ngIf="!IsLoading; else loadingTemplate"
+          (click)="onRowSelect({ data: location })"
+        >
+          <td>{{ location.description }}</td>
+  
+          <td>
+            <i
+              class="pi pi-file-edit"
+              (click)="editProperty(location); $event.stopPropagation()"
+              style="font-size: 1.5rem"
+            ></i>
+          </td>
+          <td>
+            <i
+              class="pi pi-trash"
+              (click)="confirmDeleteProperty(location); $event.stopPropagation()"
+              style="font-size: 1.5rem"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #loadingTemplate>
+        <tr>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-confirmDialog></p-confirmDialog>
+  </section>
+  
