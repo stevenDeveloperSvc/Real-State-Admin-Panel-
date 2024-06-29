@@ -1,19 +1,30 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Location } from '@interface/Content';
 import { LocationService } from '@services/location.service';
+import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SkeletonModule } from 'primeng/skeleton';
 import { TableModule, TableRowSelectEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-location',
   standalone: true,
-  imports: [TableModule],
+  imports: [
+    TableModule,
+    SkeletonModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ProgressSpinnerComponent,
+    ConfirmDialogModule
+  ],
   templateUrl: './location.component.html',
-  styleUrl: './location.component.scss'
+  styleUrl: './location.component.scss',
 })
 export class LocationComponent {
-
-
   TotalPages!: number;
   Data!: Location[];
   Value: Location = {
@@ -28,7 +39,7 @@ export class LocationComponent {
     private Location: LocationService,
     private message: MessageService,
     private confirmationService: ConfirmationService
-  ){ }
+  ) {}
 
   SaveTypes() {
     const TypeObject = this.CreateTypeObjet();
@@ -106,7 +117,7 @@ export class LocationComponent {
       },
       error: () => {
         this.message.add({
-          detail: 'Error while trying to get types',
+          detail: 'Error while trying to get Locations',
           summary: 'error',
           severity: 'error',
         });
@@ -118,7 +129,7 @@ export class LocationComponent {
   }
   confirmDeleteProperty(e: any) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete this Category?',
+      message: 'Are you sure you want to delete this Location?',
       header: 'Delete Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -171,5 +182,4 @@ export class LocationComponent {
       },
     });
   }
-  
 }

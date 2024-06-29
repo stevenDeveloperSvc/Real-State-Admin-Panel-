@@ -27,7 +27,7 @@ export class LocationService {
   }
 
   public GetAllLocations(page : null | number = null) {
-    return this.httpClient.get<LocationResponse>(`${BaseUrl}/location${BaseUrl}/category${page === null? '' : `?page=${page}`}`, {
+    return this.httpClient.get<LocationResponse>(`${BaseUrl}/location/${page === null? '' : `?page=${page}`}`, {
       headers: this.headers,
     });
   }

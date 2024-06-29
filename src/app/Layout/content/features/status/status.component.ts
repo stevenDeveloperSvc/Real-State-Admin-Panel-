@@ -168,6 +168,7 @@ export class StatusComponent {
   }
   onRowSelect(e: TableRowSelectEvent) {}
   loadProperties(e: any) {
+    this.IsLoading = true;
     const page = e.first / e.rows + 1;
     this.Status.GetAllStatus(page).subscribe({
       next: (data) => {
@@ -182,6 +183,9 @@ export class StatusComponent {
           severity: 'error',
         });
       },
+      complete:()=>{
+        this.IsLoading= false;
+      }
     });
   }
 }
