@@ -13,6 +13,7 @@ export class PropertyService {
   private dataRefreshSource = new Subject<void>();
   dataRefreshed$ = this.dataRefreshSource.asObservable();
 
+  
   private headers?: HttpHeaders;
   constructor(private httpClient: HttpClient, private route: ActivatedRoute) {
     let Token: string = '';
