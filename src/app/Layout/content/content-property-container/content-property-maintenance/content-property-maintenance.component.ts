@@ -17,6 +17,7 @@ import { PropertyDescriptionComponent } from './property-description/property-de
 import { PropertyImagesComponent } from './property-images/property-images.component';
 import { PropertyService } from '@services/property.service';
 import { ActivatedRoute } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-content-property-maintenance',
@@ -156,6 +157,10 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
           summary: 'error',
         });
       },
+      complete:()=>{
+      //  interval(3000)
+      
+      }
     });
   }
 

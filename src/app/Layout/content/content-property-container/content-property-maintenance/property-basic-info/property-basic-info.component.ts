@@ -99,7 +99,7 @@ export class PropertyBasicInfoComponent implements OnInit {
       },
       error: (b) => {},
     });
-  }
+  }   
   ngOnInit(): void {
     this.GetAllTypes();
     this.GetAllCategories();
