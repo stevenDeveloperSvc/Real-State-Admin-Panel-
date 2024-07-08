@@ -57,6 +57,13 @@ export interface OcupationResponse {
   response: ApiResponse;
   ocupations: Ocupation[];
 }
+
+export interface DetailResponse {
+  Respone: ApiResponse;
+  Details : Detail[];
+  CountItems : number;
+}
+
 export interface iImage {
   id?: number;
   alt: string;
@@ -93,6 +100,10 @@ export interface Amenity {
 }
 export interface Ocupation {
   ocupationId?: number | null;
+  description?: string | null;
+}
+export interface Detail { 
+  id?: number | null;
   description?: string | null;
 }
 export interface Status {

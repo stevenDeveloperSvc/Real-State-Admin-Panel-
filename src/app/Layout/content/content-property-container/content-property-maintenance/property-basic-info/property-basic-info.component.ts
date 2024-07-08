@@ -83,6 +83,7 @@ export class PropertyBasicInfoComponent implements OnInit {
     this.IsLoading = true;
     this.Property.GetPropertyById().subscribe({
       next: (a) => {
+        console.log(a)
         const { title, category, ameneties, type, status, price, location } =
           a.responseDTO;
         this.FormData = {
@@ -182,7 +183,5 @@ export class PropertyBasicInfoComponent implements OnInit {
       price: this.FormData.Price,
       location: this.FormData.location,
     });
-
-    console.log(this.FormData);
   }
 }
