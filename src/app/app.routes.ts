@@ -15,6 +15,7 @@ import { TypesComponent } from './Layout/content/features/types/types.component'
 import { LocationComponent } from './Layout/content/features/location/location.component';
 import { AmenityComponent } from './Layout/content/features/amenity/amenity.component';
 import { StatusComponent } from './Layout/content/features/status/status.component';
+import { DetailsComponent } from './Layout/content/features/details/details.component';
 
 export const routes: Routes = [
   {
@@ -114,6 +115,10 @@ export const routes: Routes = [
             title:'Admin - Features - Status',
             path:'status',
             component: StatusComponent
+          },{
+            title:'Admin - Features - Details',
+            path:'details',
+            component: DetailsComponent 
           }
         ]
       }

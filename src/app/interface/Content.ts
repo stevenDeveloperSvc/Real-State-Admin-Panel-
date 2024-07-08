@@ -60,8 +60,8 @@ export interface OcupationResponse {
 
 export interface DetailResponse {
   Respone: ApiResponse;
-  Details : Detail[];
-  CountItems : number;
+  details : Detail[];
+  countItems : number;
 }
 
 export interface iImage {
@@ -230,4 +230,11 @@ export interface PropertyDTO {
   CategoryId: number;
   AmenityIds?: string;
   Images?: ImageInfo[];
+}
+
+//TODO: hacer un dto para traer los detalles de una propiedad.
+//id del detalle, id de la propiedad del detalle, descripcion.  
+export interface DetailDTO { 
+  id?: number | null;
+  description?: string | null;
 }

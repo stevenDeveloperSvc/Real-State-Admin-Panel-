@@ -34,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 import { PropertyService } from '@services/property.service';
 import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-property-basic-info',
@@ -44,7 +45,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     FormsModule,
     ProgressSpinnerComponent,
     MultiSelectModule,
-    InputNumberModule,
+    InputNumberModule
   ],
   templateUrl: './property-basic-info.component.html',
   styleUrl: './property-basic-info.component.scss',

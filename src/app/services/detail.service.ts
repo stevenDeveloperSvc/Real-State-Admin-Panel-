@@ -24,8 +24,8 @@ export class DetailService {
     });
   }
 
-  public GetAllDetails() {
-    return this.httpClient.get<DetailResponse>(`${BaseUrl}/detail`, {
+  public GetAllDetails(page:number | null =0 ) {
+    return this.httpClient.get<DetailResponse>(`${BaseUrl}/detail${page === null? '' : `?page=${page}`}`, {
       headers: this.headers,
     });
   }

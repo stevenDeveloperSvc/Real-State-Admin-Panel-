@@ -18,6 +18,7 @@ import { PropertyImagesComponent } from './property-images/property-images.compo
 import { PropertyService } from '@services/property.service';
 import { ActivatedRoute } from '@angular/router';
 import { interval } from 'rxjs';
+import { PropertyDetailsComponent } from './property-details/property-details.component';
 
 @Component({
   selector: 'app-content-property-maintenance',
@@ -32,6 +33,7 @@ import { interval } from 'rxjs';
     PropertyShortDescriptionComponent,
     PropertyDescriptionComponent,
     PropertyImagesComponent,
+    PropertyDetailsComponent
   ],
   templateUrl: './content-property-maintenance.component.html',
   styleUrl: './content-property-maintenance.component.scss',

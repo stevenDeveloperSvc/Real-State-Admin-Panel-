@@ -47,29 +47,29 @@
     >
       <ng-template pTemplate="header">
         <tr>
-          <th>Location</th>
+          <th>Description</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-location>
+      <ng-template pTemplate="body" let-detail>
         <tr
           *ngIf="!IsLoading; else loadingTemplate"
-          (click)="onRowSelect({ data: location })"
+          (click)="onRowSelect({ data: detail })"
         >
-          <td>{{ location.description }}</td>
+          <td>{{ detail.description }}</td>
   
           <td>
             <i
               class="pi pi-file-edit"
-              (click)="editProperty(location); $event.stopPropagation()"
+              (click)="editProperty(detail); $event.stopPropagation()"
               style="font-size: 1.5rem"
             ></i>
           </td>
           <td>
             <i
               class="pi pi-trash"
-              (click)="confirmDeleteProperty(location); $event.stopPropagation()"
+              (click)="confirmDeleteProperty(detail); $event.stopPropagation()"
               style="font-size: 1.5rem"
             ></i>
           </td>

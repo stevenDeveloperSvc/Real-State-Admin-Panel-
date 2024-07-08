@@ -1,13 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Detail } from '@interface/Content';
 import { DetailService } from '@services/detail.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { TableRowSelectEvent } from 'primeng/table';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SkeletonModule } from 'primeng/skeleton';
+import { TableModule, TableRowSelectEvent } from 'primeng/table';
 
 @Component({
   selector: 'app-details',
   standalone: true,
-  imports: [],
+  imports: [FormsModule,ReactiveFormsModule, CommonModule, TableModule, ConfirmDialogModule, SkeletonModule],
   templateUrl: './details.component.html',
   styleUrl: './details.component.scss'
 })
@@ -73,7 +77,6 @@ export class DetailsComponent {
         });
       },
       error: (e) => {
-        console.log(e);
         this.message.add({
           detail: 'Error while trying to save',
           summary: 'error',
@@ -99,12 +102,13 @@ export class DetailsComponent {
     this.IsLoading = true;
     this.Detail.GetAllDetails().subscribe({
       next: (data) => {
-        this.Data = data.Details;
-        this.TotalPages = data.CountItems as number;
+        this.Data = data.details;
+        console.log(data)
+        this.TotalPages = data.countItems as number;
       },
       error: () => {
         this.message.add({
-          detail: 'Error while trying to get Locations',
+          detail: 'Error while trying to get details',
           summary: 'error',
           severity: 'error',
         });
@@ -116,7 +120,7 @@ export class DetailsComponent {
   }
   confirmDeleteProperty(e: any) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete this Location?',
+      message: 'Are you sure you want to delete this detail?',
       header: 'Delete Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -147,22 +151,22 @@ export class DetailsComponent {
       },
     });
   }
-  editProperty(e: Location) {
+  editProperty(e: Detail) {
     this.IsEditing = true;
     this.Value = { ...e };
   }
   onRowSelect(e: TableRowSelectEvent) {}
   loadProperties(e: any) {
     const page = e.first / e.rows + 1;
-    this.Location.GetAllLocations(page).subscribe({
+    this.Detail.GetAllDetails(page).subscribe({
       next: (data) => {
-        this.Data = data.locations;
+        this.Data = data.details ;
         this.TotalPages = data.countItems as number;
         this.IsLoading = false;
       },
       error: () => {
         this.message.add({
-          detail: 'Error while trying to get types',
+          detail: 'Error while trying to get details',
           summary: 'error',
           severity: 'error',
         });

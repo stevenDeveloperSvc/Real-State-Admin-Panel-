@@ -1,2 +1,78 @@
-<p>property-details works!</p>
-<!--TODO: implementar componente para obtener detalles de la propiedad-->
+<section class="content-user__info horizontal-box">
+    <header class="content-user__header">
+        <h4 class="header__title">Property Details</h4>
+        <p class="header__subtitle">Add a Property Details!</p>
+    </header>
+    <form class="content-user-info-box">
+        <div class="content-user-info__controls">
+
+            <div class="control__box">
+                <label for="detail" class="label-name">Detail Type</label>
+                <p-dropdown id="types" class="detail-list" name="detail" [options]="details" optionLabel="description"
+                    placeholder="Select a Detail" [(ngModel)]="FormData.type" (onChange)="onInputChange()" />
+            </div>
+
+            <div class="control__box">
+                <label for="description" class="label-name">Description</label>
+                <input class="input-box" placeholder="Text a description for the detail selected" type="text" id="description" name="description" required autocomplete="off"
+                    [(ngModel)]="FormData.title" (ngModelChange)="onInputChange()" />
+            </div>
+
+        </div>
+
+      <p-table
+      [value]="Data"
+      class="custom-table"
+      [paginator]="true"
+      selectionMode="single"
+      [lazy]="true"
+      [totalRecords]="TotalPages"
+      [rows]="5"
+      (onLazyLoad)="loadProperties($event)"
+      (onRowSelect)="onRowSelect($event)"
+      [tableStyle]="{ width: '40rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Description</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-detail>
+        <tr
+          *ngIf="!IsLoading; else loadingTemplate"
+          (click)="onRowSelect({ data: detail })"
+        >
+          <td>{{ detail.description }}</td>
+  
+          <td>
+            <i
+              class="pi pi-file-edit"
+              (click)="editProperty(detail); $event.stopPropagation()"
+              style="font-size: 1.5rem"
+            ></i>
+          </td>
+          <td>
+            <i
+              class="pi pi-trash"
+              (click)="confirmDeleteProperty(detail); $event.stopPropagation()"
+              style="font-size: 1.5rem"
+            ></i>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template #loadingTemplate>
+        <tr>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <p-confirmDialog></p-confirmDialog>
+
+    </form>
+    <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
+</section>

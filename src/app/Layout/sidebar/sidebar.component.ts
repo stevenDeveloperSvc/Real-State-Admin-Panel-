@@ -58,7 +58,8 @@ export class SidebarComponent {
         { link: '/main/features/location', label: 'Location' },
         { link: '/main/features/amenity', label: 'Amenity' },
         { link: '/main/features/status', label: 'status' },
-      
+        { link: '/main/features/details', label: 'Details' },
+
       ]
     },
     {

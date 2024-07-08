@@ -14,7 +14,6 @@ label {
   border: $border !important;
   padding: calc($padding - 11px);
   transition: $animation;
-  width: 400px;
   color: $font-color-sidebar;
   font-size: $font-subtitle-size;
 }
@@ -68,10 +67,8 @@ label {
   display: flex;
   flex-direction: column;
   gap: 30px;
-
+  width: 79.9vw;
 }
-
-
 
 .speed-box {
   width: 100%;
@@ -96,14 +93,8 @@ label {
   color: $button-color-active;
 }
 
-.textarea-property-info {
-  min-height: 510px;
-  width: 100%;
-}
-
 .horizontal-box {
-  width: 100%;
-  max-width: 100%;
+  min-height: 510px;
   min-width: 900px;
 }
 
