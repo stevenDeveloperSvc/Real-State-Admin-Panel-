@@ -236,5 +236,6 @@ export interface PropertyDTO {
 //id del detalle, id de la propiedad del detalle, descripcion.  
 export interface DetailDTO { 
   id?: number | null;
+  detail?: string | number;
   description?: string | null;
 }

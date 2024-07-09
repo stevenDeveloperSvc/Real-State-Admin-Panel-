@@ -1,39 +1,75 @@
 <section class="content-user__info horizontal-box">
-    <header class="content-user__header">
-        <h4 class="header__title">Property Details</h4>
-        <p class="header__subtitle">Add a Property Details!</p>
-    </header>
-    <form class="content-user-info-box">
-        <div class="content-user-info__controls">
+  <header class="content-user__header">
+    <h4 class="header__title">Property Details</h4>
+    <p class="header__subtitle">Add a Property Details!</p>
+  </header>
+  <form class="content-user-info-box">
+  <div class="content-user-info__controls">
+    <div class="control__box">
+        <label for="detail" class="label-name">Detail Type</label>
+        <p-dropdown
+          id="types"
+          class="detail-list"
+          name="detail"
+          [options]="details"
+          optionLabel="description"
+          placeholder="Select a Detail"
+          [(ngModel)]="SelectedDetail.detail"
+          (onChange)="onInputChange()"
+        />
+      </div>
+      <div class="container-box">
 
-            <div class="control__box">
-                <label for="detail" class="label-name">Detail Type</label>
-                <p-dropdown id="types" class="detail-list" name="detail" [options]="details" optionLabel="description"
-                    placeholder="Select a Detail" [(ngModel)]="FormData.type" (onChange)="onInputChange()" />
-            </div>
+      </div>
+      <div class="control__box">
+        <label for="description" class="label-name">Description</label>
+        <input
+          class="input-box"
+          placeholder="Text a description for the detail selected"
+          type="text"
+          id="description"
+          name="description"
+          required
+          autocomplete="off"
+          [(ngModel)]="SelectedDetail.description"
+          (ngModelChange)="onInputChange()"
+        />
+      </div>
 
-            <div class="control__box">
-                <label for="description" class="label-name">Description</label>
-                <input class="input-box" placeholder="Text a description for the detail selected" type="text" id="description" name="description" required autocomplete="off"
-                    [(ngModel)]="FormData.title" (ngModelChange)="onInputChange()" />
-            </div>
+      <div class="button__box">
 
-        </div>
+        <input
+        class="send__button"
+        type="button"
+        (click)="SaveProperty()"
+        value="SAVE"
+        />
+        <input
+        class="clear__button"
+        type="button"
+        (click)="UpdateProperty()"
+        value="CLEAR"
+        />
+      </div>
 
-      <p-table
-      [value]="Data"
+
+    </div>
+
+    <p-table
+      [value]="DataSliced"
       class="custom-table"
       [paginator]="true"
       selectionMode="single"
       [lazy]="true"
       [totalRecords]="TotalPages"
-      [rows]="5"
+      [rows]="4"
       (onLazyLoad)="loadProperties($event)"
       (onRowSelect)="onRowSelect($event)"
       [tableStyle]="{ width: '40rem' }"
     >
       <ng-template pTemplate="header">
         <tr>
+          <th>Detail Type</th>
           <th>Description</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -44,8 +80,9 @@
           *ngIf="!IsLoading; else loadingTemplate"
           (click)="onRowSelect({ data: detail })"
         >
+          <td>{{ detail.detail }}</td>
           <td>{{ detail.description }}</td>
-  
+
           <td>
             <i
               class="pi pi-file-edit"
@@ -68,11 +105,11 @@
           <td><p-skeleton width="100%"></p-skeleton></td>
           <td><p-skeleton width="100%"></p-skeleton></td>
           <td><p-skeleton width="100%"></p-skeleton></td>
+          <td><p-skeleton width="100%"></p-skeleton></td>
         </tr>
       </ng-template>
     </p-table>
     <p-confirmDialog></p-confirmDialog>
-
-    </form>
-    <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
+  </form>
+  <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
 </section>
