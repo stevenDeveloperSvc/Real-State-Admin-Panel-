@@ -34,7 +34,6 @@ export class DetailsComponent {
 
   SaveTypes() {
     const TypeObject = this.CreateTypeObjet();
-
     if (this.IsEditing) {
       this.Update(TypeObject);
     } else {

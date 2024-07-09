@@ -4,69 +4,33 @@
     <p class="header__subtitle">Add a Property Details!</p>
   </header>
   <form class="content-user-info-box">
-  <div class="content-user-info__controls">
-    <div class="control__box">
+    <div class="content-user-info__controls">
+      <div class="control__box">
         <label for="detail" class="label-name">Detail Type</label>
-        <p-dropdown
-          id="types"
-          class="detail-list"
-          name="detail"
-          [options]="details"
-          optionLabel="description"
-          placeholder="Select a Detail"
-          [(ngModel)]="SelectedDetail.detail"
-          (onChange)="onInputChange()"
-        />
+        <p-dropdown id="types" class="detail-list" name="detail" [options]="details" optionLabel="description"
+          placeholder="Select a Detail" [(ngModel)]="SelectedDetail.detail" (onChange)="onInputChange()" />
       </div>
       <div class="container-box">
 
       </div>
       <div class="control__box">
         <label for="description" class="label-name">Description</label>
-        <input
-          class="input-box"
-          placeholder="Text a description for the detail selected"
-          type="text"
-          id="description"
-          name="description"
-          required
-          autocomplete="off"
-          [(ngModel)]="SelectedDetail.description"
-          (ngModelChange)="onInputChange()"
-        />
+        <input class="input-box" placeholder="Text a description for the detail selected" type="text" id="description"
+          name="description" required autocomplete="off" [(ngModel)]="SelectedDetail.description"
+          (ngModelChange)="onInputChange()" />
       </div>
 
       <div class="button__box">
-
-        <input
-        class="send__button"
-        type="button"
-        (click)="SaveProperty()"
-        value="SAVE"
-        />
-        <input
-        class="clear__button"
-        type="button"
-        (click)="UpdateProperty()"
-        value="CLEAR"
-        />
+        <input class="send__button" type="button" (click)="SaveProperty()" value="ADD" />
+        <input class="clear__button" type="button" (click)="ClearInfo()" value="CLEAR" />
       </div>
 
 
     </div>
 
-    <p-table
-      [value]="DataSliced"
-      class="custom-table"
-      [paginator]="true"
-      selectionMode="single"
-      [lazy]="true"
-      [totalRecords]="TotalPages"
-      [rows]="4"
-      (onLazyLoad)="loadProperties($event)"
-      (onRowSelect)="onRowSelect($event)"
-      [tableStyle]="{ width: '40rem' }"
-    >
+    <p-table [value]="DataSliced" class="custom-table" [paginator]="true" selectionMode="single" [lazy]="true"
+      [totalRecords]="TotalPages" [rows]="4" [first]="first" (onPage)="pageChange($event)"
+      (onLazyLoad)="loadProperties($event)" (onRowSelect)="onRowSelect($event)">
       <ng-template pTemplate="header">
         <tr>
           <th>Detail Type</th>
@@ -76,26 +40,17 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-detail>
-        <tr
-          *ngIf="!IsLoading; else loadingTemplate"
-          (click)="onRowSelect({ data: detail })"
-        >
+        <tr *ngIf="!IsLoading; else loadingTemplate" (click)="onRowSelect({ data: detail })">
           <td>{{ detail.detail }}</td>
           <td>{{ detail.description }}</td>
 
           <td>
-            <i
-              class="pi pi-file-edit"
-              (click)="editProperty(detail); $event.stopPropagation()"
-              style="font-size: 1.5rem"
-            ></i>
+            <i class="pi pi-file-edit" (click)="editProperty(detail); $event.stopPropagation()"
+              style="font-size: 1.5rem"></i>
           </td>
           <td>
-            <i
-              class="pi pi-trash"
-              (click)="confirmDeleteProperty(detail); $event.stopPropagation()"
-              style="font-size: 1.5rem"
-            ></i>
+            <i class="pi pi-trash" (click)="confirmDeleteProperty(detail); $event.stopPropagation()"
+              style="font-size: 1.5rem"></i>
           </td>
         </tr>
       </ng-template>

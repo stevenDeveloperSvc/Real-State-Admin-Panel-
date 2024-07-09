@@ -168,6 +168,7 @@ export interface ResponseDto {
   type: Type
   category: Category
   location: Location;
+  details : DetailDTO[];
   shortDescription: string;
   price: number
   agent: Agent
@@ -236,6 +237,8 @@ export interface PropertyDTO {
 //id del detalle, id de la propiedad del detalle, descripcion.  
 export interface DetailDTO { 
   id?: number | null;
-  detail?: string | number;
+  detailid? : number | null;
+  detail?: string | null;
   description?: string | null;
+  active?: number | null; 
 }

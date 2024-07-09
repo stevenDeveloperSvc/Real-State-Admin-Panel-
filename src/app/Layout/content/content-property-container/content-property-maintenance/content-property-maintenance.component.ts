@@ -5,6 +5,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressSpinnerComponent } from '../../../../progress-spinner/progress-spinner.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
+DetailDTO,
   PropertyBasicInfoEvent,
   PropertyDescriptionEvent,
   PropertyResponseInfo,
@@ -39,6 +40,7 @@ import { PropertyDetailsComponent } from './property-details/property-details.co
   styleUrl: './content-property-maintenance.component.scss',
 })
 export class ContentPropertyMaintenanceComponent implements OnInit {
+
   PropertyId: null | number = 0;
   IsLoading: boolean = false;
   value!: any;
@@ -86,7 +88,10 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   handleSelectionChange(e: PropertyBasicInfoEvent) {
     this.value = { ...this.value, ...e };
   }
+  handlePropertyDetails(e: any) {
+    this.value = { ...this.value, ...e };
 
+    }
   handlePropertyImages(e: { images: SelectItem<any>[] }) {
     const simplifiedImages = {
       images: e.images.map((image) => image.value),
@@ -103,7 +108,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       this.IsEditiingProperty = true;
 
       this.Property.GetPropertyById(this.PropertyId, true).subscribe({
-        next: () => {
+        next: (value) => {
           this.Message.add({
             detail: 'Property Info Loaded succesfully',
             severity: 'success',
@@ -122,6 +127,9 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   }
   UpdateProperty() {}
   SaveProperty() {
+
+    console.log(this.value)
+    return;
     const formData = this.GenerateFormDataFromControls();
 
     if (this.IsEditiingProperty) {
