@@ -24,8 +24,14 @@ export class StatusService {
     });
   }
 
-  public GetAllStatus(Page: null | number = null) {
+  public GetAllStatusByPage(Page: null | number = null) {
     return this.httpClient.get<StatusResponse>(`${BaseUrl}/status${Page === null? '' : `?page=${Page}`}`, {
+      headers: this.headers,
+    });
+  }
+  
+  public GetAllStatus() {
+    return this.httpClient.get<StatusResponse>(`${BaseUrl}/status/all`, {
       headers: this.headers,
     });
   }

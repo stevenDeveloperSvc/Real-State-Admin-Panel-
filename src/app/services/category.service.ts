@@ -25,8 +25,13 @@ export class CategoryService {
     });
   }
 
-  public GetAllCategories(page:null | number = null ) {
+  public GetAllCategoriesByPage(page:null | number = null ) {
     return this.httpClient.get<CategoryReponse>(`${BaseUrl}/category${page === null? '' : `?page=${page}`}`, {
+      headers: this.headers,
+    });
+  }
+  public GetAllCategories( ) {
+    return this.httpClient.get<CategoryReponse>(`${BaseUrl}/category/all`, {
       headers: this.headers,
     });
   }

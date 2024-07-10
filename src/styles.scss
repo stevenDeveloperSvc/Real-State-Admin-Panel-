@@ -92,16 +92,6 @@ th {
 td {
   color: $font-color-secondary;
 }
-
-// td:nth-child(2){
-//   border-top-left-radius: 15px;
-//   border-bottom-left-radius: 15px;
-// }
-// td:last-child{
-//   border-top-right-radius: 15px;
-//   border-bottom-right-radius: 15px;
-// }
-
 .p-dropdown,
 .p-multiselect,
 .p-inputnumber {
@@ -115,17 +105,33 @@ td {
 .p-inputtext {
   font-family: $font-subtitle;
   color: $font-color-sidebar !important;
+  animation: $animation;
+
   background: none;
   border-width: 0px 0px 0px 0px;
+  border: 1px solid transparent;
 }
 
-.p-dropdown:not(.p-disabled).p-focus {
+.p-dropdown:not(.p-disabled).p-focus{
   animation: $animation;
   border-color: $primary-color !important;
   outline: none;
   box-shadow: none;
 }
+.p-inputtext{
+  border-radius: 0px;
 
+}
+.p-inputtext:enabled{
+  animation: $animation;
+  border-radius: 0px;
+}
+.p-inputtext:enabled:focus {
+  box-shadow: none;
+  border-radius: 0px;
+  border: 1px solid $primary-color !important;
+
+}
 html {
   line-height: 1.15;
   /* 1 */

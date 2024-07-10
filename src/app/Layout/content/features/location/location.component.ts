@@ -110,7 +110,7 @@ export class LocationComponent {
   }
   LoadInfo() {
     this.IsLoading = true;
-    this.Location.GetAllLocations().subscribe({
+    this.Location.GetAllLocationsByPage().subscribe({
       next: (data) => {
         this.Data = data.locations;
         this.TotalPages = data.countItems as number;
@@ -167,7 +167,7 @@ export class LocationComponent {
   onRowSelect(e: TableRowSelectEvent) {}
   loadProperties(e: any) {
     const page = e.first / e.rows + 1;
-    this.Location.GetAllLocations(page).subscribe({
+    this.Location.GetAllLocationsByPage(page).subscribe({
       next: (data) => {
         this.Data = data.locations;
         this.TotalPages = data.countItems as number;

@@ -242,3 +242,14 @@ export interface DetailDTO {
   description?: string | null;
   active?: number | null; 
 }
+
+
+export interface CreatePropertyResponse {
+  propertyId: number
+  response: Response
+}
+
+export interface Response {
+  isSuccess: boolean
+  value: string
+}

@@ -17,7 +17,7 @@ import { PropertyBasicInfoComponent } from './property-basic-info/property-basic
 import { PropertyDescriptionComponent } from './property-description/property-description.component';
 import { PropertyImagesComponent } from './property-images/property-images.component';
 import { PropertyService } from '@services/property.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { interval } from 'rxjs';
 import { PropertyDetailsComponent } from './property-details/property-details.component';
 
@@ -65,7 +65,9 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   constructor(
     private Property: PropertyService,
     private Message: MessageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
+
   ) {
     this.route.paramMap.subscribe((params) => {
       this.PropertyId = Number(params.get('propertyId?'));
@@ -138,6 +140,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
             severity: 'success',
             summary: 'sucess',
           });
+
         },
         error: (value) => {
           this.Message.add({
@@ -146,7 +149,6 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
             summary: 'error',
           });
 
-          console.log(value)
         },
       });
       return;
@@ -155,10 +157,13 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
     this.Property.AddProperty(formData).subscribe({
       next: (value) => {
         this.Message.add({
-          detail: 'success',
+          detail: value.response.value,
           severity: 'success',
           summary: 'sucess',
         });
+        this.PropertyId = value.propertyId;
+        this.IsEditiingProperty = true;
+        this.router.navigate(['/main/property/maintenance', this.PropertyId]);
       },
       error: (value) => {
         this.Message.add({

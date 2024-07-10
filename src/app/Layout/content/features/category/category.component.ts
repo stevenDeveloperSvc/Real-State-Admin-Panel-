@@ -110,7 +110,7 @@ export class CategoryComponent {
   }
   LoadInfo() {
     this.IsLoading = true;
-    this.Category.GetAllCategories().subscribe({
+    this.Category.GetAllCategoriesByPage().subscribe({
       next: (data) => {
         this.Data = data.categories;
         this.TotalPages = data.countItems as number;
@@ -167,7 +167,7 @@ export class CategoryComponent {
   onRowSelect(e: TableRowSelectEvent) {}
   loadProperties(e: any) {
     const page = e.first / e.rows + 1;
-    this.Category.GetAllCategories(page).subscribe({
+    this.Category.GetAllCategoriesByPage(page).subscribe({
       next: (data) => {
         this.Data = data.categories;
         this.TotalPages = data.countItems as number;

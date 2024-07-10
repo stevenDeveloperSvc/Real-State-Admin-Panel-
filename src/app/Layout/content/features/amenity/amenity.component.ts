@@ -108,7 +108,7 @@ export class AmenityComponent {
   }
   LoadInfo() {
     this.IsLoading = true;
-    this.Amenity.GetAllAmenities().subscribe({
+    this.Amenity.GetAllAmenitiesByPage().subscribe({
       next: (data) => {
         this.Data = data.amenities;
         this.TotalPages = data.countItems as number;
@@ -165,7 +165,7 @@ export class AmenityComponent {
   onRowSelect(e: TableRowSelectEvent) {}
   loadProperties(e: any) {
     const page = e.first / e.rows + 1;
-    this.Amenity.GetAllAmenities(page).subscribe({
+    this.Amenity.GetAllAmenitiesByPage(page).subscribe({
       next: (data) => {
         this.Data = data.amenities;
         this.TotalPages = data.countItems as number;

@@ -155,6 +155,7 @@ export class PropertyBasicInfoComponent implements OnInit {
     this.AmenityService.GetAllAmenities().subscribe({
       next: (value) => {
         this.Amenity = value.amenities;
+        console.log(value)
       },
       error: () => {
         this.ShowErrorMesage('Amenity');

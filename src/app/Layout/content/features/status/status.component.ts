@@ -111,7 +111,7 @@ export class StatusComponent {
   }
   LoadInfo() {
     this.IsLoading = true;
-    this.Status.GetAllStatus().subscribe({
+    this.Status.GetAllStatusByPage().subscribe({
       next: (data) => {
         this.Data = data.status;
         this.TotalPages = data.countItems as number;
@@ -170,7 +170,7 @@ export class StatusComponent {
   loadProperties(e: any) {
     this.IsLoading = true;
     const page = e.first / e.rows + 1;
-    this.Status.GetAllStatus(page).subscribe({
+    this.Status.GetAllStatusByPage(page).subscribe({
       next: (data) => {
         this.Data = data.status;
         this.TotalPages = data.countItems as number;

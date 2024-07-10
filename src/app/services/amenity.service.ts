@@ -25,12 +25,16 @@ export class AmenityService {
   }
 
   
-  public GetAllAmenities(page: null | number = null) {
+  public GetAllAmenitiesByPage(page: null | number = null) {
     return this.httpClient.get<AmenityResponse>(`${BaseUrl}/amenity${page === null? '' : `?page=${page}`}`, {
       headers: this.headers,
     });
   }
-
+  public GetAllAmenities() {
+    return this.httpClient.get<AmenityResponse>(`${BaseUrl}/amenity/all`,  {
+      headers: this.headers,
+    });
+  }
   public AddAmenity(Amenity : Amenity) {
     return this.httpClient.post<ApiResponse>(
       `${BaseUrl}/amenity`,

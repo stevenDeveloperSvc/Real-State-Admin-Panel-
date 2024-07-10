@@ -110,7 +110,7 @@ export class TypesComponent implements OnInit {
   }
   LoadInfo() {
     this.IsLoading = true;
-    this.Types.GetAllTypes().subscribe({
+    this.Types.GetAllTypesByPage().subscribe({
       next: (data) => {
         this.Data = data.types;
         this.TotalPages = data.countItems as number;
@@ -159,7 +159,7 @@ export class TypesComponent implements OnInit {
   }
   loadProperties(e: any) {
     const page = e.first / e.rows + 1;
-    this.Types.GetAllTypes(page).subscribe({
+    this.Types.GetAllTypesByPage(page).subscribe({
       next: (data) => {
         this.Data = data.types;
         this.TotalPages = data.countItems as number;

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BaseUrl } from './cosntant';
-import { ApiResponse, PropertyDTO, PropertyResponse, PropertyResponseInfo } from '../interface/Content';
+import { ApiResponse, CreatePropertyResponse, PropertyDTO, PropertyResponse, PropertyResponseInfo } from '../interface/Content';
 import { Observable, Subject, shareReplay } from 'rxjs';
 
 @Injectable({
@@ -67,7 +67,7 @@ export class PropertyService {
     return this.httpClient.put(`${BaseUrl}/Property/update`,PropertyToUpdate,{ headers: this.headers })
   }
   public AddProperty(value: any) {
-    return this.httpClient.post(`${BaseUrl}/Property`, value, {
+    return this.httpClient.post<CreatePropertyResponse>(`${BaseUrl}/Property`, value, {
       headers: this.headers,
     });
   }

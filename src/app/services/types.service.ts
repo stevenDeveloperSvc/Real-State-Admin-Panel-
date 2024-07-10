@@ -24,8 +24,13 @@ export class TypesService {
     });
   }
 
-  public GetAllTypes(Page : any = null) {
+  public GetAllTypesByPage(Page : any = null) {
     return this.httpClient.get<TypeReponse>(`${BaseUrl}/types/${Page === null? '' : `?page=${Page}`}`, {
+      headers: this.headers,
+    });
+  }
+  public GetAllTypes() {
+    return this.httpClient.get<TypeReponse>(`${BaseUrl}/types/all`, {
       headers: this.headers,
     });
   }

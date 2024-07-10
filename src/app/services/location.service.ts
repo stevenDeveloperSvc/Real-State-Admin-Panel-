@@ -26,8 +26,13 @@ export class LocationService {
     });
   }
 
-  public GetAllLocations(page : null | number = null) {
+  public GetAllLocationsByPage(page : null | number = null) {
     return this.httpClient.get<LocationResponse>(`${BaseUrl}/location/${page === null? '' : `?page=${page}`}`, {
+      headers: this.headers,
+    });
+  }
+  public GetAllLocations() {
+    return this.httpClient.get<LocationResponse>(`${BaseUrl}/location/all`, {
       headers: this.headers,
     });
   }
