@@ -5,7 +5,6 @@ import { Detail, DetailDTO } from '@interface/Content';
 import { DetailService } from '@services/detail.service';
 import { PropertyService } from '@services/property.service';
 import { ProgressSpinnerComponent } from 'app/progress-spinner/progress-spinner.component';
-import { Console } from 'console';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DropdownModule } from 'primeng/dropdown';
@@ -65,6 +64,8 @@ export class PropertyDetailsComponent implements OnInit {
     this.Property.GetPropertyById().subscribe({
       next:({ responseDTO })=>{
           this.Data  = responseDTO.details
+          this.TotalPages = this.Data.filter(a=>a.active==1).length;
+          this.first= 0;
           this.loadProperties({ first: 0, rows: 4 });
       }
     })
@@ -85,7 +86,7 @@ export class PropertyDetailsComponent implements OnInit {
     this.onSelectionChange();
     this.ClearInfo();
     this.loadProperties({ first: 0, rows: 4 }); // Actualizar la paginación después de guardar
-    this.TotalPages = this.Data.length;
+    this.TotalPages = this.Data.filter(a=>a.active==1).length;
   }
   Add() {
     const NewDetail: DetailDTO = {
@@ -98,18 +99,18 @@ export class PropertyDetailsComponent implements OnInit {
     this.Data = [...this.Data, NewDetail];
   }
   Update() {
-    const { detailId, detail, description } = this.SelectedDetail;  
-    const data = this.Data.filter(a=>a.active == 1).find(a => a.detailid == detailId);
+    const { detailid, detail, description } = this.SelectedDetail;  
+    const data = this.Data.filter(a=>a.active == 1).find(a => a.detailid == detailid);
 
     if (data) {
       data.description = description;
-      data.detailid = detailId;
+      data.detailid = detailid;
       data.detail = detail.description
       data.id = detail.id
     }
     this.ClearInfo();
     this.loadProperties({ first: 0, rows: 4 });
-    this.TotalPages = this.Data.length;
+    this.TotalPages = this.Data.filter(a=>a.active==1).length;
 
   }
   ClearInfo() {
@@ -126,6 +127,7 @@ export class PropertyDetailsComponent implements OnInit {
     this.DetailService.GetAllDetails().subscribe({
       next: (value) => {
         this.details = value.details;
+        
       },
       error: () => {
         this.ShowErrorMesage('Amenity');
@@ -176,10 +178,9 @@ export class PropertyDetailsComponent implements OnInit {
         description: value.detail
       },
       description: value.description,
-      detailid: value.detailId
+      detailid: value.detailid
     }
 
-    console.log(value)
   }
   loadProperties(event: any) {
     const page = event.first / event.rows;

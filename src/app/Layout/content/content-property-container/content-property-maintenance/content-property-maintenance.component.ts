@@ -117,7 +117,7 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
         },
         error: () => {
           this.Message.add({
-            detail: 'Error whily fetching Property Info',
+            detail: 'Error while fetching Property Info',
             severity: 'error',
             summary: 'error',
           });
@@ -128,8 +128,6 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   UpdateProperty() {}
   SaveProperty() {
 
-    console.log(this.value)
-    return;
     const formData = this.GenerateFormDataFromControls();
 
     if (this.IsEditiingProperty) {
@@ -147,6 +145,8 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
             severity: 'error',
             summary: 'error',
           });
+
+          console.log(value)
         },
       });
       return;
@@ -212,6 +212,19 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
       formData.append(`Images[${index}].Description`, img.description);
     });
 
+    if(this.value.details)
+    {
+
+      this.value.details.forEach((value : any, index: any)=>{
+        formData.append(`Details[${index}].id`, value.id)
+        formData.append(`Details[${index}].Description`, value.description)
+        formData.append(`Details[${index}].PropertyDetailId`, value.detailid)
+        formData.append(`Details[${index}].Active`, value.active)
+        
+        
+      })
+      
+    }
     return formData;
   }
 }
