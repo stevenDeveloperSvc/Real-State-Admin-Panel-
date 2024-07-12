@@ -34,7 +34,8 @@ import { PropertyDetailsComponent } from './property-details/property-details.co
     PropertyShortDescriptionComponent,
     PropertyDescriptionComponent,
     PropertyImagesComponent,
-    PropertyDetailsComponent
+    PropertyDetailsComponent,
+    ProgressSpinnerComponent
   ],
   templateUrl: './content-property-maintenance.component.html',
   styleUrl: './content-property-maintenance.component.scss',
@@ -131,54 +132,60 @@ export class ContentPropertyMaintenanceComponent implements OnInit {
   SaveProperty() {
 
     const formData = this.GenerateFormDataFromControls();
+    this.IsLoading = true;
 
-    if (this.IsEditiingProperty) {
-      this.Property.UpdateProperty(formData).subscribe({
+      if (this.IsEditiingProperty) {
+        this.Property.UpdateProperty(formData).subscribe({
+          next: (value) => {
+            this.Message.add({
+              detail: 'Property Updated',
+              severity: 'success',
+              summary: 'sucess',
+            });
+            
+          },
+          error: (value) => {
+            this.Message.add({
+              detail: `${value.error.value ?? 'Error while triying to update'}`,
+              severity: 'error',
+              summary: 'error',
+            });
+            
+            this.IsLoading = false;
+          },
+          complete :()=>{
+            this.IsLoading = false;
+          }
+        });
+        return;
+      }
+      
+      this.Property.AddProperty(formData).subscribe({
         next: (value) => {
           this.Message.add({
-            detail: 'Property Updated',
+            detail: value.response.value,
             severity: 'success',
             summary: 'sucess',
           });
-
+          this.PropertyId = value.propertyId;
+          this.IsEditiingProperty = true;
+          this.router.navigate(['/main/property/maintenance', this.PropertyId]);
         },
         error: (value) => {
           this.Message.add({
-            detail: `${value.error.value ?? 'Error while triying to update'}`,
+            detail: 'error',
             severity: 'error',
             summary: 'error',
           });
-
+          this.IsLoading = false; 
         },
+        complete:()=>{
+          this.IsLoading = false; 
+          
+        }
       });
-      return;
     }
-
-    this.Property.AddProperty(formData).subscribe({
-      next: (value) => {
-        this.Message.add({
-          detail: value.response.value,
-          severity: 'success',
-          summary: 'sucess',
-        });
-        this.PropertyId = value.propertyId;
-        this.IsEditiingProperty = true;
-        this.router.navigate(['/main/property/maintenance', this.PropertyId]);
-      },
-      error: (value) => {
-        this.Message.add({
-          detail: 'error',
-          severity: 'error',
-          summary: 'error',
-        });
-      },
-      complete:()=>{
-      //  interval(3000)
-      
-      }
-    });
-  }
-
+  
   GenerateFormDataFromControls(): FormData {
     const formData = new FormData();
 

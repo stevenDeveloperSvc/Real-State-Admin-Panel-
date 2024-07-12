@@ -26,12 +26,15 @@
       type="button"
       (click)="SaveProperty()"
       value="SAVE"
-    />
-    <input
+      [disabled]="IsLoading"
+      />
+      <input
       class="clear__button"
       type="button"
       (click)="UpdateProperty()"
       value="CLEAR"
+      [disabled]="IsLoading"
     />
   </section>
+    <app-progress-spinner [IsLoading]="IsLoading"></app-progress-spinner>
 </section>
